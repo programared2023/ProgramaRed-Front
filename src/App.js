@@ -8,15 +8,14 @@ import SignUp from "./views/SignUp";
 
 function App() {
   return (
-    <>
-      
+    <>      
       <Routes>
         <Route path="/" element={<Landing />}/>
         <Route path="/home" element={<Home />}/>
-        <Route path="/createPost"><CreatePost/></Route>
-        <Route path="/post/:id"><PostDetail/></Route>
-        <Route path="/profile/:id"><Profile/></Route>
-        <Route path="/signUp"><SignUp/></Route>
+        <Route path="/createPost" element={<CreatePost/>} />
+        <Route path="/post/:id" element={<PostDetail/>} />
+        <Route path="/profile/:id" element={<Profile/>} />
+        <Route path="/signUp" element={<SignUp/>} />
       </Routes>
     </>
   );
