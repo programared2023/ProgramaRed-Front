@@ -1,4 +1,4 @@
-export const Posts = ()=>{
+const Posts = ()=>{
 
     return(
         <>
@@ -6,3 +6,5 @@ export const Posts = ()=>{
         </>
     )
 }
+
+export default Posts;

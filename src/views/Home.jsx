@@ -1,4 +1,5 @@
-import { Posts } from "../components/Posts"
+import Posts from "../components/Posts"
+import SideBar from "../components/SideBar"
 
 const Home= ()=>{
 
@@ -6,6 +7,7 @@ const Home= ()=>{
         <>
             <h1>Soy Home equisDe</h1>
             <Posts />
+            <SideBar />
         </>
     )
 }
@@ -14,9 +16,9 @@ export default Home
 
 //filtros combinados
 
-//posts
+//posts  => ok
 
-//SideBar derecha
+//SideBar derecha 
     //barra busqueda
     //favoritos
 
