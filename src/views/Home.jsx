@@ -1,13 +1,10 @@
 import Posts from "../components/Posts"
-import SideBar from "../components/SideBar"
 
 const Home= ()=>{
 
     return(
-        <>
-            <h1>Soy Home equisDe</h1>
+        <>  
             <Posts />
-            <SideBar />
         </>
     )
 }
