@@ -1,10 +1,11 @@
+import { NavLink } from "react-router-dom";
 import Posts from "../components/Posts";
-import CreatePost from "./CreatePost/CreatePost";
+
 
 const Home = () => {
   return (
     <div className="w-1/2 flex justify-start flex-col items-center bg-indigo-400">
-      <CreatePost />
+      <NavLink to="/createPost">Sube un posteo</NavLink>
       <Posts />
     </div>
   );
