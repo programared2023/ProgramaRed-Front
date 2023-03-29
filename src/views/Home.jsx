@@ -1,6 +1,6 @@
 import { Posts } from "../components/Posts"
 
-export const Home= ()=>{
+const Home= ()=>{
 
     return(
         <>
@@ -10,6 +10,7 @@ export const Home= ()=>{
     )
 }
 
+export default Home
 
 //filtros combinados
 

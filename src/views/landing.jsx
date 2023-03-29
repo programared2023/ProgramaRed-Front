@@ -1,5 +1,5 @@
 
-export const Landing = ()=>{
+const Landing = ()=>{
 
     return(
         <>
@@ -7,3 +7,5 @@ export const Landing = ()=>{
         </>
     )
 }
+
+export default Landing;

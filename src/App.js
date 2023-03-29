@@ -1,13 +1,16 @@
-// import { Route, Switch } from "react-router-dom";
-import { Landing } from "./components/landing";
+import { Route, Routes } from "react-router-dom";
+import Landing from "./views/Landing";
+import Home from "./views/Home";
 
 function App() {
   return (
-    <div>
-      <Landing/>
-      {/* <Switch>
-      </Switch> */}
-    </div>
+    <>
+      
+      <Routes>
+        <Route exact path="/" element={<Landing />}/>
+        <Route exact path="/home" element={<Home />}/>
+      </Routes>
+    </>
   );
 }
 
