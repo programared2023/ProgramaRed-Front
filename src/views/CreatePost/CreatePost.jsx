@@ -44,7 +44,7 @@ const CreatePost = () => {
             placeholder="Agrega un título..."
             value={form.title}
           />
-          <span>{errors?.title}</span>
+          <span>{errors.title}</span>
 
           <label>Descripción</label>
           <textarea
@@ -55,7 +55,7 @@ const CreatePost = () => {
             placeholder="Agrega una descripción a tu posteo..."
             value={form.description}
           ></textarea>
-          <span>{errors?.description}</span>
+          <span>{errors.description}</span>
         </div>
         <button type="submit">Subir</button>
       </form>

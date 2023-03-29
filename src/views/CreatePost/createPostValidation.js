@@ -10,4 +10,6 @@ export const validate = (data) => {
   if (!data.description) errors.description = "Debes ingresar una descripción";
   if (data.description.length > 250)
     errors.description = "Descripción demasiado larga";
+
+  return errors;
 };
