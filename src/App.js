@@ -1,24 +1,31 @@
 import "./App.css"
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Landing from "./views/Landing";
 import Home from "./views/Home";
-import CreatePost from "./views/CreatePost";
+// import CreatePost from "./views/CreatePost";
 import PostDetail from "./views/PostDetail";
 import Profile from "./views/Profile";
 import SignUp from "./views/SignUp";
+import NavBar from "./components/NavBar";
+import SideBar from "./components/SideBar";
 
 function App() {
+  const {pathname} = useLocation();
+
+
   return (
-    <>      
+    <div className="flex justify-between h-full" >
+      {pathname !== "/" && <NavBar />}
       <Routes>
         <Route path="/" element={<Landing />}/>
         <Route path="/home" element={<Home />}/>
-        <Route path="/createPost" element={<CreatePost/>} />
+        {/* <Route path="/createPost" element={<CreatePost/>} /> */}
         <Route path="/post/:id" element={<PostDetail/>} />
         <Route path="/profile/:id" element={<Profile/>} />
         <Route path="/signUp" element={<SignUp/>} />
       </Routes>
-    </>
+      {pathname !== "/" && <SideBar />}
+    </div>
   );
 }
 
