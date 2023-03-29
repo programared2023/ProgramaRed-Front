@@ -6,7 +6,7 @@ const Landing = () => {
         <div>
             <h1>Estoy en Landing</h1>
             <Login/>
-            <span>Don't have an account? Sign up<NavLink to="/signUp"> here!</NavLink></span>
+            <span>¿No tenés una cuenta? ¡Registrate<NavLink to="/signUp"> acá!</NavLink></span>
         </div>
 
     )
