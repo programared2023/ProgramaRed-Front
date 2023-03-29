@@ -10,7 +10,7 @@ const validate = (form) => {
     if(!regexUsername.test(form.username)) errors.username = "Tu nombre de usuario solo puede incluir letras, números, guiones y puntos";
     if(form.username.length < 3 || form.username.length > 15) errors.username = "Tu nombre de usuario debe tener entre 3 y 15 caracteres";
     if(!regexPassword.test(form.password)) errors.password = "Tu contraseña debe incluír al menos una mayúscula y al menos un número";
-    if(form.password.length < 6) errors.username = "Tu contraseña debe contener al menos 6 caracteres"
+    if(form.password.length < 6) errors.password = "Tu contraseña debe contener al menos 6 caracteres"
 
     return errors;
 };
