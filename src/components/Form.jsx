@@ -1,4 +1,4 @@
-export const Form = ()=>{
+const Form = ()=>{
 
     return(
         <>
@@ -7,3 +7,5 @@ export const Form = ()=>{
         </>
     )
 }
+
+export default Form;
