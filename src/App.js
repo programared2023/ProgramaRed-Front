@@ -2,7 +2,7 @@ import "./App.css"
 import { Route, Routes } from "react-router-dom";
 import Landing from "./views/Landing";
 import Home from "./views/Home";
-import CreatePost from "./views/CreatePost";
+import CreatePost from "./views/CreatePost/CreatePost";
 import PostDetail from "./views/PostDetail";
 import Profile from "./views/Profile";
 import SignUp from "./views/SignUp";
