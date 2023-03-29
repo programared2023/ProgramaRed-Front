@@ -1,4 +1,4 @@
-import users from "../../bd.json" 
+import users from "../bd.json" 
 
 export const getUsers = ()=>{
     return{

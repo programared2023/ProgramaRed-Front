@@ -1,6 +1,8 @@
+import FormSignUp from "../components/SignUp/FormSingUp"
+
 const SignUp = () => {
     return(
-        <h1>Estás creando tu usuario</h1>
+        <FormSignUp/>
     )
 }
 
