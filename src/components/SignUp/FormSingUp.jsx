@@ -33,16 +33,19 @@ const FormSignUp = () => {
             <div>
                 <label>Nombre de usuario: </label>
                 <input onChange={changeHandler} placeholder="Escribe tu nombre de usuario..." type="text" name="username" value={form?.username}/>
+                <span>{errors?.username}</span>
             </div>
 
             <div>
                 <label>Email: </label>
                 <input onChange={changeHandler} placeholder="Escribe tu email..." type="text" name="email" value={form?.email}/>
+                <span>{errors?.email}</span>
             </div>
 
             <div>
                 <label>Contraseña: </label>
                 <input onChange={changeHandler} type="password" name="password" value={form?.password}/>
+                <span>{errors?.password}</span>
             </div>
 
             <div>

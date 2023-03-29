@@ -1,7 +1,7 @@
 const validate = (form) => {
-    const regexEmail = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/"
-    const regexUsername = "/^[a-zA-Z0-9.-]+$/";
-    const regexPassword = "/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+=[\]{}|\\,.?:\-<>\/~`]{8,}$/"
+    const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    const regexUsername = /^[a-zA-Z0-9.-]+$/;
+    const regexPassword = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+=[\]{}|\\,.?:\-<>\/~`]{8,}$/
     let errors = {};
     if(!form.username) errors.username = "Ingrese un nombre de usuario";
     if(!form.email) errors.email = "Ingrese su email"
