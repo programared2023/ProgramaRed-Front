@@ -1,14 +1,15 @@
+import Login from "../components/Login";
 import { NavLink } from "react-router-dom";
 
-const Landing = ()=>{
-
+const Landing = () => {
     return(
-        <>
-            <p>Bienvenido a ProgramaRed</p>
-            <NavLink to="/home">Entrar</NavLink>
-            <NavLink to="/signUp">Registrarse</NavLink>
-        </>
+        <div>
+            <h1>Estoy en Landing</h1>
+            <Login/>
+            <span>Don't have an account? Sign up<NavLink to="/signUp"> here!</NavLink></span>
+        </div>
+
     )
 }
 
-export default Landing;
+export default Landing
