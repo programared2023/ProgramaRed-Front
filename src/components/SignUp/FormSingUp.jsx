@@ -1,5 +1,6 @@
 import { useState } from "react";
 import validate from "./validate";
+import axios from "axios";
 
 const FormSignUp = () => {
     const [form, setForm] = useState({
@@ -26,10 +27,15 @@ const FormSignUp = () => {
         setErrors(validate({...form, [property]: value}))
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await axios.post("/user", form)
+    }
+
     return(
         <div>
         <h1>Registrarse</h1>
-        <form>
+        <form onSubmit={handleSubmit} >
             <div>
                 <label>Nombre de usuario: </label>
                 <input onChange={changeHandler} placeholder="Escribe tu nombre de usuario..." type="text" name="username" value={form?.username}/>

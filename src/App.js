@@ -11,7 +11,7 @@ import SideBar from "./components/SideBar";
 
 function App() {
   const {pathname} = useLocation();
-
+  
   return (
     <div className="flex justify-between bg-gray-700 h-screen">
       {pathname !== "/" && <NavBar />}
