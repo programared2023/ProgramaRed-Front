@@ -1,20 +1,20 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
-import { getUserById, clearDetail } from "../redux/actions";
+import { getUserByName, clearDetail } from "../redux/actions";
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { name } = useParams();
 
   const user = useSelector((state) => state.detailUser);
 
   useEffect(() => {
-    dispatch(getUserById(id));
+    dispatch(getUserByName(name));
     return () => {
       dispatch(clearDetail());
     };
-  }, [dispatch, id]);
+  }, [dispatch, name]);
 
   return (
     <div>
