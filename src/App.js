@@ -11,8 +11,7 @@ import SideBar from "./components/SideBar";
 
 function App() {
   const {pathname} = useLocation();
-
-
+  
   return (
     <div className="flex justify-between h-full" >
       {pathname !== "/" && <NavBar />}

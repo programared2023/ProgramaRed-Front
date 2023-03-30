@@ -1,4 +1,4 @@
-import Login from "../components/Login";
+import Login from "../components/Login/Login";
 import { NavLink } from "react-router-dom";
 
 const Landing = () => {
@@ -7,7 +7,7 @@ const Landing = () => {
       <h1>Estoy en Landing</h1>
       <Login />
       <span>
-        ¿No tenés una cuenta? ¡Registrate<NavLink to="/signUp"> acá!</NavLink>
+        ¿No tenés una cuenta? <NavLink to="/signUp">¡Registrate acá!</NavLink>
       </span>
     </div>
   );
