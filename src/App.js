@@ -20,7 +20,7 @@ function App() {
         <Route path="/home" element={<Home />}/>
         <Route path="/createPost" element={<CreatePost/>} />
         <Route path="/post/:id" element={<PostDetail/>} />
-        <Route path="/profile/:id" element={<Profile/>} />
+        <Route path="/:name" element={<Profile/>} />
         <Route path="/signUp" element={<SignUp/>} />
       </Routes>
       {pathname !== "/" && <SideBar />}

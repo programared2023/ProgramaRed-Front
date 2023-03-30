@@ -13,6 +13,7 @@ const initialState = {
   posts: [],
   users: [],
   detailUser: [],
+  profileUser: [],
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -27,6 +28,11 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         detailUser: payload,
       };
+    case GET_USER_BY_NAME:
+      return {
+        ...state,
+        profileUser: payload,
+      }
     case CLEAR_DETAIL:
       return {
         ...state,
