@@ -63,7 +63,7 @@ const posts =
 const Posts = ()=>{
 
     return(
-        <div className="flex flex-wrap justify-center items-center">
+        <div className="flex flex-wrap justify-center items-center h-screen overflow-y-scroll">
             {
                 posts.map((post, i) => {
                     return(
