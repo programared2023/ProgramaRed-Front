@@ -16,7 +16,7 @@ const Post = ( {post} )=>{
                     </div>
                 </div>
                 <h2 className="text-green-800 font-bold text-lg mb-2">{post.title}</h2>
-                <NavLink className="text-green-700 text-base">
+                <NavLink to={`/post/${post.id}`} className="text-green-700 text-base line-clamp-4">
                     {post.description}
                 </NavLink>
             </div>
