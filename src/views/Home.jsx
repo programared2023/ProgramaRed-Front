@@ -4,8 +4,8 @@ import Posts from "../components/Posts";
 
 const Home = () => {
   return (
-    <div className="w-1/2 flex justify-start flex-col items-center bg-indigo-400">
-      <NavLink to="/createPost">Sube un posteo</NavLink>
+    <div className="w-1/2 flex justify-start flex-col items-center">
+      <NavLink to="/createPost" className="p-2 m-4 rounded-md">Sube un posteo</NavLink>
       <Posts />
     </div>
   );

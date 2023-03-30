@@ -1,7 +1,7 @@
 const SideBar = ()=>{
 
     return(
-        <div className="bg-green-600 bg-opacity-40 w-1/4 flex flex-col items-center justify-evenly h-full">
+        <div className="w-1/4 flex flex-col items-center justify-evenly h-60 m-15 self-center bg-antique-50">
             <p>Barra Lateral</p>
         </div>
     )

@@ -14,7 +14,7 @@ function App() {
 
 
   return (
-    <div className="flex justify-between h-full" >
+    <div className="flex justify-between h-full bg-gray-700">
       {pathname !== "/" && <NavBar />}
       <Routes>
         <Route path="/" element={<Landing />}/>
