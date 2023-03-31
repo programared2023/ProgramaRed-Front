@@ -56,6 +56,10 @@ const CreatePost = () => {
             value={form.description}
           ></textarea>
           <span>{errors.description}</span>
+
+          <label>File</label>
+          <input type="file" name="file" />
+          
         </div>
         <button type="submit">Subir</button>
       </form>
