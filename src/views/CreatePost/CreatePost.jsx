@@ -4,11 +4,7 @@ import { validate } from "./createPostValidation";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "../../redux/actions";
 
-const CreatePost = (props) => {
-
-  // const { userId } = props
-
-  // const userId = useSelector(state => state.actualUser.id);  
+const CreatePost = () => {
 
   const user = useSelector(state => state.actualUser)
 
@@ -41,7 +37,6 @@ const CreatePost = (props) => {
       })
     );
   };
-
   
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -1,24 +1,22 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
-import Posts from "../components/Posts";
-import { getUserByName, clearDetail, getUserById } from "../redux/actions";
+import { clearDetail, getUserById } from "../redux/actions";
 import Post from "../components/Post";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const user = useSelector((state) => state.detailUser);
+  const user = useSelector((state) => state.actualUser);
 
+  
   useEffect(() => {
     dispatch(getUserById(id));
     return () => {
       dispatch(clearDetail());
     };
-  }, [dispatch, id]);
-
-  
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -37,12 +35,12 @@ const Profile = () => {
             <p className="text-lg text-green-700">{user.email}</p>
           </div>
 
-          {/* <NavLink
+          <NavLink
             to= "/createPost/"
             className="p-2 m-4 rounded-md bg-gray-400 transition-all duration-500 hover:bg-gray-300 hover:scale-150"
           >
             Sube un posteo
-          </NavLink> */}
+          </NavLink>
         </div>
       </div>
 
@@ -54,7 +52,7 @@ const Profile = () => {
             </h2>
             <div className="space-y-4 h-3/4 overflow-y-auto">
               {user.Posts?.map((post, i) => {
-                return <Post user={user} key={i} />;
+                return <Post post={post} key={i} />;
               })}
             </div>
           </>
@@ -62,46 +60,8 @@ const Profile = () => {
           <p>Cargando...</p>
         )}
       </div>
-    </div>
-  );
+    </div>    
+  )
 };
 
 export default Profile;
-
-
-
-
-
-
-
-
-
-//harcodeo de user
-  //cuando borren  esto descomenten lo de arriba
-  /*   const user = {
-    id: 2,
-    username: "maria",
-    password: "clave123",
-    email: "maria@example.com",
-    birthdate: "1989-06-15",
-    Posts: [
-      {
-        id: 1,
-        title: "Alto estres",
-        description: "Este objeto es un artículo que ha sido cuidadosamente diseñado para satisfacer tus necesidades. Es un producto de alta calidad que está hecho con materiales duraderos y resistentes, lo que significa que durará mucho tiempo. Este objeto también es muy versátil y se puede utilizar de muchas maneras diferentes, lo que lo convierte en una opción ideal para cualquier persona que busque un producto que pueda adaptarse a sus necesidades. Además, este objeto es muy fácil de usar y mantener, lo que lo hace perfecto para personas ocupadas o para aquellos que buscan un producto de bajo mantenimiento. En resumen, este objeto es una excelente opción para cualquiera que busque un producto de alta calidad y versátil que pueda satisfacer una amplia gama de necesidades.",
-        file: "javascript.png",
-        createdAt: "2023-03-31T12:17:17.736Z",
-        updatedAt: "2023-03-31T12:17:17.736Z",
-        UserId: 1
-      },
-      {
-        id: 1,
-        title: "Segundo post",
-        description: "Una descripcion random de un post random...",
-        file: "javascript.png",
-        createdAt: "2023-03-31T12:17:17.736Z",
-        updatedAt: "2023-03-31T12:17:17.736Z",
-        UserId: 1
-      }
-    ],
-  } */

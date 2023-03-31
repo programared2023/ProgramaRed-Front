@@ -1,9 +1,10 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Post from "./Post";
 import { useEffect } from "react";
+import { getAllPosts } from "../redux/actions";
 
 //mas hardcodeo, acá tendria que haber estado local, useEffect y por supuesto estados globales
-const posts = [
+/* const posts = [
   {
     id: 1,
     title: "Alto estres",
@@ -31,7 +32,7 @@ const posts = [
     updatedAt: "2023-03-31T12:17:17.736Z",
     UserId: 2
   }
-]
+] */
 
 /* const user = {
   id: 1,
@@ -43,18 +44,24 @@ const posts = [
 
 const Posts = ()=>{
 
-  const posts = useSelector(state => state.posts)
+  const allPosts = useSelector(state => state.posts)
   const user = useSelector(state => state.actualUser)
 
-  useEffect(()=> {
+  const dispatch = useDispatch();
 
-  })
+  useEffect(()=> {
+    dispatch(getAllPosts())
+  },[])
 
     return(
         <div className="flex flex-wrap justify-center items-center h-screen p-4">
           <div className=" flex flex-col gap-2">
             {
-              posts?.map((post, i) => <Post post={post} key={i} />)
+              allPosts?.map((post, i) => 
+              <Post 
+                post={post} 
+                key={i} 
+              />)
             }
           </div>
         </div>

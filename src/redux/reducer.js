@@ -43,7 +43,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case GET_ALL_POSTS:
       return {
         ...state,
-        post: payload,
+        posts: payload,
       }
 
     default:
