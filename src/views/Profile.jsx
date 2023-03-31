@@ -9,19 +9,77 @@ const Profile = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  // const user = useSelector((state) => state.detailUser);
+  const user = useSelector((state) => state.detailUser);
 
-  // useEffect(() => {
-  //   dispatch(getUserById(id));
-  //   return () => {
-  //     dispatch(clearDetail());
-  //   };
-  // }, [dispatch, id]);
+  useEffect(() => {
+    dispatch(getUserById(id));
+    return () => {
+      dispatch(clearDetail());
+    };
+  }, [dispatch, id]);
 
-  //harcodeo de user
+  
+
+  return (
+    <div className="flex flex-col">
+      <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 w-full max-w-5xl mx-auto px-4 py-8 items-center justify-evenly">
+        <div className="md:w-1/5 flex justify-center">
+          <img
+            src="https://source.unsplash.com/random/500x500"
+            alt="ProfilePhoto"
+            className="rounded-full h-40 w-40 object-cover object-center border-4 border-green-500"
+          />
+        </div>
+
+        <div className="md:w-2/5">
+          <div className="flex flex-col space-y-4">
+            <h1 className="text-3xl font-bold text-white">{user.username}</h1>
+            <p className="text-lg text-green-700">{user.email}</p>
+          </div>
+
+          {/* <NavLink
+            to= "/createPost/"
+            className="p-2 m-4 rounded-md bg-gray-400 transition-all duration-500 hover:bg-gray-300 hover:scale-150"
+          >
+            Sube un posteo
+          </NavLink> */}
+        </div>
+      </div>
+
+      <div className="mt-8 p-9">
+        {user ? (
+          <>
+            <h2 className="text-2xl font-bold text-white mb-4">
+              {user.Posts ? "Publicaciones" : "No Tienes publicaciones"}
+            </h2>
+            <div className="space-y-4 h-3/4 overflow-y-auto">
+              {user.Posts?.map((post, i) => {
+                return <Post user={user} key={i} />;
+              })}
+            </div>
+          </>
+        ) : (
+          <p>Cargando...</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Profile;
+
+
+
+
+
+
+
+
+
+//harcodeo de user
   //cuando borren  esto descomenten lo de arriba
-  const user = {
-    id: 1,
+  /*   const user = {
+    id: 2,
     username: "maria",
     password: "clave123",
     email: "maria@example.com",
@@ -46,47 +104,4 @@ const Profile = () => {
         UserId: 1
       }
     ],
-  }
-
-  return (
-    
-    <div className="flex flex-col">
-      <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 w-full max-w-5xl mx-auto px-4 py-8 items-center justify-evenly">
-        <div className="md:w-1/5 flex justify-center">
-          <img src="https://source.unsplash.com/random/500x500" alt="ProfilePhoto" className="rounded-full h-40 w-40 object-cover object-center border-4 border-green-500"/>
-        </div>
-
-     
-        <div className="md:w-2/5">
-  
-          <div className="flex flex-col space-y-4">
-            <h1 className="text-3xl font-bold text-white">{user.username}</h1>
-            <p className="text-lg text-green-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consequat, neque in consectetur elementum, justo purus facilisis arcu, vel efficitur massa lacus a orci. Morbi malesuada sit amet felis quis elementum.</p>
-          </div>
-
-        </div>
-      </div>
-  
-      <div className="mt-8 p-9">
-        {
-          user ? 
-          (<>
-            <h2 className="text-2xl font-bold text-white mb-4">{user.Posts ? "Publicaciones" : "No Tienes publicaciones"}</h2> 
-            <div className="space-y-4 h-3/4 overflow-y-auto">
-              {
-                user.Posts?.map(post => {
-                  return (
-                    <Post user={user} post={post} />
-                  )
-                })
-              }
-            </div> 
-          </>) : <p>Cargando...</p>
-        }
-      </div>
-    </div>
-    
-  );
-};
-
-export default Profile;
+  } */

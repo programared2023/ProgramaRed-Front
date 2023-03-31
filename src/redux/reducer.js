@@ -2,6 +2,7 @@ import {
   GET_USERS,
   GET_USER_BY_NAME,
   GET_USER_BY_ID,
+  GET_ALL_POSTS,
   GET_POST_BY_NAME,
   GET_POST_BY_ID,
   GET_ALL_TAGS,
@@ -14,6 +15,7 @@ const initialState = {
   users: [],
   detailUser: [],
   profileUser: [],
+  actualUser: []
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -26,7 +28,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case GET_USER_BY_ID:
       return {
         ...state,
-        detailUser: payload,
+        actualUser: payload,
       };
     case GET_USER_BY_NAME:
       return {
@@ -38,6 +40,11 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         detailCountry: payload,
       };
+    case GET_ALL_POSTS:
+      return {
+        ...state,
+        post: payload,
+      }
 
     default:
       return { ...state };

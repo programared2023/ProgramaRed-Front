@@ -1,6 +1,6 @@
 import users from "../bd.json" 
 import axios from "axios";
-import { GET_USERS, GET_USER_BY_ID, CLEAR_DETAIL } from "./types";
+import { GET_USERS, GET_USER_BY_ID, CLEAR_DETAIL, GET_ALL_POSTS } from "./types";
 
 
 export const getUsers = ()=>{
@@ -31,6 +31,18 @@ export const getUserByName = (name) => {
         })
     }
 }
+
+export const getAllPosts = () => {
+    return async function (dispatch) {
+        const {data} = await axios.get("/post")
+        dispatch({
+            type: GET_ALL_POSTS,
+            payload: data,
+        })
+    }
+}
+
+
 
 export const clearDetail = () => {
     return {
