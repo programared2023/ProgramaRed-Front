@@ -17,8 +17,8 @@ function App() {
       {pathname !== "/" && <NavBar />}
       <Routes>
         <Route path="/" element={<Landing />}/>
-        <Route path="/home" element={<Home />}/>
-        <Route path="/createPost" element={<CreatePost/>} />
+        <Route path="/home/" element={<Home />}/>
+        <Route path="/createPost" element={<CreatePost />} />
         <Route path="/post/:id" element={<PostDetail/>} />
         <Route path="/profile/:id" element={<Profile/>} />
         <Route path="/signUp" element={<SignUp/>} />
