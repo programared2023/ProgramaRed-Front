@@ -1,7 +1,7 @@
 const SideBar = ()=>{
 
     return(
-        <div className="bg-green-800 bg-opacity-75 w-1/6 h-full flex flex-col justify-between px-3 rounded-3xl">
+        <div className="bg-green-800 bg-opacity-75 w-1/6 h-full flex flex-col justify-between px-3 rounded-3xl shadow-shadowBlack">
             <div className="pt-4">
                 <div className="px-4 mb-4">
                     <label for="search" className="sr-only">Buscar</label>
