@@ -1,4 +1,4 @@
-import "./App.css"
+import "./dir/tailwind.css"
 import { Route, Routes, useLocation } from "react-router-dom";
 import Landing from "./views/Landing";
 import Home from "./views/Home";
@@ -13,7 +13,7 @@ function App() {
   const {pathname} = useLocation();
   
   return (
-    <div className="flex justify-between bg-gray-700 h-screen">
+    <div className="flex justify-between bg-gray-700 h-screen fixed">
       {pathname !== "/" && <NavBar />}
       <Routes>
         <Route path="/" element={<Landing />}/>
