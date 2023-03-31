@@ -1,17 +1,29 @@
-// import axios from "axios";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { validate } from "./createPostValidation";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserById } from "../../redux/actions";
 
 const CreatePost = () => {
+
+  const user = useSelector(state => state.actualUser)
+
   const [form, setForm] = useState({
     title: "",
     description: "",
-  });
+    userId: user.id,
+  }); 
 
   const [errors, setErrors] = useState({
     title: "",
     description: "",
   });
+
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(getUserById(1))    
+  },[user])
 
   const handleInputs = (e) => {
     setForm({
@@ -25,10 +37,11 @@ const CreatePost = () => {
       })
     );
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // await axios.post("/rutadelBack...")
+    console.log(form);
+    await axios.post("/post", form)
   };
 
   return (
