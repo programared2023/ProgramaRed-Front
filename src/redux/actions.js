@@ -42,8 +42,6 @@ export const getAllPosts = () => {
     }
 }
 
-
-
 export const clearDetail = () => {
     return {
       type: CLEAR_DETAIL,
@@ -59,5 +57,12 @@ export const getPostById = (id) => {
             type: GET_POST_BY_ID,
             payload: post,
         })
+    }
+}
+
+export const createPost = (form) => {
+    return async function (dispatch) {
+        const {data} = await axios.post("/post", form);
+        console.log(data);
     }
 }

@@ -1,29 +1,31 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { validate } from "./createPostValidation";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserById } from "../../redux/actions";
+import { createPost, getUserById } from "../../redux/actions";
 
 const CreatePost = () => {
-
-  const user = useSelector(state => state.actualUser)
+  const user = useSelector((state) => state.actualUser);
 
   const [form, setForm] = useState({
     title: "",
+    tags: [],
     description: "",
     userId: user.id,
-  }); 
+  });
 
   const [errors, setErrors] = useState({
     title: "",
+    tags: [],
     description: "",
   });
 
+  const [tag, setTag] = useState("");
+
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    dispatch(getUserById(1))    
-  },[dispatch])
+  useEffect(() => {
+    dispatch(getUserById(1));
+  }, [dispatch]);
 
   const handleInputs = (e) => {
     setForm({
@@ -37,20 +39,52 @@ const CreatePost = () => {
       })
     );
   };
-  
-  const handleSubmit = async (e) => {
+
+  const addTag = () => {
+    if (!form.tags.includes(tag)) {
+      setForm({
+        ...form,
+        tags: [...form.tags, tag],
+      });
+    }
+  };
+
+  const handeTagDelete = (tag) => {
+    setForm({
+      ...form,
+      tags: form.tags.filter((t) => t !== tag),
+    });
+  };
+
+  const clearForm = () => {
+    setForm({
+      title: "",
+      tags: [],
+      description: "",
+      userId: user.id,
+    });
+    setTag("");
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
-    await axios.post("/post", form)
+    dispatch(createPost(form));
+
+    clearForm();
   };
 
   return (
     <div className=" block mt-14 w-full">
       <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
-        <h2 className="text-xl font-bold text-green-700 mb-6">Estás creando un post</h2>
+        <h2 className="text-xl font-bold text-green-700 mb-6">
+          Estás creando un post
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Título
             </label>
             <input
@@ -59,7 +93,11 @@ const CreatePost = () => {
               name="title"
               placeholder="Agrega un título..."
               value={form.title}
-              className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${errors.title ? "focus:border-red-500 focus:ring-red-500" : "focus:ring-green-500 focus:border-green-500"}
+              className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${
+                errors.title
+                  ? "focus:border-red-500 focus:ring-red-500"
+                  : "focus:ring-green-500 focus:border-green-500"
+              }
               `}
             />
             {errors.title && (
@@ -67,19 +105,35 @@ const CreatePost = () => {
             )}
           </div>
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
-                Tags
-              </label>
-              <input
-                onChange={handleInputs}
-                type="text"
-                name="tags"
-                placeholder="ejemplo... #Javascript #React"
-                // value={form.title} agregen el value tags
-                className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out`}
-                // ${errors.title ? "focus:border-red-500 focus:ring-red-500" : "focus:ring-green-500 focus:border-green-500"}
-              />
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Tags
+            </label>
+            <input
+              type="text"
+              name="tags"
+              placeholder="ejemplo: Javascript y/o React"
+              onChange={(e) => setTag(e.target.value)}
+              value={tag}
+              className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out`}
+              // ${errors.title ? "focus:border-red-500 focus:ring-red-500" : "focus:ring-green-500 focus:border-green-500"}
+            />
+            <button type="button" onClick={addTag}>
+              Agregar
+            </button>
           </div>
+
+          <div>
+            {form.tags.map((tag, i) => (
+              <div key={i}>
+                <span>{tag}</span>
+                <button onClick={() => handeTagDelete(tag)}>X</button>
+              </div>
+            ))}
+          </div>
+
           <div>
             <label
               htmlFor="description"
@@ -94,7 +148,11 @@ const CreatePost = () => {
               rows="10"
               placeholder="Agrega una descripción a tu posteo..."
               value={form.description}
-              className={`border-gray-300 block w-full rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${errors.description ? "focus:border-red-500 focus:ring-red-500" : "focus:ring-green-500 focus:border-green-500"}
+              className={`border-gray-300 block w-full rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${
+                errors.description
+                  ? "focus:border-red-500 focus:ring-red-500"
+                  : "focus:ring-green-500 focus:border-green-500"
+              }
               `}
             ></textarea>
             {errors.description && (
@@ -107,8 +165,18 @@ const CreatePost = () => {
             </label>
             <input type="file" name="file" className="border-gray-300 focus:ring-green-500 focus:border-green-500 block w-full rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out" />
           </div> */}
-          <button type="submit" className={`${errors.description || errors.title ? "bg-red-500 hover:bg-red-500 " : "bg-green-500 hover:bg-green-600" } text-white font-bold py-2 px-4 rounded`}>
+          <button
+            type="submit"
+            className={`${
+              errors.description || errors.title
+                ? "bg-red-500 hover:bg-red-500 "
+                : "bg-green-500 hover:bg-green-600"
+            } text-white font-bold py-2 px-4 rounded`}
+          >
             Subir
+          </button>
+          <button type="button" onClick={clearForm}>
+            Limpiar
           </button>
         </form>
       </div>

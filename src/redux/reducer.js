@@ -17,6 +17,7 @@ const initialState = {
   profileUser: [],
   actualUser: [],
   actualPost: [],
+  message: ""
 };
 
 const reducer = (state = initialState, { type, payload }) => {
