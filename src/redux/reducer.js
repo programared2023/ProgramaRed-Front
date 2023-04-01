@@ -15,7 +15,8 @@ const initialState = {
   users: [],
   detailUser: [],
   profileUser: [],
-  actualUser: []
+  actualUser: [],
+  actualPost: [],
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -45,6 +46,11 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         posts: payload,
       }
+      case GET_POST_BY_ID:
+        return{
+          ...state,
+          actualPost: payload
+        }
 
     default:
       return { ...state };
