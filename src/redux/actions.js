@@ -1,6 +1,6 @@
 import users from "../bd.json" 
 import axios from "axios";
-import { GET_USERS, GET_USER_BY_ID, CLEAR_DETAIL, GET_ALL_POSTS } from "./types";
+import { GET_USERS, GET_USER_BY_ID, CLEAR_DETAIL, GET_ALL_POSTS, GET_POST_BY_ID } from "./types";
 
 
 export const getUsers = ()=>{
@@ -49,5 +49,15 @@ export const clearDetail = () => {
       type: CLEAR_DETAIL,
       payload: [],
     }
-  
-  }
+}
+
+export const getPostById = (id) => {
+    return async function (dispatch) {
+        const backData = await axios.get(`/post/${id}`)
+        const post = backData.data;
+        dispatch({
+            type: GET_POST_BY_ID,
+            payload: post,
+        })
+    }
+}
