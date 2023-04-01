@@ -23,7 +23,7 @@ const CreatePost = () => {
 
   useEffect(()=>{
     dispatch(getUserById(1))    
-  },[user])
+  },[dispatch])
 
   const handleInputs = (e) => {
     setForm({
@@ -45,7 +45,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className=" block mt-28 w-full">
+    <div className=" block mt-14 w-full">
       <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
         <h2 className="text-xl font-bold text-green-700 mb-6">Estás creando un post</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -66,7 +66,20 @@ const CreatePost = () => {
               <span className="text-red-500 text-sm">{errors.title}</span>
             )}
           </div>
-          {/* aca puede ir los tags para el posteo (mas adelante) */}
+          <div>
+            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+                Tags
+              </label>
+              <input
+                onChange={handleInputs}
+                type="text"
+                name="tags"
+                placeholder="ejemplo... #Javascript #React"
+                // value={form.title} agregen el value tags
+                className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out`}
+                // ${errors.title ? "focus:border-red-500 focus:ring-red-500" : "focus:ring-green-500 focus:border-green-500"}
+              />
+          </div>
           <div>
             <label
               htmlFor="description"

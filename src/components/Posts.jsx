@@ -15,17 +15,15 @@ const Posts = ()=>{
   },[dispatch])
 
     return(
-        <div className="flex flex-wrap justify-center items-center h-3/4 p-4">
-          <div className=" flex flex-col gap-2 overflow-y-auto h-full">
-            {
-              allPosts?.map((post, i) => 
-              <Post 
-                post={post} 
-                key={i} 
-              />)
-            }
+      <div className="flex flex-wrap justify-center p-4">
+        <div className="overflow-hidden min-h-0 h-5/6">
+          <div className="flex flex-col gap-2 overflow-y-auto h-full scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+            {allPosts?.map((post, i) => (
+              <Post post={post} key={i} />
+            ))}
           </div>
         </div>
+      </div>
     )
 }
 

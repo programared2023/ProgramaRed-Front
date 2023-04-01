@@ -6,11 +6,10 @@ import { useSelector } from "react-redux";
 const Home = () => {
 
   return (
-    <div className="w-1/2 flex justify-start flex-col items-center h-screen">
+    <div className="flex justify-start flex-col items-center h-full overflow-hidden">
       <NavLink to="/createPost" className="p-2 m-4 rounded-md bg-gray-400 transition-all duration-500 hover:bg-gray-300 hover:scale-150">Sube un posteo</NavLink>
-      <div className=" h-3/4 overflow-y-auto">
-        <Posts />
-      </div>
+      
+      <Posts />
     </div>
   );
 };
