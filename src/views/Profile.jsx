@@ -42,13 +42,13 @@ const Profile = () => {
           >
             Sube un posteo
       </NavLink>
-      <div className="mt-8 p-9">
+      <div className="mt-8 p-9 overflow-hidden h-full">
         {user ? (
           <>
             <h2 className="text-2xl font-bold text-white mb-4">
               {user.Posts ? "Publicaciones" : "No Tienes publicaciones"}
             </h2>
-            <div className="space-y-4 h-3/4 overflow-y-auto">
+            <div className="space-y-4 h-3/4 overflow-y-auto scrollbar-thin scrollbar-track-transparent">
               {user.Posts?.map((post, i) => {
                 return <Post post={post} key={i} />;
               })}
