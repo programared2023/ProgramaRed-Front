@@ -17,6 +17,9 @@ module.exports = {
         'full': '100%',
         '20%': '20%',
       },
+      width:{
+        "25%": "25%"
+      },
       borderRadius:{
         "40px": "40px"
       }

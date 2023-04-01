@@ -12,7 +12,7 @@ const Posts = ()=>{
 
   useEffect(()=> {
     dispatch(getAllPosts())
-  },[])
+  },[dispatch])
 
     return(
         <div className="flex flex-wrap justify-center items-center h-3/4 p-4">
