@@ -13,7 +13,7 @@ function App() {
   const {pathname} = useLocation();
   
   return (
-    <div className="flex justify-between bg-gray-700 h-screen w-screen fixed">
+    <div className="flex justify-between bg-gray-700 h-screen w-screen fixed top-0">
       {pathname !== "/" && <NavBar />}
       <Routes>
         <Route path="/" element={<Landing />}/>
