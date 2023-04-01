@@ -7,9 +7,16 @@ export const validate = (data) => {
   else if (!regexTitle.test(data.title))
     errors.name = "Sólo puedes usar letras y números";
 
+  if (!tags.length) errors.tags = "Debes ingresar al menos un tag";
+  for (let i = 0; i < tags.length; i++) {
+    if (tags[i].length > 12) errors.tags = "Tag demasiado largo";    
+  }
+
   if (!data.description) errors.description = "Debes ingresar una descripción";
-  if (data.description.length > 250)
+  if (data.description.length > 500)
     errors.description = "Descripción demasiado larga";
 
   return errors;
 };
+
+// 
