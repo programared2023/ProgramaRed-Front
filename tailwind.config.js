@@ -22,8 +22,16 @@ module.exports = {
       },
       borderRadius:{
         "40px": "40px"
+      },
+      scrollbar:{
+        width: '4px',
+        height: '8px',
+        track: '#f1f1f1',
+        thumb: '#888',
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
 }
