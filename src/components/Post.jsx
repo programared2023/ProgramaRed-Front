@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 
 const Post = ({ post }) => {
 
+    console.log(post);
+
   return (
     <div>
      <div className="bg-green-100 rounded-lg p-4 mt-4 shadow-shadowBlack">
@@ -42,7 +44,3 @@ const Post = ({ post }) => {
 };
 
 export default Post;
-
-{
-  /*  */
-}
