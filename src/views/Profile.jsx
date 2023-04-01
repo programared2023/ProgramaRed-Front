@@ -19,7 +19,7 @@ const Profile = () => {
   }, [dispatch, id]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full">
       <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 w-full max-w-5xl mx-auto px-4 py-8 items-center justify-evenly">
         <div className=" w-1/5 flex justify-center">
           <img
