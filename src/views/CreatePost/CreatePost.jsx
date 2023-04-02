@@ -5,14 +5,19 @@ import { createPost, getUserById } from "../../redux/actions";
 
 const CreatePost = () => {
   const user = useSelector((state) => state.actualUser);
-  console.log(user);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserById(1));
+  }, [dispatch]);
+  
   const [form, setForm] = useState({
     title: "",
     tags: [],
     actualTag: "",
     description: "",
-    userId: user.id,
+    userId: "",
   });
 
   const [errors, setErrors] = useState({
@@ -24,11 +29,7 @@ const CreatePost = () => {
 
   const [tag, setTag] = useState("");
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getUserById(1));
-  }, [dispatch]);
+  const [formComplete, setFormComplete] = useState(false);
 
   useEffect(() => {
     const checkFormComplete = () => {
@@ -36,20 +37,17 @@ const CreatePost = () => {
         !form.title ||
         !form.actualTag ||
         !form.description ||
-        !form.userId ||
-        !form.tags.length
+        !form.tags.length 
       ) {
+        if(!form.userId) form.userId = user.id
         setFormComplete(false);
       } else {
         setFormComplete(true);
       }
     };
     checkFormComplete();
-  }, [form]);
+  }, [form, user]);
 
-  const [formComplete, setFormComplete] = useState(false);
-
-  console.log(formComplete);
 
   const handleInputs = (e) => {
     setForm({
@@ -87,7 +85,7 @@ const CreatePost = () => {
       tags: [],
       actualTag: "",
       description: "",
-      userId: user.id,
+      userId: user.id
     });
     setTag("");
   };
@@ -239,13 +237,10 @@ const CreatePost = () => {
           <div className="flex gap-4">
             <button
               type="submit"
-              disabled={formComplete}
+              disabled={!formComplete}
               className={`${
-                errors.description ||
-                errors.title ||
-                errors.tags ||
-                errors.actualTag
-                  ? "bg-red-500 hover:bg-red-500 cursor-not-allowed"
+                !formComplete
+                  ? "bg-red-500 hover:bg-red-500 cursor-not-allowed opacity-50"
                   : "bg-green-500 hover:bg-green-600"
               } text-white font-bold py-2 px-4 rounded`}
             >
