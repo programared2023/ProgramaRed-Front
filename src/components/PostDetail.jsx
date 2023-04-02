@@ -21,6 +21,13 @@ const PostDetail = () => {
                 <div className="text-green-700 text-base">
                     {post?.description}
                 </div>
+                <div className="flex gap-2 mt-3">
+          {
+            post.Tags?.map((tag, i)=>{
+              return <span key={i} className=" text-sm text-amber-700 font-medium" >#{tag.name}</span>
+            })
+          }
+        </div>
             </div>
         </>
     )
