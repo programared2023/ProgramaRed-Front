@@ -3,8 +3,7 @@ import logo from "../images/logoNombre.png"
 
 const NavBar= ()=>{
     
-    const {pathname} = useLocation()
-    console.log(pathname); 
+    const {pathname} = useLocation() 
 
     return(
         <div className=" bg-mediumGreen w-1/6 flex flex-col justify-between sticky h-full top-0 px-3 rounded-sm shadow-shadowBlack min-w-20%">
