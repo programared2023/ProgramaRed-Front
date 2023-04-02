@@ -7,9 +7,13 @@ const Home = () => {
 
   return (
     <div className="flex justify-start flex-col items-center h-full overflow-hidden w-full">
-      <NavLink to="/createPost" className="p-2 m-4 rounded-md bg-gray-400 transition-all duration-500 hover:bg-gray-300 hover:scale-150">Sube un posteo</NavLink>
+      <NavLink to="/createPost" className="p-2 m-4 font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-130">Sube un posteo</NavLink>
       <Filters />
-      <Posts />
+      <div className="h-full overflow-hidden py-4">
+        <div className="h-full overflow-y-auto scrollbar-none">
+        <Posts />
+        </div>
+      </div>
     </div>
   );
 };

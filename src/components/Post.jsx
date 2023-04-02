@@ -10,8 +10,8 @@ const Post = ({ post, username }) => {
   },[post, localPost])
 
   return (
-    <div>
-     <div className="bg-green-100 rounded-lg p-4 mt-4 shadow-shadowBlack">
+    <div className="px-4 py-1">
+     <div className=" bg-greenGray rounded-lg p-5 mt-4 shadow-shadowBlack">
         <div className="flex items-center mb-2">
           <div className="bg-green-300 w-12 h-12 rounded-full mr-3">
             <img
@@ -34,7 +34,7 @@ const Post = ({ post, username }) => {
               {!localPost.User && localPost.username}
               {!localPost.User && !localPost.username && username}
             </NavLink>
-            <p className="text-green-500 text-xs">hace 2 horas</p>
+            <p className="text-black text-xs font-medium">hace 2 horas</p>
           </div>
         </div>
 
