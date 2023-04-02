@@ -1,23 +1,23 @@
 import {
   GET_USERS,
-  GET_USER_BY_NAME,
   GET_USER_BY_ID,
   GET_ALL_POSTS,
-  GET_POST_BY_NAME,
   GET_POST_BY_ID,
-  GET_ALL_TAGS,
   CLEAR_DETAIL,
+  GET_USER_BY_NAME,
+  GET_POST_BY_QUERY,
 } from "./types";
 
 const initialState = {
   favorites: [],
   posts: [],
   users: [],
-  detailUser: [],
-  profileUser: [],
   actualUser: [],
+  detailUser: [],
+  filteredUsers: [],
+  filteredPosts: [],
   actualPost: [],
-  message: ""
+  message: "",
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -32,11 +32,6 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         actualUser: payload,
       };
-    case GET_USER_BY_NAME:
-      return {
-        ...state,
-        profileUser: payload,
-      }
     case CLEAR_DETAIL:
       return {
         ...state,
@@ -46,12 +41,22 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         posts: payload,
-      }
-      case GET_POST_BY_ID:
-        return{
-          ...state,
-          actualPost: payload
-        }
+      };
+    case GET_POST_BY_ID:
+      return {
+        ...state,
+        actualPost: payload,
+      };
+    case GET_USER_BY_NAME:
+      return {
+        ...state,
+        filteredUser: payload,
+      };
+    case GET_POST_BY_QUERY:
+      return {
+        ...state,
+        filteredPosts: payload,
+      };
 
     default:
       return { ...state };
