@@ -5,6 +5,7 @@ import { createPost, getUserById } from "../../redux/actions";
 
 const CreatePost = () => {
   const user = useSelector((state) => state.actualUser);
+  console.log(user);
 
   const [form, setForm] = useState({
     title: "",
@@ -29,9 +30,26 @@ const CreatePost = () => {
     dispatch(getUserById(1));
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   handleInputs()
-  // }, [form])
+  useEffect(() => {
+    const checkFormComplete = () => {
+      if (
+        !form.title ||
+        !form.actualTag ||
+        !form.description ||
+        !form.userId ||
+        !form.tags.length
+      ) {
+        setFormComplete(false);
+      } else {
+        setFormComplete(true);
+      }
+    };
+    checkFormComplete();
+  }, [form]);
+
+  const [formComplete, setFormComplete] = useState(false);
+
+  console.log(formComplete);
 
   const handleInputs = (e) => {
     setForm({
@@ -53,6 +71,7 @@ const CreatePost = () => {
         tags: [...form.tags, tag],
       });
     }
+    setTag("");
   };
 
   const handeTagDelete = (tag) => {
@@ -75,7 +94,7 @@ const CreatePost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPost(form));
+    if (formComplete === true) dispatch(createPost(form));
 
     clearForm();
   };
@@ -120,34 +139,41 @@ const CreatePost = () => {
             </label>
             <div className=" flex gap-1">
               <input
+                id="inputTag"
                 type="text"
                 name="tags"
                 placeholder="ejemplo: Javascript y/o React"
                 onChange={(e) => {
-                  setTag(e.target.value)
+                  setTag(e.target.value);
                   setForm({
                     ...form,
-                    actualTag: e.target.value
-                  })
+                    actualTag: e.target.value,
+                  });
                   setErrors(
                     validate({
                       ...form,
-                      actualTag: e.target.value
+                      actualTag: e.target.value,
                     })
-                  )
+                  );
                 }}
                 value={tag}
                 className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out 
-                ${errors.tags?.length || errors.actualTag ? "focus:border-red-500 focus:ring-red-500" : "focus:ring-green-500 focus:border-green-500"}`}
+                ${
+                  errors.tags?.length || errors.actualTag
+                    ? "focus:border-red-500 focus:ring-red-500"
+                    : "focus:ring-green-500 focus:border-green-500"
+                }`}
               />
-              <button type="button" 
-                      disabled={!!errors.actualTag}
-                      onClick={addTag}
-                      className={`${
-                        errors.tags?.length || errors.actualTag
-                          ? "bg-red-500 hover:bg-red-500"
-                          : "bg-green-500 hover:bg-green-600"
-                      } text-white font-semibold py-1 px-2 rounded`}>
+              <button
+                type="button"
+                disabled={!!errors.actualTag}
+                onClick={addTag}
+                className={`${
+                  errors.tags?.length || errors.actualTag
+                    ? "bg-red-500 hover:bg-red-500"
+                    : "bg-green-500 hover:bg-green-600"
+                } text-white font-semibold py-1 px-2 rounded`}
+              >
                 Agregar
               </button>
             </div>
@@ -164,9 +190,17 @@ const CreatePost = () => {
 
           <div className="flex gap-3 w-full flex-wrap">
             {form.tags.map((tag, i) => (
-              <div className="bg-green-500 px-2 py-1 rounded-md flex items-center justify-between font-medium" key={i}>
+              <div
+                className="bg-green-500 px-2 py-1 rounded-md flex items-center justify-between font-medium"
+                key={i}
+              >
                 <span className="mr-2">{tag}</span>
-                <span className="cursor-pointer text-red-800 hover:bg-green-600 px-1 rounded" onClick={() => handeTagDelete(tag)}>X</span>
+                <span
+                  className="cursor-pointer text-red-800 hover:bg-green-600 px-1 rounded"
+                  onClick={() => handeTagDelete(tag)}
+                >
+                  X
+                </span>
               </div>
             ))}
           </div>
@@ -205,16 +239,23 @@ const CreatePost = () => {
           <div className="flex gap-4">
             <button
               type="submit"
-              disabled={errors.description || errors.title || errors.tags || errors.actualTag}
+              disabled={formComplete}
               className={`${
-                errors.description || errors.title || errors.tags || errors.actualTag
+                errors.description ||
+                errors.title ||
+                errors.tags ||
+                errors.actualTag
                   ? "bg-red-500 hover:bg-red-500 cursor-not-allowed"
                   : "bg-green-500 hover:bg-green-600"
               } text-white font-bold py-2 px-4 rounded`}
             >
               Subir
             </button>
-            <button className=" text-gray-900 font-bold py-2 px-4 rounded bg-green-500 hover:bg-green-400" type="button" onClick={clearForm}>
+            <button
+              className=" text-gray-900 font-bold py-2 px-4 rounded bg-green-500 hover:bg-green-400"
+              type="button"
+              onClick={clearForm}
+            >
               Limpiar
             </button>
           </div>
