@@ -31,8 +31,8 @@ const Profile = () => {
 
         <div className="md:w-2/5">
           <div className="flex flex-col space-y-4">
-            <h1 className="text-3xl font-bold text-white">{user.username}</h1>
-            <p className="text-lg text-green-200">{user.email}</p>
+            <h1 className="text-3xl font-bold ">{user.username}</h1>
+            <p className="text-lg text-green-700 font-medium">{user.email}</p>
           </div>
         </div>
       </div>
@@ -43,10 +43,10 @@ const Profile = () => {
       <div className="mt-8 p-9 overflow-hidden h-full">
         {user ? (
           <>
-            <h2 className="text-2xl font-bold text-white mb-4">
+            <h2 className="text-2xl font-bold mb-4">
               {user.Posts ? "Publicaciones" : "No Tienes publicaciones"}
             </h2>
-            <div className="space-y-4 h-3/4 overflow-y-auto scrollbar-thin scrollbar-track-transparent">
+            <div className="space-y-4 h-full py-5 overflow-y-auto scrollbar-thin scrollbar-track-transparent">
               {user.Posts?.map((post, i) => {
                 //al post le paso username porque en este caso "post" no posee datos de username
                 return <Post post={post} username={user.username} key={i} />;
