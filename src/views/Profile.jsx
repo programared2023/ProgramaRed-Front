@@ -36,11 +36,9 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <NavLink
-            to= "/createPost/"
-            className="p-2 m-4 rounded-md bg-gray-400 transition-all duration-500 hover:bg-gray-300 hover:scale-150 self-center"
-          >
-            Sube un posteo
+      <NavLink to="/createPost" 
+              className="p-2 m-4 self-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-130">
+        Sube un posteo
       </NavLink>
       <div className="mt-8 p-9 overflow-hidden h-full">
         {user ? (

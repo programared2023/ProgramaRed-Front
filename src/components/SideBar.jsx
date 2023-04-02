@@ -3,7 +3,7 @@ import SearchBar from "./SearchBar";
 const SideBar = ()=>{
 
     return(
-        <div className="bg-green-700 bg-opacity-40 w-1/6 h-full flex flex-col gap-5 px-3 shadow-shadowBlack min-w-20%">
+        <div className=" bg-mediumGreen w-1/6 h-full flex flex-col gap-5 px-3 shadow-shadowBlack min-w-20%">
             <div className="relative text-lg bg-transparent text-gray-800 pt-5">
                 <SearchBar/>
             </div>

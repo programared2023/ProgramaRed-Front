@@ -28,6 +28,16 @@ module.exports = {
         height: '8px',
         track: '#f1f1f1',
         thumb: '#888',
+      },
+      backgroundColor:{
+        "greenGray":"#EDF1D6",
+        "veryLigthGreen": "#E5D9B6",
+        "ligthGreen": "#A4BE7B",
+        "mediumGreen": "#5F8D4E",
+        "darkGreen": "#285430"
+      },
+      scale:{
+        "130": "1.3"
       }
     },
   },
