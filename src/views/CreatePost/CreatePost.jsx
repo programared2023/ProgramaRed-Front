@@ -138,13 +138,13 @@ const CreatePost = () => {
                 }}
                 value={tag}
                 className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out 
-                ${errors.tags || errors.actualTag ? "focus:border-red-500 focus:ring-red-500" : "focus:ring-green-500 focus:border-green-500"}`}
+                ${errors.tags?.length || errors.actualTag ? "focus:border-red-500 focus:ring-red-500" : "focus:ring-green-500 focus:border-green-500"}`}
               />
               <button type="button" 
                       disabled={!!errors.actualTag}
                       onClick={addTag}
                       className={`${
-                        errors.tags || errors.actualTag
+                        errors.tags?.length || errors.actualTag
                           ? "bg-red-500 hover:bg-red-500"
                           : "bg-green-500 hover:bg-green-600"
                       } text-white font-semibold py-1 px-2 rounded`}>
