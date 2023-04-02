@@ -50,7 +50,8 @@ const Profile = () => {
             </h2>
             <div className="space-y-4 h-3/4 overflow-y-auto scrollbar-thin scrollbar-track-transparent">
               {user.Posts?.map((post, i) => {
-                return <Post post={post} key={i} />;
+                //al post le paso username porque en este caso "post" no posee datos de username
+                return <Post post={post} username={user.username} key={i} />;
               })}
             </div>
           </>

@@ -1,8 +1,13 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-const Post = ({ post }) => {
+const Post = ({ post, username }) => {
+  //post recibe username porque en algunos casos el "post" no posee username
+  const [localPost, setLocalPost] = useState({})
 
-    console.log(post);
+  useEffect(()=>{
+    setLocalPost(post);
+  },[post, localPost])
 
   return (
     <div>
@@ -11,33 +16,42 @@ const Post = ({ post }) => {
           <div className="bg-green-300 w-12 h-12 rounded-full mr-3">
             <img
               src={
-                post?.User?.image
-                  ? post.User.image
+                localPost.User?.image
+                  ? localPost.User.image
                   : "https://source.unsplash.com/random/500x500"
               }
-              alt={post?.User?.username}
+              alt={localPost.User?.username}
               className="w-full rounded-full"
             />
           </div>
 
           <div className="flex-1">
             <NavLink
-              to={`/profile/${post?.User?.id}`}
+              to={`/profile/${localPost.User?.id}`}
               className="text-green-700 font-medium text-sm"
             >
-              {post?.User?.username}
+              {localPost.User?.username}
+              {!localPost.User && localPost.username}
+              {!localPost.User && !localPost.username && username}
             </NavLink>
             <p className="text-green-500 text-xs">hace 2 horas</p>
           </div>
         </div>
 
-        <h2 className="text-green-800 font-bold text-lg mb-2">{post?.title}</h2>
         <NavLink
-          to={`/post/${post?.id}`}
+          to={`/post/${localPost.id}`}
           className="text-green-700 text-base line-clamp-4"
         >
-          {post?.description}
+          <h2 className="text-green-800 font-bold text-lg mb-2">{localPost.title}</h2>
+          <p>{localPost.description}</p>
         </NavLink>
+        <div className="flex gap-2 mt-3">
+          {
+            localPost.Tags?.map((tag, i)=>{
+              return <span key={i} className=" text-sm text-amber-700 font-medium" >#{tag.name}</span>
+            })
+          }
+        </div>
       </div>
     </div>
   );
