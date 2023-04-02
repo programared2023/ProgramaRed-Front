@@ -6,11 +6,11 @@ const PostDetail = () => {
     const post = useSelector(state => state.actualPost)
 
     return(
-        <div>
-            <div className="bg-green-100 rounded-lg p-4 m-4 shadow-shadowBlack">
+        <>
+            <div className="bg-green-100 rounded-lg p-4 m-4 shadow-shadowBlack w-full h-3/5">
                 <div className="flex items-center mb-2">
                     <div className="bg-green-300 w-12 h-12 rounded-full mr-3">
-                        <img src={post?.User?.image ? post?.User?.image : "https://source.unsplash.com/random/500x500"} alt={post?.User?.username} className="w-full"/>
+                        <img src={post?.User?.image ? post?.User?.image : "https://source.unsplash.com/random/500x500"} alt={post?.User?.username} className="w-full rounded-full"/>
                     </div>
                     <div className="flex-1">
                     <NavLink to={`/profile/${post?.User?.id}`} className="text-green-700 font-medium text-sm">{post?.User?.username}</NavLink>
@@ -22,7 +22,7 @@ const PostDetail = () => {
                     {post?.description}
                 </div>
             </div>
-        </div>
+        </>
     )
 };
 

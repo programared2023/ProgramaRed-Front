@@ -9,6 +9,7 @@ const CreatePost = () => {
   const [form, setForm] = useState({
     title: "",
     tags: [],
+    actualTag: "",
     description: "",
     userId: user.id,
   });
@@ -16,6 +17,7 @@ const CreatePost = () => {
   const [errors, setErrors] = useState({
     title: "",
     tags: [],
+    actualTag: "",
     description: "",
   });
 
@@ -26,6 +28,10 @@ const CreatePost = () => {
   useEffect(() => {
     dispatch(getUserById(1));
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   handleInputs()
+  // }, [form])
 
   const handleInputs = (e) => {
     setForm({
@@ -60,6 +66,7 @@ const CreatePost = () => {
     setForm({
       title: "",
       tags: [],
+      actualTag: "",
       description: "",
       userId: user.id,
     });
@@ -111,25 +118,55 @@ const CreatePost = () => {
             >
               Tags
             </label>
-            <input
-              type="text"
-              name="tags"
-              placeholder="ejemplo: Javascript y/o React"
-              onChange={(e) => setTag(e.target.value)}
-              value={tag}
-              className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out`}
-              // ${errors.title ? "focus:border-red-500 focus:ring-red-500" : "focus:ring-green-500 focus:border-green-500"}
-            />
-            <button type="button" onClick={addTag}>
-              Agregar
-            </button>
+            <div className=" flex gap-1">
+              <input
+                type="text"
+                name="tags"
+                placeholder="ejemplo: Javascript y/o React"
+                onChange={(e) => {
+                  setTag(e.target.value)
+                  setForm({
+                    ...form,
+                    actualTag: e.target.value
+                  })
+                  setErrors(
+                    validate({
+                      ...form,
+                      actualTag: e.target.value
+                    })
+                  )
+                }}
+                value={tag}
+                className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out 
+                ${errors.tags || errors.actualTag ? "focus:border-red-500 focus:ring-red-500" : "focus:ring-green-500 focus:border-green-500"}`}
+              />
+              <button type="button" 
+                      disabled={!!errors.actualTag}
+                      onClick={addTag}
+                      className={`${
+                        errors.tags || errors.actualTag
+                          ? "bg-red-500 hover:bg-red-500"
+                          : "bg-green-500 hover:bg-green-600"
+                      } text-white font-semibold py-1 px-2 rounded`}>
+                Agregar
+              </button>
+            </div>
+            {errors.tags && errors.actualTag && (
+              <span className="text-red-500 text-sm">{errors.actualTag}</span>
+            )}
+            {!errors.tags && errors.actualTag && (
+              <span className="text-red-500 text-sm">{errors.actualTag}</span>
+            )}
+            {errors.tags && !errors.actualTag && (
+              <span className="text-red-500 text-sm">{errors.tags}</span>
+            )}
           </div>
 
-          <div>
+          <div className="flex gap-3 w-full flex-wrap">
             {form.tags.map((tag, i) => (
-              <div key={i}>
-                <span>{tag}</span>
-                <button onClick={() => handeTagDelete(tag)}>X</button>
+              <div className="bg-green-500 px-2 py-1 rounded-md flex items-center justify-between font-medium" key={i}>
+                <span className="mr-2">{tag}</span>
+                <span className="cursor-pointer text-red-800 hover:bg-green-600 px-1 rounded" onClick={() => handeTagDelete(tag)}>X</span>
               </div>
             ))}
           </div>
@@ -165,19 +202,22 @@ const CreatePost = () => {
             </label>
             <input type="file" name="file" className="border-gray-300 focus:ring-green-500 focus:border-green-500 block w-full rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out" />
           </div> */}
-          <button
-            type="submit"
-            className={`${
-              errors.description || errors.title
-                ? "bg-red-500 hover:bg-red-500 "
-                : "bg-green-500 hover:bg-green-600"
-            } text-white font-bold py-2 px-4 rounded`}
-          >
-            Subir
-          </button>
-          <button type="button" onClick={clearForm}>
-            Limpiar
-          </button>
+          <div className="flex gap-4">
+            <button
+              type="submit"
+              disabled={errors.description || errors.title || errors.tags || errors.actualTag}
+              className={`${
+                errors.description || errors.title || errors.tags || errors.actualTag
+                  ? "bg-red-500 hover:bg-red-500 cursor-not-allowed"
+                  : "bg-green-500 hover:bg-green-600"
+              } text-white font-bold py-2 px-4 rounded`}
+            >
+              Subir
+            </button>
+            <button className=" text-gray-900 font-bold py-2 px-4 rounded bg-green-500 hover:bg-green-400" type="button" onClick={clearForm}>
+              Limpiar
+            </button>
+          </div>
         </form>
       </div>
     </div>
