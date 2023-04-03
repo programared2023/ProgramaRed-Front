@@ -63,6 +63,7 @@ const CreatePost = () => {
   };
 
   const addTag = () => {
+    if(tag === "") return ""
     if (!form.tags.includes(tag)) {
       setForm({
         ...form,
@@ -166,12 +167,12 @@ const CreatePost = () => {
                 type="button"
                 disabled={!!errors.actualTag}
                 onClick={addTag}
-                className={`${
-                  errors.tags?.length || errors.actualTag
-                    ? "bg-red-500 hover:bg-red-500"
-                    : "bg-green-500 hover:bg-green-600"
-                } text-white font-semibold py-1 px-2 rounded`}
-              >
+                className={`text-white font-semibold py-1 px-2 rounded
+                  ${form.tags.length > 0 && errors.actualTag ? "bg-red-500 hover:bg-red-500" : ""}
+                  ${form.tags.length === 0 && errors.actualTag ? "bg-red-500 hover:bg-red-500" : ""}
+                  ${form.tags.length > 0 && !errors.actualTag ? "bg-green-500 hover:bg-green-600" : ""}
+                  ${form.tags.length === 0 && !errors.actualTag ? "bg-green-500 hover:bg-green-600" : ""}`}
+                >
                 Agregar
               </button>
             </div>
