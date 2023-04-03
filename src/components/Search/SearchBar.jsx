@@ -1,30 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import queryCreator from "./helper";
 import { useDispatch } from "react-redux";
 import { getPostByQuery, clearFilters } from "../../redux/actions";
 import { useSelector } from "react-redux";
 
 const SearchBar = () => {
+  const [search, setSearch] = useState("");
+  const filteredPosts = useSelector((state) => state.filteredPosts);
 
-    const [search, setSearch] = useState("");
-    const filteredPosts = useSelector(state => state.filteredPosts)
+  useEffect(() => {
+    return () => setSearch("");
+  }, []);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const searchHandler = () => {
-      if(filteredPosts.length) dispatch(clearFilters())
-        const querys = queryCreator(search)
+  const searchHandler = () => {
+    if (filteredPosts.length) dispatch(clearFilters());
+    const querys = queryCreator(search);
 
-        for(let i=0; i<querys.length; i++){
-          dispatch(getPostByQuery(querys[i]))
-        }
-    
+    for (let i = 0; i < querys.length; i++) {
+      dispatch(getPostByQuery(querys[i]));
     }
+    setSearch("");
+  };
 
-    const changeHandler = (e) => {
-        setSearch(e.target.value)
-    }
-    
+  const changeHandler = (e) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <div className="flex relative items-center border-b-2 border-teal-500 py-2 text-white">
       <input
@@ -35,7 +38,10 @@ const SearchBar = () => {
         value={search}
         onChange={changeHandler}
       />
-      <button onClick={searchHandler} className="absolute right-0 top-0 mt-3 mr-4">
+      <button
+        onClick={searchHandler}
+        className="absolute right-0 top-0 mt-3 mr-4"
+      >
         <svg
           className="h-4 w-4 fill-current"
           xmlns="http://www.w3.org/2000/svg"
