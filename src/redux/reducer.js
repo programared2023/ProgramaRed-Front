@@ -6,6 +6,7 @@ import {
   CLEAR_DETAIL,
   GET_USER_BY_NAME,
   GET_POST_BY_QUERY,
+  CLEAR_FILTERS,
 } from "./types";
 
 const initialState = {
@@ -55,8 +56,13 @@ const reducer = (state = initialState, { type, payload }) => {
     case GET_POST_BY_QUERY:
       return {
         ...state,
-        filteredPosts: payload,
+        filteredPosts: [...state.filteredPosts, ...payload],
       };
+      case CLEAR_FILTERS:
+        return{
+          ...state,
+          filteredPosts: []
+        }
 
     default:
       return { ...state };

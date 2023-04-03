@@ -6,3 +6,4 @@ export const GET_ALL_TAGS = 'GET_ALL_TAGS';
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const GET_USER_BY_NAME = 'GET_USER_BY_NAME';
 export const GET_POST_BY_QUERY = 'GET_POST_BY_QUERY';
+export const CLEAR_FILTERS = 'CLEAR_FILTERS'

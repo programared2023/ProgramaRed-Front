@@ -7,7 +7,8 @@ import {
   GET_ALL_POSTS,
   GET_POST_BY_ID,
   GET_POST_BY_QUERY,
-  GET_USER_BY_NAME
+  GET_USER_BY_NAME,
+  CLEAR_FILTERS,
 } from "./types";
 
 export const getUsers = () => {
@@ -84,3 +85,9 @@ export const getPostByQuery = (query) => {
     });
   };
 };
+
+export const clearFilters = () => {
+  return {
+    type: CLEAR_FILTERS
+  }
+}
