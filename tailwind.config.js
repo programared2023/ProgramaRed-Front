@@ -5,6 +5,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        appear: {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(0)' },
+        }
+      },
+      animation: {
+        'spin-slow': 'spin 5s linear infinite',
+        "appear-top": "appear 1s" 
+      },
       boxShadow: {
         shadowBlack: '1px 1px 7px 0 black',
         shadowBoxOutline: "0 0 6px 1px black"
