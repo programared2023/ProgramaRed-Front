@@ -1,9 +1,16 @@
 import { NavLink } from "react-router-dom";
 import Posts from "../components/Posts";
 import Filters from "../components/Filters";
-
+import { useDispatch } from "react-redux";
+import { getAllPosts } from "../redux/actions";
+import { useEffect } from "react";
 
 const Home = () => {
+  const dispatch = useDispatch();
+
+  useEffect(()=> {
+    dispatch(getAllPosts())
+  },[dispatch])
 
   return (
     <div className="flex justify-start flex-col items-center h-full overflow-hidden w-full">

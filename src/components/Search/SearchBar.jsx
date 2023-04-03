@@ -1,15 +1,24 @@
 import { useState } from "react";
-// import { useDispatch } from "react-redux";
+import queryCreator from "./helper";
+import { useDispatch } from "react-redux";
+import { getPostByQuery, clearFilters } from "../../redux/actions";
+import { useSelector } from "react-redux";
 
 const SearchBar = () => {
 
     const [search, setSearch] = useState("");
+    const filteredPosts = useSelector(state => state.filteredPosts)
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const searchHandler = () => {
-        // helper()
-        // dispatch()
+      if(filteredPosts.length) dispatch(clearFilters())
+        const querys = queryCreator(search)
+
+        for(let i=0; i<querys.length; i++){
+          dispatch(getPostByQuery(querys[i]))
+        }
+    
     }
 
     const changeHandler = (e) => {
@@ -26,7 +35,7 @@ const SearchBar = () => {
         value={search}
         onChange={changeHandler}
       />
-      <button onClick={searchHandler} type="submit" className="absolute right-0 top-0 mt-3 mr-4">
+      <button onClick={searchHandler} className="absolute right-0 top-0 mt-3 mr-4">
         <svg
           className="h-4 w-4 fill-current"
           xmlns="http://www.w3.org/2000/svg"
