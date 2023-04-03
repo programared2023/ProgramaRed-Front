@@ -28,9 +28,9 @@ const SearchBar = () => {
   return (
     <div className="flex relative items-center border-b-2 border-teal-500 py-2 text-white">
       <input
-        className="bg-transparent border-none mr-3 px-2 leading-tight focus:outline-none"
+        className="bg-transparent border-none mr-3 px-2 leading-tight focus:outline-none placeholder:text-white placeholder:opacity-60"
         type="text"
-        placeholder="Buscar"
+        placeholder="Buscar en ProgramaRed"
         name="search"
         value={search}
         onChange={changeHandler}

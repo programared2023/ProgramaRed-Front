@@ -7,9 +7,9 @@ const SideBar = ()=>{
             <div className="relative text-lg bg-transparent text-gray-800 pt-5">
                 <SearchBar/>
             </div>
-            <div className="px-4 py-2 bg-green-700 text-sm text-green-400 rounded-lg hover:bg-green-600 cursor-pointer">
+            {/* <div className="px-4 py-2 border text-center border-cyan-500 bg-mediumGreen text-sm text-white rounded-lg hover:bg-darkGreen cursor-pointer">
                 <p>Tus Favoritos</p>    
-            </div> 
+            </div>  */}
         </div>
     )
 }
