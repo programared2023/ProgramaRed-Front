@@ -1,67 +1,105 @@
 import { useState } from "react";
 import validate from "./validate";
+import { useDispatch } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const FormSignUp = () => {
-    const [form, setForm] = useState({
-        username: "",
-        email: "",
-        password: "",
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const changeHandler = (event) => {
+    const property = event.target.name;
+    const value = event.target.value;
+
+    setForm({
+      ...form,
+      [property]: value,
     });
 
-    const [errors, setErrors] = useState({
-        username: "",
-        email: "",
-        password: "",
+    setErrors(validate({ ...form, [property]: value }));
+  };
+
+  const clearForm = () => {
+    setForm({
+      username: "",
+      email: "",
+      password: "",
     });
+  };
 
-    const changeHandler = (event) => {
-        const property = event.target.name;
-        const value = event.target.value;
-    
-        setForm({
-            ...form, 
-            [property]: value
-        });
+  const navigate = useNavigate();
 
-        setErrors(validate({...form, [property]: value}))
-    };
+  const dispatch = useDispatch();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        await axios.post("/user", form)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const info = await axios.post("/user", form);
+      alert(info.data);
+      clearForm();
+      navigate("/");
+    } catch (error) {
+      alert(error.response.data);
     }
+  };
 
-    return(
-        <div className=" block mt-14 w-full bg-darkGreen">
-            <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
-                <h3>Registrarse</h3>
-                <form onSubmit={handleSubmit} >
-                    <div>
-                        <label>Nombre de usuario: </label>
-                        <input onChange={changeHandler} placeholder="Escribe tu nombre de usuario..." type="text" name="username" value={form?.username}/>
-                        <span>{errors?.username}</span>
-                    </div>
+  return (
+    <div className=" block mt-14 w-full ">
+      <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
+        <h3>Registrarse</h3>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>Nombre de usuario: </label>
+            <input
+              onChange={changeHandler}
+              placeholder="Escribe tu nombre de usuario..."
+              type="text"
+              name="username"
+              value={form?.username}
+            />
+            <span>{errors?.username}</span>
+          </div>
 
-                    <div>
-                        <label>Email: </label>
-                        <input onChange={changeHandler} placeholder="Escribe tu email..." type="text" name="email" value={form?.email}/>
-                        <span>{errors?.email}</span>
-                    </div>
+          <div>
+            <label>Email: </label>
+            <input
+              onChange={changeHandler}
+              placeholder="Escribe tu email..."
+              type="text"
+              name="email"
+              value={form?.email}
+            />
+            <span>{errors?.email}</span>
+          </div>
 
-                    <div>
-                        <label>Contraseña: </label>
-                        <input onChange={changeHandler} type="password" name="password" value={form?.password}/>
-                        <span>{errors?.password}</span>
-                    </div>
+          <div>
+            <label>Contraseña: </label>
+            <input
+              onChange={changeHandler}
+              type="password"
+              name="password"
+              value={form?.password}
+            />
+            <span>{errors?.password}</span>
+          </div>
 
-                    <div>
-                        <button>Enviar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    )
-}
+          <div>
+            <button type="submit">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
 
 export default FormSignUp;

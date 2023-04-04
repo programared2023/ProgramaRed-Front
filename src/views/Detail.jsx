@@ -10,7 +10,7 @@ const Detail = () => {
 
     useEffect(()=> {
         dispatch(getPostById(id))
-      },[dispatch])
+      },[dispatch, id])
 
     return(
         <PostDetail/>
