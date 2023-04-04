@@ -79,6 +79,11 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         filterPostByTag: [...payload],
       }
+      case GET_POST_BY_QUERY:
+        return {
+          ...state,
+          filteredPosts : payload
+        }
 
     default:
       return { ...state };

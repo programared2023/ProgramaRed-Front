@@ -116,3 +116,25 @@ export const getPostByTag = (tag) => {
     });
   };
 }
+
+export const getPostByQuery = (user, tag, post) => {
+  return async function (dispatch) {
+    let backData
+    if(user){
+      backData = await axios.get(`/posts?user=${user}`);
+    }
+
+    if(tag){
+      backData = await axios.get(`/posts?tag=${tag}`);
+    }
+
+    if(post){
+      backData = await axios.get(`/posts?post=${post}`);
+    }
+    const posts = backData.data;
+    dispatch({
+      type: GET_POST_BY_QUERY,
+      payload: posts,
+    });
+  };
+}
