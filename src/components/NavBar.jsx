@@ -3,8 +3,14 @@ import logo from "../images/logoNombre.png"
 
 const NavBar= ()=>{
     
-    const {pathname} = useLocation() 
+    const {pathname} = useLocation();
+    
+    let userId = localStorage.getItem("id");
+    let isUserLogged
 
+    if (pathname === `/profile/${userId}`) isUserLogged = true
+    else isUserLogged = false
+    
     return(
         <div className=" bg-mediumGreen w-1/6 flex flex-col justify-between sticky h-full top-0 px-3 rounded-sm shadow-shadowBlack min-w-20%">
             <div className="pt-4">
@@ -18,7 +24,7 @@ const NavBar= ()=>{
                         </svg>
                         Home
                     </NavLink>
-                    <NavLink to="/profile/1" className={`flex py-2 px-4 hover:bg-darkGreen hover:scale-110  text-xl gap-3 w-full items-center transition-all rounded-3xl ${pathname.startsWith("/profile") ? "text-white bg-darkGreen scale-110" : "text-blue-50" }`}>
+                    <NavLink to={`/profile/${userId}`} className={`flex py-2 px-4 hover:bg-darkGreen hover:scale-110  text-xl gap-3 w-full items-center transition-all rounded-3xl ${isUserLogged ? "text-white bg-darkGreen scale-110" : "text-blue-50" }`}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                         </svg>

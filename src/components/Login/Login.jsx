@@ -54,7 +54,7 @@ const Login = () => {
           <h2 className="text-xl font-bold text-green-700 text-center pb-2">
             Inicia cesion con tu cuenta 
           </h2>
-          <p className=" text-center text-xs" >No tienes una cuenta? Regístrate <NavLink className="text-blue-500">aquí</NavLink></p>
+          <p className=" text-center text-xs" >No tienes una cuenta? Regístrate <NavLink to="/signUp" className="text-blue-600">aquí</NavLink></p>
         </div>
         <form onSubmit={handleSubmit}>
           <div>
