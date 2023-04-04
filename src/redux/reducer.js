@@ -6,17 +6,22 @@ import {
   CLEAR_DETAIL,
   GET_USER_BY_NAME,
   GET_POST_BY_QUERY,
+  GET_POST_BY_TAG,
   CLEAR_FILTERS,
+  GET_ALL_TAGS,
 } from "./types";
 
 const initialState = {
   favorites: [],
   posts: [],
   users: [],
+  tags: [],
   actualUser: [],
   detailUser: [],
   filteredUsers: [],
   filteredPosts: [],
+  filterPostByTag: [],
+  filterByTag: [],
   actualPost: [],
   message: "",
 };
@@ -58,11 +63,21 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         filteredPosts: [...state.filteredPosts, ...payload],
       };
-      case CLEAR_FILTERS:
-        return{
-          ...state,
-          filteredPosts: []
-        }
+    case GET_ALL_TAGS:
+      return {
+        ...state,
+        tags: payload,
+      };
+    case CLEAR_FILTERS:
+      return {
+        ...state,
+        filteredPosts: [],
+      };
+    case GET_POST_BY_TAG:
+      return {
+        ...state,
+        filterPostByTag: [...payload],
+      }
 
     default:
       return { ...state };
