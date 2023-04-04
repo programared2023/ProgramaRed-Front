@@ -12,7 +12,7 @@ module.exports = {
         }
       },
       animation: {
-        'spin-slow': 'spin 5s linear infinite',
+        'spin-slow': 'spin 25s linear infinite',
         "appear-top": "appear 1s" 
       },
       boxShadow: {
