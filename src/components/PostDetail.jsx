@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const PostDetail = () => {
+const PostDetail = ({onClose}) => {
   const post = useSelector((state) => state.actualPost);
 
   const postDate = new Date(post.createdAt).toLocaleString("es-AR").split(",");
@@ -9,12 +9,13 @@ const PostDetail = () => {
   const date = postDate[0];
   const hour = postDate[1];
 
-  console.log(date);
-  console.log(hour);
+  // console.log(date);
+  // console.log(hour);
 
   return (
-    <div className="bg-greenGray rounded-lg p-4 mx-8 my-10 shadow-shadowBlack w-full flex flex-col justify-between h-3/4">
+    <div className="bg-greenGray rounded-lg p-4 shadow-shadowBlack w-full flex flex-col justify-between h-3/4 min-w-90% m-0 absolute top-10 left-1/2 transform -translate-x-1/2">
       <div>
+        <button onClick={()=>{onClose()}} >X</button>
         <div className="flex items-center mb-2">
           <div className="bg-green-300 w-12 h-12 rounded-full mr-3">
             <img
