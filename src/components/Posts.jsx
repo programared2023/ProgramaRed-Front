@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import Post from "./Post";
 import { useEffect } from "react";
 import { useState } from "react";
+import { setCategory } from "../redux/actions";
 
 const Posts = ()=>{
 
@@ -14,6 +15,7 @@ const Posts = ()=>{
 
   useEffect(()=> {
     setPosts(allPosts)
+    setCategory("")
   },[allPosts])
 
   useEffect(()=> {

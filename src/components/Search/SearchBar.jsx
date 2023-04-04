@@ -1,23 +1,33 @@
 import { useEffect, useState } from "react";
-import queryCreator from "./helper";
 import { useDispatch } from "react-redux";
-import { getPostByQuery, clearFilters, getPostBySearch } from "../../redux/actions";
+import { clearFilters, getPostBySearch, getPostByQuery } from "../../redux/actions";
 import { useSelector } from "react-redux";
+import queryCreator from "./helper";
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
   const filteredPosts = useSelector((state) => state.filteredPosts);
+  const category = useSelector(state => state.category)
 
   useEffect(() => {
     return () => setSearch("");
   }, []);
 
+  useEffect(() => {
+    searchHandler ()
+  }, [category]);
+
   const dispatch = useDispatch();
 
   const searchHandler = () => {
     if (filteredPosts.length) dispatch(clearFilters());
-    dispatch(getPostBySearch(search))
-    setSearch("");
+    if(category === "") dispatch(getPostBySearch(search))
+    if(category !== ""){
+      let query = queryCreator(search, category)
+      console.log(query)
+      dispatch(getPostByQuery(query))
+    }
+
   };
 
   const changeHandler = (e) => {
