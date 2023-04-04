@@ -10,6 +10,7 @@ import {
   CLEAR_FILTERS,
   GET_ALL_TAGS,
   GET_POST_BY_SEARCH,
+  SET_CATEGORY,
 } from "./types";
 
 const initialState = {
@@ -25,6 +26,11 @@ const initialState = {
   filterByTag: [],
   actualPost: [],
   message: "",
+  categories: {
+    tag: false,
+    user: false,
+    posts: false,
+  }
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -84,6 +90,39 @@ const reducer = (state = initialState, { type, payload }) => {
           ...state,
           filteredPosts : payload
         }
+        case SET_CATEGORY:
+          if(payload === "user"){
+            return{
+              ...state,
+              categories: {
+                tag: false,
+                user: true,
+                posts: false,
+              }
+            }
+          }
+
+          if(payload === "tag"){
+            return{
+              ...state,
+              categories: {
+                tag: true,
+                user: false,
+                posts: false,
+              }
+            }
+          }
+
+          if(payload === "posts"){
+            return{
+              ...state,
+              categories: {
+                tag: false,
+                user: false,
+                posts: true,
+              }
+            }
+          }
 
     default:
       return { ...state };
