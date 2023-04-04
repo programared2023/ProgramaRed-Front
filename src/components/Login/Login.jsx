@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { validate } from "./validateLogin";
-import { Await, NavLink, json, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
