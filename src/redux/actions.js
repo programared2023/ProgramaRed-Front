@@ -12,6 +12,7 @@ import {
   GET_POST_BY_TAG,
   GET_ALL_TAGS,
   GET_POST_BY_SEARCH,
+  SET_CATEGORY,
 } from "./types";
 
 export const getUsers = () => {
@@ -138,3 +139,10 @@ export const getPostByQuery = (user, tag, post) => {
     });
   };
 }
+
+export const setCategory = (category) => {
+  return{
+    type: SET_CATEGORY,
+    payload: category
+  }
+} 
