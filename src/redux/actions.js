@@ -9,6 +9,8 @@ import {
   GET_POST_BY_QUERY,
   GET_USER_BY_NAME,
   CLEAR_FILTERS,
+  GET_POST_BY_TAG,
+  GET_ALL_TAGS,
 } from "./types";
 
 export const getUsers = () => {
@@ -90,4 +92,26 @@ export const clearFilters = () => {
   return {
     type: CLEAR_FILTERS
   }
+}
+
+export const getAllTags = () => {
+  return async function (dispatch) {
+    const backData = await axios.get("/tags");
+    const tags = backData.data;
+    dispatch({
+      type: GET_ALL_TAGS,
+      payload: tags,
+    })
+  }
+}
+
+export const getPostByTag = (tag) => {
+  return async function (dispatch) {
+    const backData = await axios.get(`/post?${tag}`);
+    const posts = backData.data;
+    dispatch({
+      type: GET_POST_BY_TAG,
+      payload: posts,
+    });
+  };
 }

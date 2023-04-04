@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import Posts from "../components/Posts";
-import Filters from "../components/Filters";
+import Filters from "../components/Filters/Filters";
 import { useDispatch } from "react-redux";
 import { getAllPosts } from "../redux/actions";
 import { useEffect } from "react";
