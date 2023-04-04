@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import Detail from "../views/Detail";
 
 const Post = ({ post, username }) => {
   //post recibe username porque en algunos casos el "post" no posee username
   const [localPost, setLocalPost] = useState({});
+
+  const [showDetails, setShowDetails] = useState(false);
+  const toggleDetails = () => setShowDetails(!showDetails);
 
   useEffect(() => {
     setLocalPost(post);
@@ -43,15 +47,19 @@ const Post = ({ post, username }) => {
           </div>
         </div>
 
-        <NavLink
+        <button
           to={`/post/${localPost.id}`}
-          className="text-green-700 text-base line-clamp-4"
+          className="text-green-700 text-base line-clamp-4 text-left"
+          onClick={toggleDetails}
         >
           <h2 className="text-green-800 font-bold text-lg mb-2">
             {localPost.title}
           </h2>
           <p>{localPost.description}</p>
-        </NavLink>
+        </button>
+        
+        {showDetails && localPost && <Detail post={localPost} onClose={toggleDetails} />}
+        
         <div className="flex gap-2 mt-3">
           {localPost.Tags?.map((tag, i) => {
             return (
