@@ -1,6 +1,6 @@
-// import Login from "../components/Login/Login";
 import logo from "../images/logo.png"
 import { NavLink } from "react-router-dom";
+import Login from "../components/Login/Login";
 
 const Landing = () => {
   return (
@@ -14,6 +14,9 @@ const Landing = () => {
         {/* <span className="mt-8 text-lg text-black">
           ¿No tenés una cuenta? ¡Registrate <NavLink to="/signUp" className="underline">acá!</NavLink>
         </span> */}
+      </div>
+      <div>
+        <Login />
       </div>
     </div>
   );

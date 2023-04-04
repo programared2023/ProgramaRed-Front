@@ -4,13 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPost, getUserById } from "../../redux/actions";
 
 const CreatePost = () => {
-  const user = useSelector((state) => state.actualUser);
+  const actualUser = useSelector((state) => state.actualUser);
 
   const dispatch = useDispatch();
 
+  const [user, setUser] = useState({})
+
   useEffect(() => {
-    dispatch(getUserById(1));
-  }, [dispatch]);
+    let userId = localStorage.getItem("id");
+    dispatch(getUserById(userId));
+
+    setUser(actualUser)
+  }, [dispatch, actualUser]);
   
   const [form, setForm] = useState({
     title: "",

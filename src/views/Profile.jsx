@@ -1,22 +1,23 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { clearDetail, getUserById } from "../redux/actions";
 import Post from "../components/Post";
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  // const { id } = useParams();
 
   const user = useSelector((state) => state.actualUser);
 
   
   useEffect(() => {
-    dispatch(getUserById(id));
+    let userId = localStorage.getItem("id");
+    dispatch(getUserById(userId));
     return () => {
       dispatch(clearDetail());
     };
-  }, [dispatch, id]);
+  }, [dispatch]);
 
   return (
     <div className="flex flex-col w-full">
