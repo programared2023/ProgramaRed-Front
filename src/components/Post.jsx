@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Detail from "../views/Detail";
+import { setCategory } from "../redux/actions";
 
 const Post = ({ post, username }) => {
   //post recibe username porque en algunos casos el "post" no posee username
@@ -11,6 +12,7 @@ const Post = ({ post, username }) => {
 
   useEffect(() => {
     setLocalPost(post);
+    setCategory("")
   }, [post, localPost]);
 
   const postDate = new Date(post.createdAt).toLocaleString("es-AR").split(",");
