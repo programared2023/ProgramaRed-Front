@@ -49,7 +49,7 @@ const FormSignUp = () => {
       clearForm();
       navigate("/");
     } catch (error) {
-      alert(error.response.data);
+      alert(error.response.data.error);
     }
   };
 
