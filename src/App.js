@@ -10,18 +10,18 @@ import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
 
 function App() {
-  const {pathname} = useLocation();
-  
+  const { pathname } = useLocation();
+
   return (
     <div className="flex justify-between bg-veryLigthGreen h-screen w-screen fixed top-0">
       {pathname !== "/" && <NavBar />}
       <Routes>
-        <Route path="/" element={<Landing />}/>
-        <Route path="/home" element={<Home />}/>
+        <Route path="/" element={<Landing />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/createPost" element={<CreatePost />} />
-        <Route path="/post/:id" element={<Detail/>} />
-        <Route path="/profile/:id" element={<Profile/>} />
-        <Route path="/signUp" element={<SignUp/>} />
+        <Route path="/post/:id" element={<Detail />} />
+        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/signUp" element={<SignUp />} />
       </Routes>
       {pathname !== "/" && <SideBar />}
     </div>
