@@ -5,7 +5,7 @@ import { getAllTags } from "../../redux/actions";
 const Filters = ({ posts }) => {
   const filterByTag = useSelector((state) => state.filterByTag);
   const [filter, serFilter] = useState(filterByTag);
-  console.log("soy el estado local filter:",filter);
+  // console.log("soy el estado local filter:",filter);
 
   const allTags = useSelector((state) => state.tags);
 
@@ -20,9 +20,9 @@ const Filters = ({ posts }) => {
   const getPostByTag = (e) => {
     if (e.target) {
       const tag = "tag=" + e.target.value;
-      console.log("soy el tag",tag);
+      // console.log("soy el tag",tag);
       setSelectedTag(tag);
-      console.log("soy selectedTag: ",tag);
+      // console.log("soy selectedTag: ",tag);
       dispatch(getPostByTag(tag));
     }
   };
