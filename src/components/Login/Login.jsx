@@ -89,6 +89,7 @@ const Login = () => {
             <input
               type="password"
               name="password"
+              placeholder="Tu contraseña"
               value={form.password}
               onChange={handleInputs}
               className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${
