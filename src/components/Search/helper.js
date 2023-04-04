@@ -1,16 +1,12 @@
-const queryCreator = (search) => {
-    let words = search.split(" ");
-    let querys = [];
-    // console.log(words)
-    for(let i=0; i<words.length; i++){
-        let query = ""
-        query += `title=${words[i]}&username=${words[i]}&tag=${words[i]}`
-        querys.push(query)
-    }
-    return querys;
-}
+const queryCreator = (search, category) => {
+    let query
 
-// console.log(queryCreator("ailin sergio javascript"))
+    if(category === "user") query = `/posts?username=${search}`
+    if(category === "tag") query = `/posts?tag=${search}`
+    if(category === "posts") query = `/posts?title=${search}`
+
+    return query;
+}
 
 export default queryCreator;
 

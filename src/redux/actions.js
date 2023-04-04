@@ -118,21 +118,11 @@ export const getPostByTag = (tag) => {
   };
 }
 
-export const getPostByQuery = (user, tag, post) => {
+export const getPostByQuery = (query) => {
   return async function (dispatch) {
-    let backData
-    if(user){
-      backData = await axios.get(`/posts?user=${user}`);
-    }
-
-    if(tag){
-      backData = await axios.get(`/posts?tag=${tag}`);
-    }
-
-    if(post){
-      backData = await axios.get(`/posts?post=${post}`);
-    }
+    const backData = await axios.get(query);
     const posts = backData.data;
+    console.log(posts)
     dispatch({
       type: GET_POST_BY_QUERY,
       payload: posts,

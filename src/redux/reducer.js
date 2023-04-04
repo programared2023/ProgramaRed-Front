@@ -26,11 +26,7 @@ const initialState = {
   filterByTag: [],
   actualPost: [],
   message: "",
-  categories: {
-    tag: false,
-    user: false,
-    posts: false,
-  }
+  category: ""
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -91,37 +87,10 @@ const reducer = (state = initialState, { type, payload }) => {
           filteredPosts : payload
         }
         case SET_CATEGORY:
-          if(payload === "user"){
-            return{
-              ...state,
-              categories: {
-                tag: false,
-                user: true,
-                posts: false,
-              }
-            }
-          }
-
-          if(payload === "tag"){
-            return{
-              ...state,
-              categories: {
-                tag: true,
-                user: false,
-                posts: false,
-              }
-            }
-          }
-
-          if(payload === "posts"){
-            return{
-              ...state,
-              categories: {
-                tag: false,
-                user: false,
-                posts: true,
-              }
-            }
+          console.log(payload)
+          return{
+            ...state,
+            category: payload,
           }
 
     default:
