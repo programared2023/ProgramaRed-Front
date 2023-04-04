@@ -11,6 +11,7 @@ import {
   CLEAR_FILTERS,
   GET_POST_BY_TAG,
   GET_ALL_TAGS,
+  GET_POST_BY_SEARCH,
 } from "./types";
 
 export const getUsers = () => {
@@ -77,12 +78,12 @@ export const getUserByName = (name) => {
   };
 };
 
-export const getPostByQuery = (query) => {
+export const getPostBySearch = (search) => {
   return async function (dispatch) {
-    const backData = await axios.get(`/post?${query}`);
+    const backData = await axios.get(`/post?search=${search}`);
     const posts = backData.data;
     dispatch({
-      type: GET_POST_BY_QUERY,
+      type: GET_POST_BY_SEARCH,
       payload: posts,
     });
   };

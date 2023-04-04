@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import queryCreator from "./helper";
 import { useDispatch } from "react-redux";
-import { getPostByQuery, clearFilters } from "../../redux/actions";
+import { getPostByQuery, clearFilters, getPostBySearch } from "../../redux/actions";
 import { useSelector } from "react-redux";
 
 const SearchBar = () => {
@@ -16,11 +16,7 @@ const SearchBar = () => {
 
   const searchHandler = () => {
     if (filteredPosts.length) dispatch(clearFilters());
-    const querys = queryCreator(search);
-
-    for (let i = 0; i < querys.length; i++) {
-      dispatch(getPostByQuery(querys[i]));
-    }
+    dispatch(getPostBySearch(search))
     setSearch("");
   };
 
