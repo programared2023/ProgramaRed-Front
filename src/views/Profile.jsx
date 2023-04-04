@@ -1,23 +1,25 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { clearDetail, getUserById } from "../redux/actions";
 import Post from "../components/Post";
 
 const Profile = () => {
   const dispatch = useDispatch();
-  // const { id } = useParams();
+  const { id } = useParams();
 
   const user = useSelector((state) => state.actualUser);
 
-  
   useEffect(() => {
     let userId = localStorage.getItem("id");
-    dispatch(getUserById(userId));
+
+    if (id === localStorage.getItem("id")) dispatch(getUserById(userId));
+    else dispatch(getUserById(id))
+    
     return () => {
       dispatch(clearDetail());
     };
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <div className="flex flex-col w-full">
@@ -37,10 +39,13 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <NavLink to="/createPost" 
-              className="p-2 m-4 self-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-130">
-        Sube un posteo
-      </NavLink>
+      {
+        id === localStorage.getItem("id") 
+        ? (<NavLink to="/createPost" 
+            className="p-2 m-4 self-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-130">
+            Sube un posteo
+          </NavLink>) : ""
+      }
       <div className="mt-8 p-9 overflow-hidden h-full">
         {user ? (
           <>
