@@ -4,7 +4,7 @@ const queryCreator = (search) => {
     // console.log(words)
     for(let i=0; i<words.length; i++){
         let query = ""
-        query += `username=${words[i]}&tag=${words[i]}`
+        query += `title=${words[i]}&username=${words[i]}&tag=${words[i]}`
         querys.push(query)
     }
     return querys;

@@ -9,6 +9,7 @@ import {
   GET_POST_BY_TAG,
   CLEAR_FILTERS,
   GET_ALL_TAGS,
+  GET_POST_BY_SEARCH,
 } from "./types";
 
 const initialState = {
@@ -58,10 +59,10 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         filteredUser: payload,
       };
-    case GET_POST_BY_QUERY:
+    case GET_POST_BY_SEARCH:
       return {
         ...state,
-        filteredPosts: [...state.filteredPosts, ...payload],
+        filteredPosts: payload,
       };
     case GET_ALL_TAGS:
       return {
