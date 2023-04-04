@@ -1,4 +1,4 @@
-import "./dir/tailwind.css"
+import "./dir/tailwind.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Landing from "./views/Landing";
 import Home from "./views/Home";
@@ -8,6 +8,7 @@ import Profile from "./views/Profile";
 import SignUp from "./views/SignUp";
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
+import Payment from "./views/Payment";
 
 function App() {
   const { pathname } = useLocation();
@@ -22,6 +23,7 @@ function App() {
         <Route path="/post/:id" element={<Detail />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/signUp" element={<SignUp />} />
+        <Route path="/premium" element={<Payment />} />
       </Routes>
       {pathname !== "/" && <SideBar />}
     </div>
