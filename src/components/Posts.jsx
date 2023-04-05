@@ -11,18 +11,15 @@ const Posts = ()=>{
 
   const [posts, setPosts] = useState([]);
 
-  // const user = useSelector(state => state.actualUser)
-
   useEffect(()=> {
-    setPosts(allPosts)
-    setCategory("")
+    setPosts(allPosts);
+    setCategory("");
   },[allPosts])
 
   useEffect(()=> {
-    setPosts(filteredPosts)
+    setPosts(filteredPosts);
   },[filteredPosts])
 
-  // console.log(posts)
     return(
       <div className="flex flex-wrap justify-center p-4 w-full max-h-full">
         <div className="overflow-hidden min-h-0 h-5/6 w-full">

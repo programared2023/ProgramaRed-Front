@@ -13,7 +13,7 @@ const PostDetail = ({onClose}) => {
   // console.log(hour);
 
   return (
-    <div className="bg-greenGray rounded-lg p-4 shadow-shadowBlack w-full flex flex-col justify-between h-3/4 min-w-90% m-0 absolute top-10 left-1/2 transform -translate-x-1/2">
+    <div className="bg-greenGray rounded-lg p-4 shadow-shadowBlack min-w-90% flex flex-col justify-between h-3/4 m-0 absolute top-10 left-1/2 transform -translate-x-1/2 z-50">
       <div>
         <button onClick={()=>{onClose()}} >X</button>
         <div className="flex items-center mb-2">
