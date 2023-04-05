@@ -13,7 +13,7 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <div className="flex justify-start flex-col items-center h-full overflow-hidden w-full">
+    <div className="flex justify-start flex-col items-center h-full overflow-hidden w-full relative">
       <NavLink
         to="/createPost"
         className="p-2 m-4 font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-130"
