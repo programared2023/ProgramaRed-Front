@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { clearDetail } from "../redux/actions";
 
-const PostDetail = ({onClose}) => {
+const PostDetail = ({toggleDetails}) => {
   const post = useSelector((state) => state.actualPost);
 
   const postDate = new Date(post.createdAt).toLocaleString("es-AR").split(",");
@@ -9,13 +10,15 @@ const PostDetail = ({onClose}) => {
   const date = postDate[0];
   const hour = postDate[1];
 
-  // console.log(date);
-  // console.log(hour);
+  const dispatch = useDispatch()
 
   return (
     <div className="bg-greenGray rounded-lg p-4 shadow-shadowBlack min-w-90% flex flex-col justify-between h-3/4 m-0 absolute top-10 left-1/2 transform -translate-x-1/2 z-50">
       <div>
-        <button onClick={()=>{onClose()}} >X</button>
+        <button onClick={()=>{
+          toggleDetails()
+          dispatch(clearDetail)
+          }} >X</button>
         <div className="flex items-center mb-2">
           <div className="bg-green-300 w-12 h-12 rounded-full mr-3">
             <img

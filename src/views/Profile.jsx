@@ -4,7 +4,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { clearDetail, getUserById } from "../redux/actions";
 import Post from "../components/Post";
 
-const Profile = () => {
+const Profile = ({ toggleDetails }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -55,7 +55,7 @@ const Profile = () => {
             <div className="space-y-4 h-full py-5 overflow-y-auto scrollbar-thin scrollbar-track-transparent">
               {user.Posts?.map((post, i) => {
                 //al post le paso username porque en este caso "post" no posee datos de username
-                return <Post post={post} username={user.username} key={i} />;
+                return <Post post={post} username={user.username} key={i} toggleDetails={toggleDetails} />;
               })}
             </div>
           </>
