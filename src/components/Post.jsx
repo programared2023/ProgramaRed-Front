@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import Detail from "../views/Detail";
+import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getPostById } from "../redux/actions";
 
-const Post = ({ post, username }) => {
+const Post = ({ post, username, toggleDetails}) => {
   //post recibe username porque en algunos casos el "post" no posee username
   const [localPost, setLocalPost] = useState({});
 
-  const { pathname } = useLocation();
-
-  const [showDetails, setShowDetails] = useState(false);
-  const toggleDetails = () => setShowDetails(!showDetails);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setLocalPost(post);
   }, [post, localPost]);
 
-  const [favorite, serFavorite] = useState([]); //guardar post seleccionado - quiza hacer dispacht a redux
+  //const [favorite, setFavorite] = useState([]); //guardar post seleccionado - quiza hacer dispacht a redux
   const [clicked, setClicked] = useState(false);
 
   const postDate = new Date(post.createdAt).toLocaleString("es-AR").split(",");
@@ -51,7 +49,7 @@ const Post = ({ post, username }) => {
             <p className="text-black text-xs font-medium">{`Creado el ${date} a las ${hour}`}</p>
           </div>
             {
-              localPost.User?.id.toString() != localStorage.getItem("id")
+              localPost.User?.id.toString() !== localStorage.getItem("id")
               ? (
                 !clicked ? 
                 ( 
@@ -75,16 +73,16 @@ const Post = ({ post, username }) => {
 
         <button
           className="text-green-700 text-base line-clamp-4 text-left"
-          onClick={toggleDetails}
-        >
+          onClick={()=>{
+            toggleDetails();
+            dispatch(getPostById(localPost.id));
+          }}
+          >
           <h2 className="text-green-800 font-bold text-lg mb-2">
             {localPost.title}
           </h2>
           <p>{localPost.description}</p>
         </button>
-        
-        {showDetails && localPost && <Detail post={localPost} onClose={toggleDetails} showDetails={showDetails}/>}
-        
         
         <div className="flex gap-2 mt-3">
           {localPost.Tags?.map((tag, i) => {
