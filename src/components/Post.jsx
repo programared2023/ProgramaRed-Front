@@ -91,11 +91,22 @@ const Post = ({ post, username }) => {
         
         <div className="flex gap-2 mt-3">
           {localPost.Tags?.map((tag, i) => {
-            return (
-              <button onClick={() => dispatch(getPostByTag(tag.name))} key={i} className=" text-sm text-amber-700 font-medium">
-                #{tag.name}
-              </button>
-            );
+              {
+                if(pathname !== "/home"){
+                  return(
+                    <NavLink to="/home"><button onClick={() => dispatch(getPostByTag(tag.name))} key={i} className=" text-sm text-amber-700 font-medium">
+                      #{tag.name}
+                    </button></NavLink>
+                  )
+                } 
+                else{
+                  return(
+                    <button onClick={() => dispatch(getPostByTag(tag.name))} key={i} className=" text-sm text-amber-700 font-medium">
+                      #{tag.name}
+                    </button>
+                  )
+                }
+              }
           })}
         </div>
       </div>
