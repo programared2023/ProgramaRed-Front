@@ -109,8 +109,9 @@ export const getAllTags = () => {
 
 export const getPostByTag = (tag) => {
   return async function (dispatch) {
-    const backData = await axios.get(`/post?${tag}`);
+    const backData = await axios.get(`/posts?tag=${tag}`);
     const posts = backData.data;
+    console.log(posts)
     dispatch({
       type: GET_POST_BY_TAG,
       payload: posts,

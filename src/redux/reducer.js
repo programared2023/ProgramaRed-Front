@@ -44,7 +44,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case CLEAR_DETAIL:
       return {
         ...state,
-        actualPost: payload,
+        detailCountry: payload,
       };
     case GET_ALL_POSTS:
       return {
@@ -79,7 +79,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case GET_POST_BY_TAG:
       return {
         ...state,
-        filterPostByTag: [...payload],
+        filteredPosts: payload,
       }
       case GET_POST_BY_QUERY:
         return {
