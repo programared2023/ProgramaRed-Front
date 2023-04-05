@@ -1,41 +1,58 @@
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
-import { useCallback, useEffect } from "react";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
-// const MP_PUBLIC_KEY = "TEST-9cd5ef81-313e-40ed-9aa7-f8d0f163a1e2";
-const FORM_ID = "payment-form"
+const MP_PUBLIC_KEY = "APP_USR-2e62776c-c02a-41fc-8124-39dda16ba58b";
+initMercadoPago(MP_PUBLIC_KEY, {
+  locale: 'es-AR'
+})
 
 const Payment = () => {
   // const [preferenceId, setPreferenceId] = useState("");
+  const [cargando, setCargando] = useState(true)
+  const [procesando, setProcesando] = useState(false)
   const [searchParams, _] = useSearchParams()
+  // const [initialization, setInitialization] = useState({ preferenceId: '' })
 
-  const realizarPago = useCallback(async () => {
-    const res = await axios.post('http://localhost:3001/subcriptions',
-      {
-        "title": "Subscripcion Premium",
-        "description": "Pagar una subscripcion premium para poder publicar videos",
-        "price": 500,
-        "user": {
-          "username": "nicolas123",
-          "email": "juncosnicolas36@gmail.com"
+  const onSubmit = async () => {
+    // callback llamado al hacer clic en Wallet Brick
+    // esto es posible porque el ladrillo es un botón
+    // en este momento del envío, debe crear la preferencia
+    return new Promise((resolve, reject) => {
+      setProcesando(true)
+      axios.post('/subcriptions', {
+        title: "Subscripcion Premium",
+        description: "Pagar una subscripcion premium para poder publicar videos",
+        price: 500,
+        user: {
+          username: "nicolas123",
+          email: "juncosnicolas36@gmail.com"
         }
       })
-    if (res.data.preferenceId) {
-      const script = document.createElement('script')
-      script.type = 'text/javascript'
-      script.src = 'https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js'
-      script.setAttribute('data-preference-id', res.data.preferenceId)
-      const form = document.getElementById(FORM_ID)
-      form.appendChild(script)
-    }
-  })
+        .then((response) => response.data)
+        .then((data) => {
+          // resolver la promesa con el ID de la preferencia
+          // setInitialization({ preferenceId: data.preferenceId })
+          resolve(data.preferenceId);
+        })
+        .catch((error) => {
+          // manejar la respuesta de error al intentar crear preferencia
+          console.error(error);
+          reject(error);
+        }).finally(() => {
+          setProcesando(false)
+        })
+    });
+  };
 
-  useEffect(() => {
-    realizarPago()
-    return () => { }
-  }, [])
+  const onReady = () => {
+    setCargando(false)
+  }
 
+  const onError = (error) => {
+    console.error("Error:", error);
+  }
   return (
     <div id="wallet_container">
       <h2>Obtiene tu membresía Premium</h2>
@@ -44,43 +61,48 @@ const Payment = () => {
       <br />
       <span>Compartir videos y tutoriales</span>
 
-      <form id={FORM_ID} method="get" />
-      {/* <button onClick={realizarPago} className="bg-blue-500 px-3 py-1 hover:bg-blue-700 rounded-xl border border-black">Realizar Pago</button> */}
+      <Wallet
+        customization={{ visual: { buttonBackground: 'black', borderRadius: '8rem' } }}
+        onReady={onReady}
+        onSubmit={onSubmit}
+        onError={onError}
+      // initialization={initialization}
+      />
 
-      {/* <Wallet
-        onReady={() => {
-          console.log("Ready:", "Pago listo para crearse");
-        }}
-        onSubmit={async () => {
-          const res = await axios.post("http://localhost:3001/subcriptions", {
-            title: "Subscripcion Premium",
-            description:
-              "Pagar una subscripcion premium para poder publicar videos",
-            price: 500,
-            user: {
-              username: "nicolas123",
-              email: "juncosnicolas36@gmail.com",
-            },
-          });
-          if (res?.data.preferenceId) {
-            console.log(res?.data);
-            setPreferenceId(res.data.preferenceId);
-          }
-        }}
-        onError={(error) => {
-          console.error("Error:", error);
-        }}
-        initialization={{ preferenceId: preferenceId }}
-      /> */}
+      {searchParams.get("status") === 'approved' && (
+        <h3 className='text-xl text-green-700'>Pago Realizado con Exito!</h3>
+      )}
+      {searchParams.get("status") === 'denied' && (
+        <span className="text-red-700">Error al completar el pago</span>
+      )}
 
-      {searchParams.get("error") && (
-        <span className="text-red-700">Hubo un error al realizar el pago</span>
-      )}
-      {searchParams.get("success") && (
-        <span className="text-green-700">Pago exitoso!</span>
-      )}
+      {/* {
+        !preferenceId && (
+          <button onClick={realizarPago} className="w-full h-10 bg-blue-500 text-black rounded-md hover:bg-blue-400 mt-5">Realizar Pago</button>
+        )
+      } */}
+      {
+        cargando && <span className="text-sm text-orange-700 font-bold">Cargando...</span>
+      }
+      {
+        procesando && <span className="text-sm text-orange-700 font-bold">Procesando Pago...</span>
+      }
     </div>
   );
 };
 
 export default Payment;
+
+/**
+ * CUENTAS DE PRUEBA
+ * 
+ * COMPRADOR: 
+ *    - USERNAME: TEST_USER_2020951133
+ *    - PASSWORD: NxqNQ8sD4E
+ * 
+ * VENDEDOR:
+ *    - USERNAME: TEST_USER_2109952451
+ *    - PASSWORD: dJqrzvx9YU
+ * 
+ * 
+ */
