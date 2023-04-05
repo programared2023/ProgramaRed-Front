@@ -10,10 +10,7 @@ const Landing = () => {
           <img src={logo} alt="logo" className="bg-veryLigthGreen rounded-full animate-spin-slow" />
         </div>
         <h1 className="text-3xl font-bold text-green-900 mb-8 text-center">Bienvenido a ProgramaRed</h1>
-        <NavLink to="/home" className="bg-ligthGreen text-black transition-all duration-300 hover:bg-darkGreen hover:text-white font-bold py-2 px-4 rounded-lg">Home</NavLink>
-        {/* <span className="mt-8 text-lg text-black">
-          ¿No tenés una cuenta? ¡Registrate <NavLink to="/signUp" className="underline">acá!</NavLink>
-        </span> */}
+        {/* <NavLink to="/home" className="bg-ligthGreen text-black transition-all duration-300 hover:bg-darkGreen hover:text-white font-bold py-2 px-4 rounded-lg">Home</NavLink> */}
       </div>
       <div>
         <Login />
