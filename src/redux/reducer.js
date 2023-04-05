@@ -44,7 +44,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case CLEAR_DETAIL:
       return {
         ...state,
-        detailCountry: payload,
+        actualPost: payload,
       };
     case GET_ALL_POSTS:
       return {
