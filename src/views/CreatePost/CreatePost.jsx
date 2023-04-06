@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { validate } from "./createPostValidation";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, getUserById } from "../../redux/actions";
+import { uploadFile } from "../../firebase/config"
 
 const CreatePost = () => {
   const actualUser = useSelector((state) => state.actualUser);
@@ -9,13 +10,12 @@ const CreatePost = () => {
   const dispatch = useDispatch();
 
   const [user, setUser] = useState({})
+  let userId = localStorage.getItem("id");
 
   useEffect(() => {
-    let userId = localStorage.getItem("id");
     dispatch(getUserById(userId));
-
     setUser(actualUser)
-  }, [dispatch, actualUser]);
+  }, [dispatch, user]);
   
   const [form, setForm] = useState({
     title: "",
@@ -23,6 +23,7 @@ const CreatePost = () => {
     actualTag: "",
     description: "",
     userId: "",
+    files: [],
   });
 
   const [errors, setErrors] = useState({
@@ -30,6 +31,7 @@ const CreatePost = () => {
     tags: [],
     actualTag: "",
     description: "",
+    files: [],
   });
 
   const [tag, setTag] = useState("");
@@ -42,7 +44,8 @@ const CreatePost = () => {
         !form.title ||
         !form.actualTag ||
         !form.description ||
-        !form.tags.length 
+        !form.tags.length ||
+        !form.files.length 
       ) {
         if(!form.userId) form.userId = user.id
         setFormComplete(false);
@@ -91,10 +94,53 @@ const CreatePost = () => {
       tags: [],
       actualTag: "",
       description: "",
-      userId: user.id
+      userId: user.id,
+      files: [],
     });
     setTag("");
   };
+
+  /* const [uploadingFile, setUploadingFile] = useState(null);  
+
+  const uploadChange = (e) => {
+    setUploadingFile(e.target.files[0])
+  }
+
+  let url = "";
+
+  const uploadState = async (e) => {    
+    url = await uploadFile(uploadingFile)
+  }
+
+  const setFiles = () => {
+    uploadState()
+    if (!form.files.length)
+      setForm({
+        ...form,
+        files: [url]
+      })
+    else setForm({
+      ...form,
+      files: [...form.files, url]
+    })
+  } */
+
+  // const [uploadingFile, setUploadingFile] = useState(null);
+
+  const inputFile = async (e) => {
+    // setUploadingFile(e.target.files[0])
+    const url = await uploadFile(e.target.files[0])
+
+    setForm({
+      ...form,
+      files: [...form.files, url]
+    })
+
+  }
+
+  console.log("soy form.files: ", form.files);
+
+  console.log("soy el form antes de ser subido: ", form);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -234,12 +280,17 @@ const CreatePost = () => {
               <span className="text-red-500 text-sm">{errors.description}</span>
             )}
           </div>
-          {/* <div> //comente el archivo porque no lo vamos a usar por ahora
+
+          <div>
             <label htmlFor="file" className="block text-sm font-medium text-gray-700 mb-1">
-              File
+              Subir una imagen
             </label>
-            <input type="file" name="file" className="border-gray-300 focus:ring-green-500 focus:border-green-500 block w-full rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out" />
-          </div> */}
+            <input onChange={inputFile} type="file" name="file" className="border-gray-300 focus:ring-green-500 focus:border-green-500 block w-full rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out" />            
+            {errors.files && (
+              <span className="text-red-500 text-sm">{errors.files}</span>
+            )}
+          </div>
+
           <div className="flex gap-4">
             <button
               type="submit"

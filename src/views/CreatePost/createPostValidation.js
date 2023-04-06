@@ -15,6 +15,8 @@ export const validate = (data) => {
   if (!data.description) errors.description = "Debes ingresar una descripción";
   if (data.description.length > 500)
     errors.description = "Descripción demasiado larga";
+    
+  if (!data.files.length) errors.files = "Debes seleccionar una imagen";
 
   return errors;
 };
