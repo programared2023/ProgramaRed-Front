@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
@@ -14,6 +14,37 @@ const Payment = () => {
   const [procesando, setProcesando] = useState(false)
   const [searchParams, _] = useSearchParams()
   // const [initialization, setInitialization] = useState({ preferenceId: '' })
+  const [message, setMessage] = useState("")
+
+  useEffect(() => {
+    if (searchParams.get('status')
+      && searchParams.get('payment_id')
+      && localStorage.getItem('id')) {
+      completePayment()
+    }
+  }, [])
+
+  const completePayment = async () => {
+    console.log(
+      {
+        paymentId: searchParams.get('payment_id'),
+        productTitle: "Subscripcion Premium",
+        price: 500 * 1.30,
+        userId: Number(localStorage.getItem('id')),
+        status: searchParams.get('status')
+      }
+    );
+    const res = await axios.post('/payments', {
+      paymentId: searchParams.get('payment_id'),
+      productTitle: "Subscripcion Premium",
+      price: 500 * 1.30,
+      userId: Number(localStorage.getItem('id')),
+      status: searchParams.get('status')
+    })
+    if (res.data) {
+      setMessage(res.data)
+    }
+  }
 
   const onSubmit = async () => {
     // callback llamado al hacer clic en Wallet Brick
@@ -66,21 +97,12 @@ const Payment = () => {
         onReady={onReady}
         onSubmit={onSubmit}
         onError={onError}
-      // initialization={initialization}
       />
 
-      {searchParams.get("status") === 'approved' && (
-        <h3 className='text-xl text-green-700'>Pago Realizado con Exito!</h3>
-      )}
-      {searchParams.get("status") === 'denied' && (
-        <span className="text-red-700">Error al completar el pago</span>
+      {message && (
+        <h3 className='text-xl text-green-700'>{message}</h3>
       )}
 
-      {/* {
-        !preferenceId && (
-          <button onClick={realizarPago} className="w-full h-10 bg-blue-500 text-black rounded-md hover:bg-blue-400 mt-5">Realizar Pago</button>
-        )
-      } */}
       {
         cargando && <span className="text-sm text-orange-700 font-bold">Cargando...</span>
       }
