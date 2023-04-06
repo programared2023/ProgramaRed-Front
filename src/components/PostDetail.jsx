@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearDetail } from "../redux/actions";
+import { clearDetail, getPostByTag } from "../redux/actions";
 
 const PostDetail = ({toggleDetails}) => {
   const post = useSelector((state) => state.actualPost);
@@ -11,6 +11,12 @@ const PostDetail = ({toggleDetails}) => {
   const hour = postDate[1];
 
   const dispatch = useDispatch()
+
+  const clickHandler = (tag) => {
+    dispatch(getPostByTag(tag))
+    toggleDetails()
+    dispatch(clearDetail())
+  }
 
   return (
     <div className="bg-greenGray rounded-lg p-4 shadow-shadowBlack min-w-90% flex flex-col justify-between h-3/4 m-0 absolute top-10 left-1/2 transform -translate-x-1/2 z-50">
@@ -47,9 +53,9 @@ const PostDetail = ({toggleDetails}) => {
       <div className="flex gap-2 mt-3">
         {post.Tags?.map((tag, i) => {
           return (
-            <span key={i} className=" text-sm text-amber-700 font-medium">
-              #{tag.name}
-            </span>
+            <NavLink to="/home"><button onClick={() => clickHandler(tag.name)} key={i} className=" text-sm text-amber-700 font-medium">
+                      #{tag.name}
+                    </button></NavLink>
           );
         })}
       </div>
