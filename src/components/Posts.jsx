@@ -12,12 +12,14 @@ const Posts = ({toggleDetails})=>{
   const [posts, setPosts] = useState([]);
 
   useEffect(()=> {
-    setPosts(allPosts);
+    if(!filteredPosts.length) setPosts(allPosts);
+    else setPosts(filteredPosts)
     setCategory("");
   },[allPosts])
 
   useEffect(()=> {
-    setPosts(filteredPosts);
+    if(filteredPosts.length) setPosts(filteredPosts);
+    else setPosts(allPosts);
   },[filteredPosts])
 
     return(
