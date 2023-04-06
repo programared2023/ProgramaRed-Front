@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getPostById } from "../redux/actions";
+import { getPostById, getPostByTag } from "../redux/actions";
 
 const Post = ({ post, username, toggleDetails}) => {
   //post recibe username porque en algunos casos el "post" no posee username
   const [localPost, setLocalPost] = useState({});
+
+  const { pathname } = useLocation();
 
   const dispatch = useDispatch();
 
@@ -85,12 +87,23 @@ const Post = ({ post, username, toggleDetails}) => {
         </button>
         
         <div className="flex gap-2 mt-3">
-          {localPost.Tags?.map((tag, i) => {
-            return (
-              <span key={i} className=" text-sm text-amber-700 font-medium">
-                #{tag.name}
-              </span>
-            );
+            {localPost.Tags?.map((tag, i) => {
+              {
+                if(pathname !== "/home"){
+                  return(
+                    <NavLink to="/home"><button onClick={() => dispatch(getPostByTag(tag.name))} key={i} className=" text-sm text-amber-700 font-medium">
+                      #{tag.name}
+                    </button></NavLink>
+                  )
+                } 
+                else{
+                  return(
+                    <button onClick={() => dispatch(getPostByTag(tag.name))} key={i} className=" text-sm text-amber-700 font-medium">
+                      #{tag.name}
+                    </button>
+                  )
+                }
+              }
           })}
         </div>
       </div>
