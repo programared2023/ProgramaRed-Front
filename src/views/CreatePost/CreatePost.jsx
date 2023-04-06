@@ -100,47 +100,13 @@ const CreatePost = () => {
     setTag("");
   };
 
-  /* const [uploadingFile, setUploadingFile] = useState(null);  
-
-  const uploadChange = (e) => {
-    setUploadingFile(e.target.files[0])
-  }
-
-  let url = "";
-
-  const uploadState = async (e) => {    
-    url = await uploadFile(uploadingFile)
-  }
-
-  const setFiles = () => {
-    uploadState()
-    if (!form.files.length)
-      setForm({
-        ...form,
-        files: [url]
-      })
-    else setForm({
-      ...form,
-      files: [...form.files, url]
-    })
-  } */
-
-  // const [uploadingFile, setUploadingFile] = useState(null);
-
   const inputFile = async (e) => {
-    // setUploadingFile(e.target.files[0])
     const url = await uploadFile(e.target.files[0])
-
     setForm({
       ...form,
       files: [...form.files, url]
     })
-
   }
-
-  console.log("soy form.files: ", form.files);
-
-  console.log("soy el form antes de ser subido: ", form);
 
   const handleSubmit = (e) => {
     e.preventDefault();
