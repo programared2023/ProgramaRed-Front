@@ -26,7 +26,7 @@ const initialState = {
   filterByTag: [],
   actualPost: [],
   message: "",
-  category: ""
+  category: "",
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -80,18 +80,18 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         filterPostByTag: [...payload],
-      }
-      case GET_POST_BY_QUERY:
-        return {
-          ...state,
-          filteredPosts : payload
-        }
-        case SET_CATEGORY:
-          console.log(payload)
-          return{
-            ...state,
-            category: payload,
-          }
+      };
+    case GET_POST_BY_QUERY:
+      return {
+        ...state,
+        filteredPosts: payload,
+      };
+    case SET_CATEGORY:
+      console.log(payload);
+      return {
+        ...state,
+        category: payload,
+      };
 
     default:
       return { ...state };
