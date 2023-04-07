@@ -19,7 +19,7 @@ function App() {
   const toggleDetails = () => setShowDetails(!showDetails);
 
   return (
-    <div className="flex justify-between bg-veryLigthGreen h-screen w-screen fixed top-0">
+    <div className="flex flex-col h-full bg-veryLigthGreen">
       {pathname !== "/" && <NavBar />}
       {showDetails && <FalseScreen isView={showDetails} />}
       {showDetails && <Detail toggleDetails={toggleDetails} />}
