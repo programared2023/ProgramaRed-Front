@@ -50,12 +50,29 @@ const PostDetail = ({toggleDetails}) => {
         <h2 className="text-green-800 font-bold text-lg mb-2">{post?.title}</h2>
         <div className="text-green-700 text-base">{post?.description}</div>
       </div>
+
+      <div className="flex justify-center" >
+        {
+          !post.files?.length ? 
+          ""
+          : post.files.map((file, i)=>{
+            return (
+              <div className=" flex w-52  m-2" key={i} >      
+                <a href={file} target="_blank" >
+                  <img className=" w-full rounded-md" src={file} alt="a" />
+                </a>                
+              </div>
+            )
+          })
+        }
+      </div>
+
       <div className="flex gap-2 mt-3">
         {post.Tags?.map((tag, i) => {
           return (
             <NavLink to="/home"><button onClick={() => clickHandler(tag.name)} key={i} className=" text-sm text-amber-700 font-medium">
-                      #{tag.name}
-                    </button></NavLink>
+                #{tag.name}
+              </button></NavLink>
           );
         })}
       </div>
