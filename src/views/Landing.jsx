@@ -4,7 +4,7 @@ import Login from "../components/Login/Login"
 
 const Landing = () => {
   return (
-    <div className="flex flex-col items-center bg-slate-500 h-full md:h-screen">
+    <div className="flex flex-col items-center bg-slate-500 h-full">
       {/* Hero Section */}
       <div className="w-full bg-center bg-cover">
         <div className="flex items-center justify-center h-full text-center">

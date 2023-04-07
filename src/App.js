@@ -19,7 +19,7 @@ function App() {
   const toggleDetails = () => setShowDetails(!showDetails);
 
   return (
-    <div className="flex flex-col h-full bg-veryLigthGreen">
+    <div className={`flex flex-col h-full w-screen bg-veryLigthGreen lg:flex-row lg:h-screen`}>
       {pathname !== "/" && <NavBar />}
       {showDetails && <FalseScreen isView={showDetails} />}
       {showDetails && <Detail toggleDetails={toggleDetails} />}
@@ -31,7 +31,7 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/premium" element={<Payment />} />
       </Routes>
-      {pathname !== "/" && <SideBar />}
+      {/* {pathname !== "/" && <SideBar />} */}
     </div>
   );
 }

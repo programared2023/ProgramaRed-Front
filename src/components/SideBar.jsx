@@ -4,7 +4,7 @@ import Categories from "./Categories/Categories";
 const SideBar = ()=>{
 
     return(
-        <div className=" bg-mediumGreen w-1/6 h-full flex flex-col gap-5 px-3 shadow-shadowBlack min-w-20%">
+        <div className="relative top-0 bg-mediumGreen flex flex-col gap-5 px-3 shadow-shadowBlack w-5/6 mt-3">
             <div className="relative text-lg bg-transparent text-gray-800 pt-5">
                 <SearchBar/>
                 <Categories/>
