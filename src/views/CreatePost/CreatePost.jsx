@@ -38,6 +38,8 @@ const CreatePost = () => {
 
   const [formComplete, setFormComplete] = useState(false);
 
+  const [uploadingFiles, setUploadingFiles] = useState();
+
   useEffect(() => {
     const checkFormComplete = () => {
       if (
@@ -101,12 +103,30 @@ const CreatePost = () => {
   };
 
   const inputFile = async (e) => {
-    const url = await uploadFile(e.target.files[0])
+    const files = e.target.files
+    let urls = []
+
+    for (const key in files) {      
+        const url = await uploadFile(files[key])
+        urls.push(url)
+      }
+    console.log("URLs: ", urls);
+    
     setForm({
       ...form,
-      files: [...form.files, url]
+      files: [...form.files, ...urls]
     })
   }
+
+  const fileDelete = (file) => {
+    setForm({
+      ...form,
+      files: form.files.filter((f) => f !== file)
+    })
+  }
+  
+  console.log("soy el form.files: ", form.files);
+  console.log("soy el form: ", form);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -251,10 +271,26 @@ const CreatePost = () => {
             <label htmlFor="file" className="block text-sm font-medium text-gray-700 mb-1">
               Subir una imagen
             </label>
-            <input onChange={inputFile} type="file" name="file" className="border-gray-300 focus:ring-green-500 focus:border-green-500 block w-full rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out" />            
-            {errors.files && (
+            <input onChange={inputFile} type="file" multiple accept="image/*" name="file" className="border-gray-300 focus:ring-green-500 focus:border-green-500 block w-full rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out" />            
+            {/* {errors.files && (
               <span className="text-red-500 text-sm">{errors.files}</span>
-            )}
+            )} */}
+
+          </div>
+          <div className="flex">
+            {
+              !form.files.length ?
+              <h2>Sube un archivo</h2>
+              : form.files.map((file,i) => {
+                return (
+                  <div className=" flex" key={i} >
+                    {console.log("soy el file", file)}
+                    <span onClick={() => fileDelete(file)} >X</span>
+                    <img className=" w-14" src={file} alt="a" />
+                  </div>
+                )                
+              })
+            }
           </div>
 
           <div className="flex gap-4">

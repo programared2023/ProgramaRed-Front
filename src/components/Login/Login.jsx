@@ -32,8 +32,7 @@ const Login = () => {
     try {
       e.preventDefault();
       let {data} = await axios(`/user?username=${form.username}`)
-      console.log(data)
-      
+            
       if (!data.length) throw new Error("el usuario no existe")
       if (data[0].password !== form.password) throw new Error("la contraseña es incorrecta")
 
@@ -52,7 +51,7 @@ const Login = () => {
       <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
         <div className="pb-4" >
           <h2 className="text-xl font-bold text-green-700 text-center pb-2">
-            Inicia cesion con tu cuenta 
+            Inicia sesión con tu cuenta 
           </h2>
           <p className=" text-center text-xs" >No tienes una cuenta? Regístrate <NavLink to="/signUp" className="text-blue-600">aquí</NavLink></p>
         </div>
