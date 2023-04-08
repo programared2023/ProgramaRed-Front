@@ -6,7 +6,6 @@ import CreatePost from "./views/CreatePost/CreatePost";
 import Profile from "./views/Profile";
 import SignUp from "./views/SignUp";
 import NavBar from "./components/NavBar";
-import SideBar from "./components/SideBar";
 import Payment from "./views/Payment";
 import { useEffect, useRef, useState } from "react";
 import FalseScreen from "./components/FalseScreen";

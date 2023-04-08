@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { validate } from "./createPostValidation";
 import { useDispatch, useSelector } from "react-redux";
-import { createPost, getUserById } from "../../redux/actions";
+import { getUserById } from "../../redux/actions";
 import { uploadFile } from "../../firebase/config";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const CreatePost = () => {
   const actualUser = useSelector((state) => state.actualUser);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [user, setUser] = useState({});
   let id = localStorage.getItem("id");
@@ -41,7 +45,7 @@ const CreatePost = () => {
   useEffect(() => {
     const checkFormComplete = () => {
       if (
-        !form.title ||
+        
         !form.actualTag ||
         !form.description ||
         !form.tags.length
@@ -126,14 +130,24 @@ const CreatePost = () => {
       urls.push(url);
     }
 
-    if (formComplete === true)
-      dispatch(
-        createPost({
-          ...form,
-          files: urls,
-        })
-      );
+    if (formComplete === true){
+      try {
+        const { data } = await axios.post("/post", {...form, files: urls});
 
+        Swal.fire({
+          icon: 'success',
+          title: 'Post Subido',
+          text: data,
+        }).then((result) => {if (result.isConfirmed) navigate("/home")})
+
+      } catch {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: "Hubo un error al subir el post",
+        })
+      }
+    }
     clearForm();
   };
 
@@ -371,5 +385,6 @@ const CreatePost = () => {
     </div>
   );
 };
+
 
 export default CreatePost;

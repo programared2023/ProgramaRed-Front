@@ -61,13 +61,6 @@ export const getPostById = (id) => {
   };
 };
 
-export const createPost = (form) => {
-  return async function () {
-    const { data } = await axios.post("/post", form);
-    console.log(data);
-  };
-};
-
 export const getUserByName = (name) => {
   return async function (dispatch) {
     const backData = await axios.get(`/user?username=${name}`);
