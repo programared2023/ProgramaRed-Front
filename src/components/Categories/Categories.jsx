@@ -10,12 +10,10 @@ const Categories = () => {
   }
   
     return (
-      <div>
-        <button name="user" onClick={clicked}>User</button>
-        <br/>
-        <button name="tag" onClick={clicked}>Tag</button>
-        <br/>
-        <button name="posts" onClick={clicked}>Post</button>
+      <div className="flex justify-evenly">
+        <button className="px-3 py-2 bg-ligthGreen my-4 rounded-xl font-semibold transition-all hover:bg-darkGreen hover:scale-130 hover:text-white" name="user" onClick={clicked}>User</button>
+        <button className="px-3 py-2 bg-ligthGreen my-4 rounded-xl font-semibold transition-all hover:bg-darkGreen hover:scale-130 hover:text-white" name="tag" onClick={clicked}>Tag</button>
+        <button className="px-3 py-2 bg-ligthGreen my-4 rounded-xl font-semibold transition-all hover:bg-darkGreen hover:scale-130 hover:text-white" name="posts" onClick={clicked}>Post</button>
       </div>
     );
   };

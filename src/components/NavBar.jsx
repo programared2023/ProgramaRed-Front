@@ -124,7 +124,7 @@ const NavBar = () => {
         `}</style>
     </div>
     <section className="DESKTOP-MENU hidden space-x-8 lg:inline-flex">
-    <div className="z-40 bg-mediumGreen">
+    <div className="z-40 bg-mediumGreen shadow-shadowRigth">
         <div className="flex flex-col z-40">
             <div className="absolute min-w-full lg:relative lg:min-w-20%">
                 <nav className={`${isOpen ? "w-screen bg-mediumGreen" : ""}`}>

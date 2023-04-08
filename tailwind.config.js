@@ -17,7 +17,8 @@ module.exports = {
       },
       boxShadow: {
         shadowBlack: '1px 1px 7px 0 black',
-        shadowBoxOutline: "0 0 6px 1px black"
+        shadowBoxOutline: "0 0 6px 1px black",
+        shadowRigth: "2px 0px 6px 0 black"
       },
       minWidth: {
         '0': '0',

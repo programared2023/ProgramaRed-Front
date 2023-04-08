@@ -3,9 +3,11 @@ import { useDispatch } from "react-redux";
 import { clearFilters, getPostBySearch, getPostByQuery } from "../../redux/actions";
 import { useSelector } from "react-redux";
 import queryCreator from "./helper";
+import Categories from "../Categories/Categories";
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
+  const [showCategories, setShowCategories] = useState(false);
   const filteredPosts = useSelector((state) => state.filteredPosts);
   const category = useSelector(state => state.category)
 
@@ -32,17 +34,32 @@ const SearchBar = () => {
 
   const changeHandler = (e) => {
     setSearch(e.target.value);
+    
+    if (e.target.value.length <= 0) setShowCategories(false);
+    else setShowCategories(true);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      searchHandler();
+    }
+  }
+
   return (
-    <div className="flex relative items-center border-b-2 border-teal-500 py-2 text-white">
+    <>
+    <div className="flex relative w-full border-b-2 border-teal-500 py-2 text-white my-4">
       <input
-        className="bg-transparent border-none mr-3 px-2 leading-tight focus:outline-none placeholder:text-white placeholder:opacity-60"
+        className="bg-transparent w-full border-none mr-3 px-2 leading-tight font-medium focus:outline-none placeholder:text-white placeholder:opacity-60"
         type="text"
         placeholder="Buscar en ProgramaRed"
         name="search"
         value={search}
         onChange={changeHandler}
+        onClick={(e)=>{
+          if (e.target.value.length <= 0) setShowCategories(true);
+          else setShowCategories(false);      
+        }}
+        onKeyDown={handleKeyDown}
       />
       <button
         onClick={searchHandler}
@@ -61,6 +78,8 @@ const SearchBar = () => {
         </svg>
       </button>
     </div>
+    {showCategories && <Categories /> }
+    </>
   );
 };
 
