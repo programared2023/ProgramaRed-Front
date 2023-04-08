@@ -2,6 +2,7 @@ import { useState } from "react";
 import { validate } from "./validateLogin";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import LoginAuth0 from "./LoginAuth0"
 
 const Login = () => {
   const navigate = useNavigate()
@@ -110,6 +111,7 @@ const Login = () => {
                 Ingresar
           </button>
         </form>
+        <LoginAuth0 />
       </div>
     </div>
   );
