@@ -3,10 +3,11 @@ import logo from "../images/logoNombre.png";
 import { clearFilters } from "../redux/actions";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { logout} = useAuth0();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
 
@@ -169,8 +170,10 @@ const NavBar = () => {
                                     Hazte Premium
                                 </NavLink>
                                 <NavLink onClick={()=>{
+                                    logout()
                                     localStorage.clear()
                                     closeMenu()
+
                                     }} to="/" className="my-3 text-blue-50 flex py-2 px-4 hover:bg-darkGreen hover:scale-110  text-xl gap-3 w-full items-center transition-all rounded-3xl">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
