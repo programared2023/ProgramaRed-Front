@@ -10,7 +10,7 @@ import thomas from "../images/Thomas.jpg";
 const About = () => {
   return (
     <div className=" flex-col flex justify-between items-center bg-slate-500 h-full w-full lg:flex-row ">
-      <div className=" ml-14">
+      <div className=" ml-14 flex flex-col items-center font-semibold text-white shrink-0">
         <div className=" flex flex-col items-center mb-4 md:mb-0">
           <img
             src={logo}
@@ -23,10 +23,13 @@ const About = () => {
         </div>
         <div className="max-w-sm">
           <p>
-            ProgramaRed es una red social creada para programadores y
-            desarrolladores. En nuestra plataforma, puedes encontrar otros
-            programadores con intereses similares, colaborar en proyectos,
-            compartir conocimientos y mucho más.
+            ProgramaRed es una red social específicamente para programadores y
+            desarrolladores
+          </p>
+          <p>
+            En la plataforma podrás encontrar a otros programadores con
+            intereses similares, colaborar en proyectos, compartir tus
+            conocimientos y aprender de otros colegas
           </p>
         </div>
       </div>
@@ -71,11 +74,11 @@ const About = () => {
           Desarrolladores
         </h2>
         <p>
-            ProgramaRed es una red social creada para programadores y
-            desarrolladores. En nuestra plataforma, puedes encontrar otros
-            programadores con intereses similares, colaborar en proyectos,
-            compartir conocimientos y mucho más.
-          </p>
+          ProgramaRed es una red social creada para programadores y
+          desarrolladores. En nuestra plataforma, puedes encontrar otros
+          programadores con intereses similares, colaborar en proyectos,
+          compartir conocimientos y mucho más.
+        </p>
       </div>
     </div>
   );
