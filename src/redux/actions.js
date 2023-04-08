@@ -62,9 +62,21 @@ export const getPostById = (id) => {
 };
 
 export const createPost = (form) => {
-  return async function () {
-    const { data } = await axios.post("/post", form);
-    console.log(data);
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.post("/post", form);
+
+      dispatch({
+        type: "MESSAGE_SUCCES",
+        payload: data
+      })
+    } catch (err) {
+      dispatch({
+        type: "MESSAGE_FAILED",
+        payload: err.data
+      })
+    }
+    
   };
 };
 

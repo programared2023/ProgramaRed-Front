@@ -3,6 +3,7 @@ import { validate } from "./createPostValidation";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, getUserById } from "../../redux/actions";
 import { uploadFile } from "../../firebase/config";
+import Swal from "sweetalert2";
 
 const CreatePost = () => {
   const actualUser = useSelector((state) => state.actualUser);
