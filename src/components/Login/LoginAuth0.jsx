@@ -6,8 +6,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 
 const LoginAuth0 = () => {
+
+
   const navigate = useNavigate()
   const { user,loginWithRedirect,loginWithPopup,isAuthenticated  } = useAuth0();
+    console.log(isAuthenticated)
 
   const getUserByEmail = async () => {
     try {
@@ -42,17 +45,13 @@ const LoginAuth0 = () => {
 
   // };
   return (
-    <div className=" block mt-14 w-full">
-      <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
-        
+    <div >
       { isAuthenticated ? (
        navigate("/home") 
-        
        ) : (
-       <button onClick={() => loginWithPopup()}>Login</button>
+       <button className='text-white font-semibold py-1 px-2 rounded mt-3 bg-red-500 hover:bg-red-500' 
+       onClick={() => loginWithPopup()}>Autenticación con terceros</button>
        )}    
-
-      </div>
     </div>
   );
 };
