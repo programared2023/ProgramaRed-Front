@@ -70,7 +70,7 @@ const PostDetail = ({toggleDetails}) => {
       <div className="flex gap-2 mt-3">
         {post.Tags?.map((tag, i) => {
           return (
-            <NavLink to="/home"><button onClick={() => clickHandler(tag.name)} key={i} className=" text-sm text-amber-700 font-medium">
+            <NavLink key={i} to="/home"><button onClick={() => clickHandler(tag.name)} className=" text-sm text-amber-700 font-medium">
                 #{tag.name}
               </button></NavLink>
           );
