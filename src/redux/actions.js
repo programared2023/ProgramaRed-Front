@@ -61,25 +61,6 @@ export const getPostById = (id) => {
   };
 };
 
-export const createPost = (form) => {
-  return async function (dispatch) {
-    try {
-      const { data } = await axios.post("/post", form);
-
-      dispatch({
-        type: "MESSAGE_SUCCES",
-        payload: data
-      })
-    } catch (err) {
-      dispatch({
-        type: "MESSAGE_FAILED",
-        payload: err.data
-      })
-    }
-    
-  };
-};
-
 export const getUserByName = (name) => {
   return async function (dispatch) {
     const backData = await axios.get(`/user?username=${name}`);
