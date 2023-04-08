@@ -8,7 +8,7 @@ import SignUp from "./views/SignUp";
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
 import Payment from "./views/Payment";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FalseScreen from "./components/FalseScreen";
 import Detail from "./views/Detail";
 
@@ -18,8 +18,30 @@ function App() {
   const [showDetails, setShowDetails] = useState(false);
   const toggleDetails = () => setShowDetails(!showDetails);
 
+  const appRef = useRef(null); // Ref para el div contenedor de App
+
+  useEffect(() => {
+    function handleResize() {
+      const windowHeight = window.innerHeight;
+      const contentHeight = appRef.current.scrollHeight;
+      console.log("APP: ", appRef.current.scrollHeight);
+
+      if (contentHeight > windowHeight) {
+        appRef.current.style.height = "100%";
+      } else {
+        appRef.current.style.height = "100vh";
+      }
+    }
+    handleResize(); // Llamamos a la función al inicio para ajustar la altura inicialmente
+
+    window.addEventListener("resize", handleResize); // Añadimos el event listener para detectar cambios de tamaño
+    return () => {
+      window.removeEventListener("resize", handleResize); // Removemos el event listener al desmontar el componente
+    };
+  }, []);
+
   return (
-    <div className={`flex flex-col justify-center h-full w-screen bg-veryLigthGreen lg:flex-row lg:h-screen`}>
+    <div ref={appRef} className={`flex flex-col justify-center w-screen bg-veryLigthGreen lg:flex-row`}>
       {pathname !== "/" && pathname !== "/signUp" && <NavBar />}
       {showDetails && <FalseScreen isView={showDetails} />}
       {showDetails && <Detail toggleDetails={toggleDetails} />}
