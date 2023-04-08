@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div className={`flex flex-col justify-center h-full w-screen bg-veryLigthGreen lg:flex-row lg:h-screen`}>
-      {pathname !== "/" && <NavBar />}
+      {pathname !== "/" && pathname !== "/signUp" && <NavBar />}
       {showDetails && <FalseScreen isView={showDetails} />}
       {showDetails && <Detail toggleDetails={toggleDetails} />}
       <Routes>

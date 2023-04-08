@@ -2,7 +2,7 @@ import { useState } from "react";
 import validate from "./validate";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const FormSignUp = () => {
   const [form, setForm] = useState({
@@ -57,6 +57,7 @@ const FormSignUp = () => {
     <div className=" block mt-14 w-full ">
       <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
         <h3>Registrarse</h3>
+        <p>Ya tienes una cuenta logeate <NavLink to="/">aquí</NavLink></p>
         <form onSubmit={handleSubmit}>
           <div>
             <label>Nombre de usuario: </label>
