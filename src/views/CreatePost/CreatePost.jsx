@@ -2,27 +2,28 @@ import { useEffect, useState } from "react";
 import { validate } from "./createPostValidation";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, getUserById } from "../../redux/actions";
-import { uploadFile } from "../../firebase/config"
+import { uploadFile } from "../../firebase/config";
 
 const CreatePost = () => {
   const actualUser = useSelector((state) => state.actualUser);
 
   const dispatch = useDispatch();
 
-  const [user, setUser] = useState({})
-  let userId = localStorage.getItem("id");
+  const [user, setUser] = useState({});
+  let id = localStorage.getItem("id");
+
 
   useEffect(() => {
-    dispatch(getUserById(userId));
-    setUser(actualUser)
+    dispatch(getUserById(id));
+    setUser(actualUser);
   }, [dispatch, user]);
-  
+
   const [form, setForm] = useState({
     title: "",
     tags: [],
     actualTag: "",
     description: "",
-    userId: "",
+    userId: id,
     files: [],
   });
 
@@ -31,14 +32,11 @@ const CreatePost = () => {
     tags: [],
     actualTag: "",
     description: "",
-    files: [],
   });
 
   const [tag, setTag] = useState("");
 
   const [formComplete, setFormComplete] = useState(false);
-
-  const [uploadingFiles, setUploadingFiles] = useState();
 
   useEffect(() => {
     const checkFormComplete = () => {
@@ -46,10 +44,11 @@ const CreatePost = () => {
         !form.title ||
         !form.actualTag ||
         !form.description ||
-        !form.tags.length ||
-        !form.files.length 
+        !form.tags.length
       ) {
-        if(!form.userId) form.userId = user.id
+        if (!form.userId){
+          form.userId = id;
+        } 
         setFormComplete(false);
       } else {
         setFormComplete(true);
@@ -57,7 +56,6 @@ const CreatePost = () => {
     };
     checkFormComplete();
   }, [form, user]);
-
 
   const handleInputs = (e) => {
     setForm({
@@ -73,7 +71,7 @@ const CreatePost = () => {
   };
 
   const addTag = () => {
-    if(tag === "") return ""
+    if (tag === "") return "";
     if (!form.tags.includes(tag)) {
       setForm({
         ...form,
@@ -103,34 +101,38 @@ const CreatePost = () => {
   };
 
   const inputFile = async (e) => {
-    const files = e.target.files
-    let urls = []
+    const files = await e.target.files;
 
-    for (const key in files) {      
-        const url = await uploadFile(files[key])
-        urls.push(url)
-      }
-    console.log("URLs: ", urls);
-    
     setForm({
       ...form,
-      files: [...form.files, ...urls]
-    })
-  }
+      files: [...form.files, ...files],
+    });
+  };
 
   const fileDelete = (file) => {
     setForm({
       ...form,
-      files: form.files.filter((f) => f !== file)
-    })
-  }
-  
-  console.log("soy el form.files: ", form.files);
-  console.log("soy el form: ", form);
+      files: form.files.filter((f) => f !== file),
+    });
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formComplete === true) dispatch(createPost(form));
+
+    let urls = [];
+
+    for (const key of form.files) {
+      const url = await uploadFile(key);
+      urls.push(url);
+    }
+
+    if (formComplete === true)
+      dispatch(
+        createPost({
+          ...form,
+          files: urls,
+        })
+      );
 
     clearForm();
   };
@@ -205,11 +207,27 @@ const CreatePost = () => {
                 disabled={!!errors.actualTag}
                 onClick={addTag}
                 className={`text-white font-semibold py-1 px-2 rounded
-                  ${form.tags.length > 0 && errors.actualTag ? "bg-red-500 hover:bg-red-500" : ""}
-                  ${form.tags.length === 0 && errors.actualTag ? "bg-red-500 hover:bg-red-500" : ""}
-                  ${form.tags.length > 0 && !errors.actualTag ? "bg-green-500 hover:bg-green-600" : ""}
-                  ${form.tags.length === 0 && !errors.actualTag ? "bg-green-500 hover:bg-green-600" : ""}`}
-                >
+                  ${
+                    form.tags.length > 0 && errors.actualTag
+                      ? "bg-red-500 hover:bg-red-500"
+                      : ""
+                  }
+                  ${
+                    form.tags.length === 0 && errors.actualTag
+                      ? "bg-red-500 hover:bg-red-500"
+                      : ""
+                  }
+                  ${
+                    form.tags.length > 0 && !errors.actualTag
+                      ? "bg-green-500 hover:bg-green-600"
+                      : ""
+                  }
+                  ${
+                    form.tags.length === 0 && !errors.actualTag
+                      ? "bg-green-500 hover:bg-green-600"
+                      : ""
+                  }`}
+              >
                 Agregar
               </button>
             </div>
@@ -267,30 +285,65 @@ const CreatePost = () => {
             )}
           </div>
 
-          <div>
-            <label htmlFor="file" className="block text-sm font-medium text-gray-700 mb-1">
-              Subir una imagen
+          <div className="my-4">
+            <label
+              htmlFor="archivo"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Selecciona una imagen
             </label>
-            <input onChange={inputFile} type="file" multiple accept="image/*" name="file" className="border-gray-300 focus:ring-green-500 focus:border-green-500 block w-full rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out" />            
-            {/* {errors.files && (
-              <span className="text-red-500 text-sm">{errors.files}</span>
-            )} */}
+            <div className="flex items-center justify-center w-full">
+              <label
+                htmlFor="archivo"
+                className="flex flex-col items-center px-4 py-2 bg-white rounded-md shadow-md tracking-wide border border-gray-400 cursor-pointer hover:bg-gray-100 hover:border-gray-500"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                  />
+                </svg>
 
+                <span className="mt-2 text-sm leading-normal">
+                  Seleccionar archivo
+                </span>
+                <input
+                  onChange={inputFile}
+                  multiple
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                  id="archivo"
+                />
+              </label>
+            </div>
           </div>
+
           <div className="flex">
-            {
-              !form.files.length ?
-              <h2>Sube un archivo</h2>
-              : form.files.map((file,i) => {
+            {!form.files.length ? (
+              ""
+            ) : (
+              form.files.map((file, i) => {
                 return (
-                  <div className=" flex" key={i} >
-                    {console.log("soy el file", file)}
-                    <span onClick={() => fileDelete(file)} >X</span>
-                    <img className=" w-14" src={file} alt="a" />
+                  <div className=" flex" key={i}>
+                    <span onClick={() => fileDelete(file)}>X</span>
+                    <img
+                      className=" w-14"
+                      src={URL.createObjectURL(file)}
+                      alt="a"
+                    />
                   </div>
-                )                
+                );
               })
-            }
+            )}
           </div>
 
           <div className="flex gap-4">
