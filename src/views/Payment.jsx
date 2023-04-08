@@ -85,30 +85,32 @@ const Payment = () => {
     console.error("Error:", error);
   }
   return (
-    <div id="wallet_container">
-      <h2>Obtiene tu membresía Premium</h2>
-      <p>Hazte Premium para obtener beneficios adicionales en tu cuenta</p>
-      <span>Subir y descargar archivos</span>
-      <br />
-      <span>Compartir videos y tutoriales</span>
+    <div className="h-full w-full self-center pt-10">
+      <div id="wallet_container" className="w-3/4 bg-ligthGreen flex flex-col items-center gap-2 my-2 mx-auto p-5 rounded-40px" >
+        <h2>Obtiene tu membresía Premium</h2>
+        <p>Hazte Premium para obtener beneficios adicionales en tu cuenta</p>
+        <span>Subir y descargar archivos</span>
+        <br />
+        <span>Compartir videos y tutoriales</span>
 
-      <Wallet
-        customization={{ visual: { buttonBackground: 'black', borderRadius: '8rem' } }}
-        onReady={onReady}
-        onSubmit={onSubmit}
-        onError={onError}
-      />
+        <Wallet
+          customization={{ visual: { buttonBackground: 'black', borderRadius: '8rem' } }}
+          onReady={onReady}
+          onSubmit={onSubmit}
+          onError={onError}
+        />
 
-      {message && (
-        <h3 className='text-xl text-green-700'>{message}</h3>
-      )}
+        {message && (
+          <h3 className='text-xl text-green-700'>{message}</h3>
+        )}
 
-      {
-        cargando && <span className="text-sm text-orange-700 font-bold">Cargando...</span>
-      }
-      {
-        procesando && <span className="text-sm text-orange-700 font-bold">Procesando Pago...</span>
-      }
+        {
+          cargando && <span className="text-sm text-orange-700 font-bold">Cargando...</span>
+        }
+        {
+          procesando && <span className="text-sm text-orange-700 font-bold">Procesando Pago...</span>
+        }
+      </div>
     </div>
   );
 };
