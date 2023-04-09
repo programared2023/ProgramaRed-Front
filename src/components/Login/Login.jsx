@@ -50,7 +50,7 @@ const Login = () => {
         showConfirmButton: false,
         timer: 1500,
         didClose: () => {
-          navigate("/home")
+          navigate(`/profile/${localStorage.getItem("id")}`);
         }
       })
     
