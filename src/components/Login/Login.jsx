@@ -50,7 +50,7 @@ const Login = () => {
         showConfirmButton: false,
         timer: 1500,
         didClose: () => {
-          navigate("/home")
+          navigate(`/profile/${localStorage.getItem("id")}`);
         }
       })
     
@@ -59,6 +59,8 @@ const Login = () => {
         icon: 'error',
         title: 'Oops...',
         text: error.message,
+        showConfirmButton: false,
+        timer: 1400
       })
     }
 

@@ -8,34 +8,35 @@ const LoginAuth0 = () => {
   const { loginWithPopup, isAuthenticated } = useAuth0();
   console.log(isAuthenticated);
 
-  const handleClick = (connection) =>{
+  const handleClick = (connection) => {
     loginWithPopup({
       connection,
       width: 400,
       height: 600,
-    }).then(() =>{
-      const title = connection === "github" ? "Te Logueaste correctamente con GitHub" : "Te Logueaste correctamente con Google";
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title,
-        showConfirmButton: true,
-        // timer: 1500,
-        didClose: () => {
-          navigate("/home")
-        }
-      })
-    }).catch(() =>{
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: "Ocurrió un error, intentalo nuevamente",
-      })
     })
-  }
+      .catch(() => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Ocurrió un error, intentalo nuevamente",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+  };
 
-  useEffect(()=>{
-    if (isAuthenticated) navigate("/home");
+  useEffect(() => {
+    if (isAuthenticated){
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Te Logueaste correctamente",
+        showConfirmButton: true,
+        didClose: () => {
+          if (isAuthenticated) navigate("/home");
+        },
+      });
+    } ;
   }, [isAuthenticated, navigate]);
 
   return (
@@ -45,7 +46,9 @@ const LoginAuth0 = () => {
           <div>
             <button
               className="font-semibold py-2 px-4 mt-3 bg-orange-200 hover:bg-orange-300 rounded-full"
-              onClick={() =>{ handleClick("google-oauth2") }}
+              onClick={() => {
+                handleClick("google-oauth2");
+              }}
             >
               <svg
                 className="h-8 w-8"
@@ -107,7 +110,9 @@ const LoginAuth0 = () => {
           <div>
             <button
               className="font-semibold py-2 px-4 mt-3 bg-orange-200 hover:bg-orange-300 rounded-full"
-              onClick={() =>{ handleClick("github") }}
+              onClick={() => {
+                handleClick("github");
+              }}
             >
               <svg
                 fill="#000000"
