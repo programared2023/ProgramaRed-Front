@@ -139,7 +139,7 @@ const About = () => {
               ProgramaRed es nuestro proyecto final
             </p>
             <p className=" m-7 text-center">
-              La el objetivo del proyecto es acercar los a programadores
+              El objetivo del proyecto es acercar a los programadores
               latinoamericanos, generando una comunidad en la cual podamos
               interactuar de forma sencilla e intuitiva, razón por la cual
               decidimos encararlo a partir del concepto de "red social"
@@ -153,8 +153,8 @@ const About = () => {
               ¡Esperamos que nuestra web sea de tu agrado!
             </p>
             <p className=" m-7 text-center">
-              Puedes enviarnos un e-mail a: programared2023@gmail.com o visitar
-              nuestro <a className="hover:bg-slate-900 p-0.5 rounded-md" href="http://github.com/programared2023">GitHub</a> para ver el proyecto completo
+              Para contactarnos puedes enviarnos un e-mail a: programared2023@gmail.com o visitar
+              nuestro <a target="_blank" className="bg-slate-900 p-0.5 rounded-md" href="http://github.com/programared2023">GitHub</a> para ver el proyecto completo
             </p>
           </div>
         </div>
