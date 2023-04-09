@@ -18,8 +18,8 @@ const app = initializeApp(firebaseConfig);
 
 export const storage = getStorage(app);
 
-export const uploadFile = async (file) => {
-  const storageRef = ref(storage, `posts/${v4()}`);
+export const uploadFile = async (file, route) => {
+  const storageRef = ref(storage, `${route}${v4()}`);
   await uploadBytes(storageRef, file);
   const url = await getDownloadURL(storageRef);
   return url;

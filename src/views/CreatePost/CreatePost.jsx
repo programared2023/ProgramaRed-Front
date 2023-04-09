@@ -20,7 +20,7 @@ const CreatePost = () => {
   useEffect(() => {
     dispatch(getUserById(id));
     setUser(actualUser);
-  }, [dispatch, actualUser, id]);
+  }, [dispatch, id]);
 
   const [form, setForm] = useState({
     title: "",
@@ -126,7 +126,7 @@ const CreatePost = () => {
     let urls = [];
 
     for (const key of form.files) {
-      const url = await uploadFile(key);
+      const url = await uploadFile(key, "post/");
       urls.push(url);
     }
 
