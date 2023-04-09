@@ -10,6 +10,7 @@ import Payment from "./views/Payment";
 import { useEffect, useRef, useState } from "react";
 import FalseScreen from "./components/FalseScreen";
 import Detail from "./views/Detail";
+import About from "./views/About";
 
 function App() {
   const { pathname } = useLocation();
@@ -40,11 +41,12 @@ function App() {
 
   return (
     <div ref={appRef} className={`flex flex-col justify-center w-screen bg-veryLigthGreen lg:flex-row`}>
-      {pathname !== "/" && pathname !== "/signUp" && <NavBar />}
+      {pathname !== "/" && pathname !== "/signUp" && pathname !== "/about" && <NavBar />}
       {showDetails && <FalseScreen isView={showDetails} />}
       {showDetails && <Detail toggleDetails={toggleDetails} />}
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/about" element={<About />} />
         <Route path="/home" element={<Home toggleDetails={toggleDetails} />}/>
         <Route path="/createPost" element={<CreatePost />} />
         <Route path="/profile/:id" element={<Profile toggleDetails={toggleDetails} />} />

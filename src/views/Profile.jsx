@@ -10,6 +10,8 @@ const Profile = ({ toggleDetails }) => {
 
   const user = useSelector((state) => state.actualUser);
 
+  console.log(user);
+
   useEffect(() => {
     let userId = localStorage.getItem("id");
 
