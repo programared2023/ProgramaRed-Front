@@ -20,13 +20,11 @@ const NavBar = () => {
       try {
         if (user) {
           const token = await getAccessTokenSilently();
-          console.log(token);
           let response = await axios.get("/usercreate", {
             headers: {
               authorization: `Bearer ${token}`,
             },
           });
-          console.log(response);
           let { data } = await axios(`/user/email/${user.email}`);
           setId(data[0].id);
 
@@ -151,11 +149,11 @@ const NavBar = () => {
                     closeMenu();
                   }}
                   to={`/profile/${userId}`}
-                  className={`flex py-2 px-4 hover:bg-darkGreen hover:scale-110  text-xl gap-3 w-full items-center transition-all rounded-3xl ${
+                  className={`my-3 flex py-2 px-4 hover:bg-darkGreen hover:scale-110  text-xl gap-3 w-full items-center transition-all rounded-3xl ${
                     isUserLogged
-                      ? "text-white bg-darkGreen scale-110"
-                      : "text-blue-50"
-                  }`}
+                     ? "text-white bg-darkGreen scale-110"
+                     : "text-blue-50"
+                    }`}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -172,6 +170,30 @@ const NavBar = () => {
                     />
                   </svg>
                   Perfil
+                </NavLink>
+                <NavLink
+                  onClick={() => {
+                    closeMenu();
+                  }}
+                  to={`/favorites`}
+                  className={`flex py-2 px-4 hover:bg-darkGreen hover:scale-110  text-xl gap-3 w-full items-center transition-all rounded-3xl ${
+                    isUserLogged
+                      ? "text-white bg-darkGreen scale-110"
+                      : "text-blue-50"
+                  }`}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" 
+                        fill="none" viewBox="0 0 24 24" 
+                        strokeWidth="1.5" 
+                        stroke="currentColor" 
+                        className="w-6 h-6"
+                  >
+                  <path strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                  </svg>
+                  
+                  Favoritos
                 </NavLink>
                 <NavLink
                   onClick={() => {
@@ -357,6 +379,29 @@ const NavBar = () => {
                           />
                         </svg>
                         Perfil
+                      </NavLink>
+                      <NavLink
+                        onClick={() => {
+                          closeMenu();
+                        }}
+                        to={`/favorites`}
+                        className={`my-3 flex py-2 px-4 hover:bg-darkGreen hover:scale-110  text-xl gap-3 w-full items-center transition-all rounded-3xl ${
+                          isUserLogged
+                            ? "text-white bg-darkGreen scale-110"
+                            : "text-blue-50"
+                        }`}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                          fill="none" viewBox="0 0 24 24" 
+                          strokeWidth="1.5" 
+                          stroke="currentColor" 
+                          className="w-6 h-6"
+                          >
+                          <path strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                        </svg>
+                        Favoritos
                       </NavLink>
                       <NavLink
                         onClick={() => {

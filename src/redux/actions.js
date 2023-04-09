@@ -13,6 +13,7 @@ import {
   GET_ALL_TAGS,
   GET_POST_BY_SEARCH,
   SET_CATEGORY,
+  GET_FAVORITES,
 } from "./types";
 
 export const getUsers = () => {
@@ -129,4 +130,15 @@ export const setCategory = (category) => {
     payload: category
   }
 };
+
+export const getFavorites = (userId) => {
+  return async function (dispatch) {
+    const backData = await axios.get(`/favorites/${userId}`);
+    const favorites = backData.data;
+    dispatch({
+      type: GET_FAVORITES,
+      payload: favorites,
+    });
+  };
+}
 
