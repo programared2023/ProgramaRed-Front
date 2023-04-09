@@ -2,11 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
-import axios from "axios";
 
 const LoginAuth0 = () => {
   const navigate = useNavigate();
-  const { loginWithPopup, isAuthenticated, user } = useAuth0();
+  const { loginWithPopup, isAuthenticated } = useAuth0();
   console.log(isAuthenticated);
 
   const handleClick = (connection) =>{
@@ -20,8 +19,8 @@ const LoginAuth0 = () => {
         position: 'center',
         icon: 'success',
         title,
-        showConfirmButton: false,
-        timer: 1500,
+        showConfirmButton: true,
+        // timer: 1500,
         didClose: () => {
           navigate("/home")
         }
@@ -37,7 +36,7 @@ const LoginAuth0 = () => {
 
   useEffect(()=>{
     if (isAuthenticated) navigate("/home");
-  }, [isAuthenticated]);
+  }, [isAuthenticated, navigate]);
 
   return (
     <div>

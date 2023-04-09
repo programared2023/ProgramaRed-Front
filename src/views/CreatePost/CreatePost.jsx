@@ -20,7 +20,7 @@ const CreatePost = () => {
   useEffect(() => {
     dispatch(getUserById(id));
     setUser(actualUser);
-  }, [dispatch, user]);
+  }, [dispatch, actualUser, id]);
 
   const [form, setForm] = useState({
     title: "",
@@ -59,7 +59,7 @@ const CreatePost = () => {
       }
     };
     checkFormComplete();
-  }, [form, user]);
+  }, [form, actualUser, id]);
 
   const handleInputs = (e) => {
     setForm({
@@ -138,7 +138,7 @@ const CreatePost = () => {
           icon: 'success',
           title: 'Post Subido',
           text: data,
-        }).then((result) => {if (result.isConfirmed) navigate("/home")})
+        }).then((result) => {if (result.isConfirmed) navigate(`/profile/${id}`)})
 
       } catch {
         Swal.fire({
