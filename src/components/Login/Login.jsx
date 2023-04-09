@@ -3,6 +3,7 @@ import { validate } from "./validateLogin";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoginAuth0 from "./LoginAuth0"
+import Swal from "sweetalert2";
 
 const Login = () => {
   const navigate = useNavigate()
@@ -32,20 +33,36 @@ const Login = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+      if(!form.password && !form.username) throw new Error("Debe completar los campos")
+
       let {data} = await axios(`/user?username=${form.username}`)
-            
-      if (!data.length) throw new Error("el usuario no existe")
-      if (data[0].password !== form.password) throw new Error("la contraseña es incorrecta")
+      
+      if (!data.length) throw new Error("El usuario no existe")
+      if (data[0].password !== form.password) throw new Error("La contraseña es incorrecta")
 
       localStorage.setItem("username", JSON.stringify(data[0].username))
       localStorage.setItem("id", JSON.stringify(data[0].id))
+
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Te Logueaste correctamente',
+        showConfirmButton: false,
+        timer: 1500,
+        didClose: () => {
+          navigate("/home")
+        }
+      })
     
-      navigate("/home")
     } catch (error) {
-      alert(error.message)
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error.message,
+      })
     }
 
-  };
+  }
 
   return (
     <div className=" block mt-14 w-full">
