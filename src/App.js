@@ -7,6 +7,7 @@ import Profile from "./views/Profile";
 import SignUp from "./views/SignUp";
 import NavBar from "./components/NavBar";
 import Payment from "./views/Payment";
+import Favorites from "./views/Favorites"
 import { useEffect, useRef, useState } from "react";
 import FalseScreen from "./components/FalseScreen";
 import Detail from "./views/Detail";
@@ -50,6 +51,7 @@ function App() {
         <Route path="/home" element={<Home toggleDetails={toggleDetails} />}/>
         <Route path="/createPost" element={<CreatePost />} />
         <Route path="/profile/:id" element={<Profile toggleDetails={toggleDetails} />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/premium" element={<Payment />} />
       </Routes>

@@ -7,7 +7,7 @@ import axios from "axios";
 const Post = ({ post, username, toggleDetails}) => {
   //post recibe username porque en algunos casos el "post" no posee username
   const [localPost, setLocalPost] = useState({});
-  const userId = localStorage.getItem("id")  
+  let userId = localStorage.getItem("id")  
   const { pathname } = useLocation();
   
   const dispatch = useDispatch();

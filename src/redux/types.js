@@ -10,3 +10,4 @@ export const GET_POST_BY_TAG = "GET_POST_BY_TAG";
 export const CLEAR_FILTERS = "CLEAR_FILTERS";
 export const GET_POST_BY_SEARCH = "GET_POST_BY_SEARCH";
 export const SET_CATEGORY = "SET_CATEGORY";
+export const GET_fAVORITES = "GET_fAVORITES";
