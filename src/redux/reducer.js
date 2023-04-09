@@ -11,7 +11,7 @@ import {
   GET_ALL_TAGS,
   GET_POST_BY_SEARCH,
   SET_CATEGORY,
-  GET_fAVORITES,
+  GET_FAVORITES,
 } from "./types";
 
 const initialState = {
@@ -93,7 +93,7 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         category: payload,
       };
-     case GET_fAVORITES:
+     case GET_FAVORITES:
       return {
         ...state,
         favorites: payload,
