@@ -59,6 +59,8 @@ const Login = () => {
         icon: 'error',
         title: 'Oops...',
         text: error.message,
+        showConfirmButton: false,
+        timer: 1400
       })
     }
 

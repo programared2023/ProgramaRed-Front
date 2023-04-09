@@ -13,23 +13,31 @@ const LoginAuth0 = () => {
       connection,
       width: 400,
       height: 600,
-    }).then(() =>{
+    })
+    .then(() =>{
       const title = connection === "github" ? "Te Logueaste correctamente con GitHub" : "Te Logueaste correctamente con Google";
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title,
-        showConfirmButton: true,
-        // timer: 1500,
-        didClose: () => {
-          navigate("/home")
-        }
-      })
-    }).catch(() =>{
+      if (isAuthenticated) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title,
+          timer: 1500,
+          showConfirmButton: false,
+          didClose: () => {
+            if(isAuthenticated) navigate("/home")
+          }
+        })
+      }else{
+        throw new Error();
+      }
+    })
+    .catch(() =>{
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: "Ocurrió un error, intentalo nuevamente",
+        showConfirmButton: false,
+        timer: 1500
       })
     })
   }
