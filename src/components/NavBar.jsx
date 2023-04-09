@@ -1,17 +1,54 @@
 import { NavLink, useLocation } from "react-router-dom";
 import logo from "../images/logoNombre.png";
 import { clearFilters } from "../redux/actions";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useDispatch, } from "react-redux";
+import { useState,useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { logout} = useAuth0();
+  const { logout,user,getAccessTokenSilently} = useAuth0();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
+  const [id, setId] = useState('')
 
-  let userId = localStorage.getItem("id");
+    useEffect(() => { 
+       async function fetchData() {
+       // You can await here
+       try{
+       if (user) {  
+       const token = await getAccessTokenSilently()
+            console.log(token)
+
+            let response = await axios.get('/usercreate',{
+             headers:{
+                authorization: `Bearer ${token}`
+                }
+            })
+            console.log(response)
+             
+       let {data} = await axios(`/user/email/${user.email}`)
+       setId(data[0].id)
+
+       localStorage.setItem("username", JSON.stringify(data[0].username))
+       localStorage.setItem("id", JSON.stringify(data[0].id))
+
+       }
+     }catch(e){
+     console.log(e.message)
+        }
+     }
+     fetchData();
+    }, []);
+
+  let userId
+  if (!user){
+     userId = localStorage.getItem("id");
+  }else{
+     userId = id; //desde el estado  
+  }
+  
   let isUserLogged;
 
   if (pathname === `/profile/${userId}`) isUserLogged = true;
@@ -92,6 +129,7 @@ const NavBar = () => {
                     Hazte Premium
                 </NavLink>
                 <NavLink onClick={()=>{
+                    logout()
                     localStorage.clear()
                     closeMenu()
                     }} to="/" className="text-blue-50 flex py-2 px-4 hover:bg-darkGreen hover:scale-110  text-xl gap-3 w-full items-center transition-all rounded-3xl">
