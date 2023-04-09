@@ -36,7 +36,7 @@ const LoginAuth0 = () => {
       { isAuthenticated ? (
        navigate("/home") 
        ) : (
-       <div className="flex ">
+       <div className="flex justify-center ">
         <div> 
           <button className='text-white font-semibold py-1 px-2  mt-3 bg-red-500 hover:bg-red-300' 
            onClick={() => loginWithPopup()}>
