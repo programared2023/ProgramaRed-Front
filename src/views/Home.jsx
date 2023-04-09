@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import Posts from "../components/Posts";
-import Filters from "../components/Filters/Filters";
 import { useDispatch } from "react-redux";
 import { getAllPosts } from "../redux/actions";
 import { useEffect } from "react";
@@ -23,7 +22,6 @@ const Home = ({ toggleDetails}) => {
         >
           Sube un posteo
         </NavLink>
-        {/* <Filters /> */}
 
         <div className="h-full w-full overflow-hidden py-3">
           <div className=" h-screen overflow-y-auto scrollbar-none">

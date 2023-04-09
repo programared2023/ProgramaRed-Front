@@ -44,7 +44,7 @@ const Login = () => {
       localStorage.setItem("id", JSON.stringify(data[0].id))
 
       Swal.fire({
-        position: 'top-center',
+        position: 'center',
         icon: 'success',
         title: 'Te Logueaste correctamente',
         showConfirmButton: false,
@@ -71,7 +71,7 @@ const Login = () => {
           <h2 className="text-xl font-bold text-green-700 text-center pb-2">
             Inicia sesión con tu cuenta 
           </h2>
-          <p className=" text-center text-xs" >No tienes una cuenta? Regístrate <NavLink to="/signUp" className="text-blue-600">aquí</NavLink></p>
+          <p className="text-center text-xs" >No tienes una cuenta? Regístrate <NavLink to="/signUp" className="text-blue-600">aquí</NavLink></p>
         </div>
         <form onSubmit={handleSubmit}>
           <div>
@@ -129,8 +129,10 @@ const Login = () => {
               </button>
           </div>
         </form>
-        <LoginAuth0 />
-        
+        <div className=" border-t border-t-gray-500 mt-3">
+          <p className="text-center text-xs">Logeate con google o github</p>
+          <LoginAuth0 />
+        </div>
       </div>
     </div>
   );
