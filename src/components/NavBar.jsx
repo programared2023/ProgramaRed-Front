@@ -16,29 +16,26 @@ const NavBar = () => {
     useEffect(() => { 
        async function fetchData() {
        // You can await here
-       try{
-       if (user) {  
-       const token = await getAccessTokenSilently()
-            console.log(token)
+           try{
+               if (user) {  
+               const token = await getAccessTokenSilently()
+                    console.log(token)
+                    let response = await axios.get('/usercreate',{
+                     headers:{
+                        authorization: `Bearer ${token}`
+                        }
+                    })             
+                    console.log(response)
+               let {data} = await axios(`/user/email/${user.email}`)
+               setId(data[0].id)
 
-            let response = await axios.get('/usercreate',{
-             headers:{
-                authorization: `Bearer ${token}`
-                }
-            })
-            console.log(response)
-             
-       let {data} = await axios(`/user/email/${user.email}`)
-       setId(data[0].id)
-
-       localStorage.setItem("username", JSON.stringify(data[0].username))
-       localStorage.setItem("id", JSON.stringify(data[0].id))
-
-       }
-     }catch(e){
-     console.log(e.message)
+               localStorage.setItem("username", JSON.stringify(data[0].username))
+               localStorage.setItem("id", JSON.stringify(data[0].id))
+               }
+            }catch(e){
+                console.log(e.message)
+            }
         }
-     }
      fetchData();
     }, []);
 
@@ -48,7 +45,6 @@ const NavBar = () => {
   }else{
      userId = id; //desde el estado  
   }
-  
   let isUserLogged;
 
   if (pathname === `/profile/${userId}`) isUserLogged = true;

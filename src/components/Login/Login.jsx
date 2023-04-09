@@ -62,7 +62,7 @@ const Login = () => {
       })
     }
 
-  };
+  }
 
   return (
     <div className=" block mt-14 w-full">
@@ -120,15 +120,17 @@ const Login = () => {
               <span className="text-red-500 text-sm">{errors.password}</span>
             )}
           </div>
-
-          <button type="submit"
-                  className={`text-white font-semibold py-1 px-2 rounded mt-3
-                  ${errors.password || errors.username ? "bg-red-500 hover:bg-red-500" : "bg-green-500 hover:bg-green-600"}`}
-                >
-                Ingresar
-          </button>
+          <div className="flex justify-center"> 
+              <button type="submit"
+                      className={`text-white font-semibold py-1 px-2 rounded mt-3
+                      ${errors.password || errors.username ? "bg-red-500 hover:bg-red-500" : "bg-green-500 hover:bg-green-600"}`}
+                    >
+                    Ingresar
+              </button>
+          </div>
         </form>
         <LoginAuth0 />
+        
       </div>
     </div>
   );
