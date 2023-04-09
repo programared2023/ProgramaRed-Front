@@ -45,7 +45,7 @@ const CreatePost = () => {
   useEffect(() => {
     const checkFormComplete = () => {
       if (
-        
+        !form.title ||
         !form.actualTag ||
         !form.description ||
         !form.tags.length
