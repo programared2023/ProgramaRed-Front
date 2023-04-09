@@ -6,6 +6,7 @@ import pumba from "../images/Pumba.jpg";
 import niko from "../images/Niko.jpg";
 import sergio from "../images/Sergio.jpg";
 import thomas from "../images/Thomas.jpg";
+import { NavLink } from "react-router-dom";
 
 const About = () => {
   return (
@@ -74,6 +75,9 @@ const About = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <NavLink to="/" >Volver a Landing - poneme estilos Lucas</NavLink>
       </div>
       <div className="gap-16 ml-14 flex flex-col items-center font-semibold text-white shrink-0">
         <div className=" max-w-sm ">
