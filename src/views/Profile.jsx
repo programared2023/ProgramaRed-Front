@@ -14,14 +14,13 @@ const Profile = ({ toggleDetails }) => {
 
   const user = useSelector((state) => state.actualUser);
 
-  console.log(user);
-
   const [formDescription, setFormDescription] = useState(false);
   const [description, setDescription] = useState("");
   const [profileImg, setProfileImg] = useState();
 
+  let userId;
   useEffect(() => {
-    let userId = localStorage.getItem("id");
+    userId = localStorage.getItem("id");
 
     if (id === localStorage.getItem("id")) dispatch(getUserById(userId));
     else dispatch(getUserById(id));
@@ -33,7 +32,7 @@ const Profile = ({ toggleDetails }) => {
 
   const updateDescription = async (e) => {
     e.preventDefault();
-    const { data } = await axios.put(`/user/${id}`, { description });
+    const { data } = await axios.put(`/user/${userId}`, { description });
     Swal.fire({
       icon: "success",
       title: "Descripción actualizada",
@@ -78,34 +77,37 @@ const Profile = ({ toggleDetails }) => {
     }
   };
 
+  console.log("USER: ", user);
+
   return (
     <div className="flex flex-col w-full relative">
       <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 w-full max-w-5xl mx-auto px-4 py-8 items-center justify-evenly">
         <div className=" flex-col w-1/5 flex justify-center">
-          {id !== localStorage.getItem("id") && !user.profileImage ? (
-            <>
-              <img
-                src={person}
-                alt="ProfilePhoto"
-                className="rounded-full w-full object-cover object-center border-2 border-green-500"
-              />
-            </>
-          ) : id !== localStorage.getItem("id") && user.profileImage ? (
-            <>
-              <img
-                src={user.profileImage}
-                alt="ProfilePhoto"
-                className="rounded-full w-full object-cover object-center border-2 border-green-500"
-              />
-            </>
+          {id !== localStorage.getItem("id") ? (
+            !user.profileImage ? (
+              <>
+                <img
+                  src={person}
+                  alt="ProfilePhoto"
+                  className="rounded-full w-full object-cover object-center border-2 border-green-500"
+                />
+              </>
+            ) : (
+              <>
+                <img
+                  src={user.profileImage}
+                  alt="ProfilePhoto"
+                  className="rounded-full w-full object-cover object-center border-2 border-green-500"
+                />
+              </>
+            )
           ) : (
             <>
               <img
-                src={user.profileImage}
+                src={user.profileImage ? user.profileImage : person}
                 alt="ProfilePhoto"
                 className="rounded-full w-full object-cover object-center border-2 border-green-500"
               />
-
               <div className="p-2 m-4 self-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-110">
                 <label>
                   <svg
