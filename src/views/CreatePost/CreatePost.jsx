@@ -13,14 +13,14 @@ const CreatePost = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [user, setUser] = useState({});
+  const [user] = useState(actualUser);
   let id = localStorage.getItem("id");
-
 
   useEffect(() => {
     dispatch(getUserById(id));
-    setUser(actualUser);
-  }, [dispatch, id]);
+  }, [dispatch, id, user]);
+
+  console.log("USER desp del useEffect: ", user);
 
   const [form, setForm] = useState({
     title: "",
@@ -135,17 +135,18 @@ const CreatePost = () => {
         const { data } = await axios.post("/post", { ...form, files: urls });
 
         Swal.fire({
-          icon: 'success',
-          title: 'Post Subido',
+          icon: "success",
+          title: "Post Subido",
           text: data,
-        }).then((result) => { if (result.isConfirmed) navigate(`/profile/${id}`) })
-
+        }).then((result) => {
+          if (result.isConfirmed) navigate(`/profile/${id}`);
+        });
       } catch {
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
+          icon: "error",
+          title: "Oops...",
           text: "Hubo un error al subir el post",
-        })
+        });
       }
     }
     clearForm();
@@ -171,10 +172,11 @@ const CreatePost = () => {
               name="title"
               placeholder="Agrega un título..."
               value={form.title}
-              className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${errors.title
+              className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${
+                errors.title
                   ? "focus:border-red-500 focus:ring-red-500"
                   : "focus:ring-green-500 focus:border-green-500"
-                }
+              }
               `}
             />
             {errors.title && (
@@ -209,31 +211,36 @@ const CreatePost = () => {
                 }}
                 value={tag}
                 className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out 
-                ${errors.tags?.length || errors.actualTag
+                ${
+                  errors.tags?.length || errors.actualTag
                     ? "focus:border-red-500 focus:ring-red-500"
                     : "focus:ring-green-500 focus:border-green-500"
-                  }`}
+                }`}
               />
               <button
                 type="button"
                 disabled={!!errors.actualTag}
                 onClick={addTag}
                 className={`text-white font-semibold py-1 px-2 rounded
-                  ${form.tags.length > 0 && errors.actualTag
-                    ? "bg-red-500 hover:bg-red-500"
-                    : ""
+                  ${
+                    form.tags.length > 0 && errors.actualTag
+                      ? "bg-red-500 hover:bg-red-500"
+                      : ""
                   }
-                  ${form.tags.length === 0 && errors.actualTag
-                    ? "bg-red-500 hover:bg-red-500"
-                    : ""
+                  ${
+                    form.tags.length === 0 && errors.actualTag
+                      ? "bg-red-500 hover:bg-red-500"
+                      : ""
                   }
-                  ${form.tags.length > 0 && !errors.actualTag
-                    ? "bg-green-500 hover:bg-green-600"
-                    : ""
+                  ${
+                    form.tags.length > 0 && !errors.actualTag
+                      ? "bg-green-500 hover:bg-green-600"
+                      : ""
                   }
-                  ${form.tags.length === 0 && !errors.actualTag
-                    ? "bg-green-500 hover:bg-green-600"
-                    : ""
+                  ${
+                    form.tags.length === 0 && !errors.actualTag
+                      ? "bg-green-500 hover:bg-green-600"
+                      : ""
                   }`}
               >
                 Agregar
@@ -281,10 +288,11 @@ const CreatePost = () => {
               rows="10"
               placeholder="Agrega una descripción a tu posteo..."
               value={form.description}
-              className={`border-gray-300 block w-full rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${errors.description
+              className={`border-gray-300 block w-full rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${
+                errors.description
                   ? "focus:border-red-500 focus:ring-red-500"
                   : "focus:ring-green-500 focus:border-green-500"
-                }
+              }
               `}
             ></textarea>
             {errors.description && (
@@ -335,32 +343,39 @@ const CreatePost = () => {
           </div>
 
           <div className="flex flex-wrap py-3">
-            {!form.files.length ? (
-              ""
-            ) : (
-              form.files.map((file, i) => {
-                return (
-                  <div className="flex flex-col justify-center items-center h-20 mx-3 gap-1" key={i}>
-                    <span onClick={() => fileDelete(file)} className="cursor-pointer bg-red-400 px-2 py-1" >X</span>
-                    <img
-                      className="h-full"
-                      src={URL.createObjectURL(file)}
-                      alt="a"
-                    />
-                  </div>
-                );
-              })
-            )}
+            {!form.files.length
+              ? ""
+              : form.files.map((file, i) => {
+                  return (
+                    <div
+                      className="flex flex-col justify-center items-center h-20 mx-3 gap-1"
+                      key={i}
+                    >
+                      <span
+                        onClick={() => fileDelete(file)}
+                        className="cursor-pointer bg-red-400 px-2 py-1"
+                      >
+                        X
+                      </span>
+                      <img
+                        className="h-full"
+                        src={URL.createObjectURL(file)}
+                        alt="a"
+                      />
+                    </div>
+                  );
+                })}
           </div>
 
           <div className="flex gap-4">
             <button
               type="submit"
               disabled={!formComplete}
-              className={`${!formComplete
+              className={`${
+                !formComplete
                   ? "bg-red-500 hover:bg-red-500 cursor-not-allowed opacity-50"
                   : "bg-green-500 hover:bg-green-600"
-                } text-white font-bold py-2 px-4 rounded`}
+              } text-white font-bold py-2 px-4 rounded`}
             >
               Subir
             </button>
@@ -377,6 +392,5 @@ const CreatePost = () => {
     </div>
   );
 };
-
 
 export default CreatePost;
