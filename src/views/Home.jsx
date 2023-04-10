@@ -1,16 +1,47 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 import Posts from "../components/Posts";
 import { useDispatch } from "react-redux";
 import { getAllPosts } from "../redux/actions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SideBar from "../components/SideBar";
+import axios from "axios";
 
-const Home = ({ toggleDetails}) => {
+const Home = ({ toggleDetails }) => {
   const dispatch = useDispatch();
+  const [searchParams, _] = useSearchParams()
+  // const [initialization, setInitialization] = useState({ preferenceId: '' })
+  const [message, setMessage] = useState("")
 
   useEffect(() => {
     dispatch(getAllPosts());
-  }, [dispatch]);
+    if (searchParams.get('status')
+      && searchParams.get('payment_id')
+      && localStorage.getItem('id')) {
+      completePayment()
+    }
+  }, [dispatch, message]);
+
+  const completePayment = async () => {
+    console.log(
+      {
+        paymentId: searchParams.get('payment_id'),
+        productTitle: "Subscripcion Premium",
+        price: 500 * 1.30,
+        userId: Number(localStorage.getItem('id')),
+        status: searchParams.get('status')
+      }
+    );
+    const res = await axios.post('/payments', {
+      paymentId: searchParams.get('payment_id'),
+      productTitle: "Subscripcion Premium",
+      price: 500 * 1.30,
+      userId: Number(localStorage.getItem('id')),
+      status: searchParams.get('status')
+    })
+    if (res.data) {
+      setMessage(res.data)
+    }
+  }
 
   return (
     <>
@@ -23,9 +54,13 @@ const Home = ({ toggleDetails}) => {
           Sube un posteo
         </NavLink>
 
+        {message && (
+          <h3 className='text-xl text-green-700'>{message}</h3>
+        )}
+
         <div className="h-full w-full overflow-hidden py-3">
           <div className=" h-screen overflow-y-auto scrollbar-none">
-            <Posts toggleDetails={toggleDetails}/>
+            <Posts toggleDetails={toggleDetails} />
           </div>
         </div>
       </div>
