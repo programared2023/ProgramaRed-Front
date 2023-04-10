@@ -18,9 +18,7 @@ const Profile = ({ toggleDetails }) => {
   const [description, setDescription] = useState("");
   const [profileImg, setProfileImg] = useState();
 
-
   let userId;
-
   useEffect(() => {
     userId = localStorage.getItem("id");
 
@@ -34,7 +32,7 @@ const Profile = ({ toggleDetails }) => {
 
   const updateDescription = async (e) => {
     e.preventDefault();
-    const { data } = await axios.put(`/user/${id}`, { description });
+    const { data } = await axios.put(`/user/${userId}`, { description });
     Swal.fire({
       icon: "success",
       title: "Descripción actualizada",

@@ -33,7 +33,7 @@ const Landing = () => {
               className="bg-ligthGreen rounded-full w-24 h-24 p-2 animate-spin-slow"
             />
             <NavLink to="/about" >
-              <h2 className="text-lg font-bold text-gray-800 mt-4 hover:text-white hover:bg-slate-900 rounded-md p-1 ">¿Qué es ProgramaRed?</h2>
+              <h2 className="text-lg font-bold px-5 py-3 text-gray-800 mt-4 hover:text-white hover:bg-slate-900 rounded-md p-1 ">¿Qué es ProgramaRed?</h2>
             </NavLink>
           </div>
         </div>
