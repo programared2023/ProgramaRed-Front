@@ -14,11 +14,11 @@ const Favorites = ()=>{
   }, []);
 
     return(
-      <div className="flex flex-wrap justify-center p-4 w-full max-h-full">
+      <div className="flex flex-wrap justify-center p-4 w-full h-screen">
         <div className="overflow-hidden min-h-0 h-5/6 w-full">
           <div className="flex flex-col gap-2 overflow-y-auto h-full scrollbar-thin scrollbar-track-transparent">
             <h2 className="text-2xl font-bold mb-4">
-              {favorites.length ? "Favoritos" : "No hay publicaciones"}
+              {favorites.length ? "Favoritos" : "No tienes Favoritos"}
             </h2>
               {favorites?.map((post, i) => (
               <Post post={post.Post} key={i} />
