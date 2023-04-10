@@ -15,11 +15,7 @@ const Post = ({ post, username, toggleDetails}) => {
   useEffect(() => {
     setLocalPost(post);
   }, [post, localPost]);
-
-  useEffect(() => {
-
-  }, [])
-  
+ 
   const getFavorites = async () => {
     let favorites = await axios.get(`/favorites/${userId}`)
     return favorites;
@@ -28,10 +24,10 @@ const Post = ({ post, username, toggleDetails}) => {
   // const [favorite, setFavorite] = useState([]); //guardar post seleccionado - quiza hacer dispacht a redux
   const [clicked, setClicked] = useState(false);
 
-  const postDate = new Date(post.createdAt).toLocaleString("es-AR").split(",");
+  // const postDate = new Date(post.createdAt).toLocaleString("es-AR").split(",");
 
-  const date = postDate[0];
-  const hour = postDate[1];
+  // const date = postDate[0];
+  // const hour = postDate[1];
 
   const favorite = {
     idPost: localPost.id,
@@ -55,8 +51,8 @@ const Post = ({ post, username, toggleDetails}) => {
           <div className="bg-green-300 w-12 h-12 rounded-full mr-3">
             <img
               src={
-                localPost.User?.image
-                  ? localPost.User.image
+                localPost.User?.profileImage
+                  ? localPost.User.profileImage
                   : "https://source.unsplash.com/random/500x500"
               }
               alt={localPost.User?.username}
@@ -73,7 +69,7 @@ const Post = ({ post, username, toggleDetails}) => {
               {!localPost.User && localPost.username}
               {!localPost.User && !localPost.username && username}
             </NavLink>
-            <p className="text-black text-xs font-medium">{`Creado el ${date} a las ${hour}`}</p>
+            <p className="text-black text-xs font-medium">{`Creado el ${post.publishDate}`}</p>
           </div>
             {
               localPost.User?.id.toString() !== localStorage.getItem("id")
