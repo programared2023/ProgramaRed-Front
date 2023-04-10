@@ -19,27 +19,32 @@ const Home = ({ toggleDetails }) => {
       && localStorage.getItem('id')) {
       completePayment()
     }
-  }, [dispatch, message]);
+  }, [dispatch]);
 
   const completePayment = async () => {
-    console.log(
-      {
+    try {
+      console.log(
+        {
+          paymentId: searchParams.get('payment_id'),
+          productTitle: "Subscripcion Premium",
+          price: 500 * 1.30,
+          userId: Number(localStorage.getItem('id')),
+          status: searchParams.get('status')
+        }
+      );
+      const res = await axios.post('/payments', {
         paymentId: searchParams.get('payment_id'),
         productTitle: "Subscripcion Premium",
         price: 500 * 1.30,
         userId: Number(localStorage.getItem('id')),
         status: searchParams.get('status')
+      })
+      if (res.status === 200) {
+        setMessage(res.data)
       }
-    );
-    const res = await axios.post('/payments', {
-      paymentId: searchParams.get('payment_id'),
-      productTitle: "Subscripcion Premium",
-      price: 500 * 1.30,
-      userId: Number(localStorage.getItem('id')),
-      status: searchParams.get('status')
-    })
-    if (res.data) {
-      setMessage(res.data)
+    } catch (error) {
+      console.log(error);
+      setMessage(error.message)
     }
   }
 
