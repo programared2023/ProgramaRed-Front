@@ -50,16 +50,16 @@ const CreatePost = () => {
         !form.description ||
         !form.tags.length
       ) {
-        if (!form.userId){
+        if (!form.userId) {
           form.userId = id;
-        } 
+        }
         setFormComplete(false);
       } else {
         setFormComplete(true);
       }
     };
     checkFormComplete();
-  }, [form, actualUser, id]);
+  }, [form, id]);
 
   const handleInputs = (e) => {
     setForm({
@@ -130,15 +130,15 @@ const CreatePost = () => {
       urls.push(url);
     }
 
-    if (formComplete === true){
+    if (formComplete === true) {
       try {
-        const { data } = await axios.post("/post", {...form, files: urls});
+        const { data } = await axios.post("/post", { ...form, files: urls });
 
         Swal.fire({
           icon: 'success',
           title: 'Post Subido',
           text: data,
-        }).then((result) => {if (result.isConfirmed) navigate(`/profile/${id}`)})
+        }).then((result) => { if (result.isConfirmed) navigate(`/profile/${id}`) })
 
       } catch {
         Swal.fire({
@@ -171,11 +171,10 @@ const CreatePost = () => {
               name="title"
               placeholder="Agrega un título..."
               value={form.title}
-              className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${
-                errors.title
+              className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${errors.title
                   ? "focus:border-red-500 focus:ring-red-500"
                   : "focus:ring-green-500 focus:border-green-500"
-              }
+                }
               `}
             />
             {errors.title && (
@@ -210,36 +209,31 @@ const CreatePost = () => {
                 }}
                 value={tag}
                 className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out 
-                ${
-                  errors.tags?.length || errors.actualTag
+                ${errors.tags?.length || errors.actualTag
                     ? "focus:border-red-500 focus:ring-red-500"
                     : "focus:ring-green-500 focus:border-green-500"
-                }`}
+                  }`}
               />
               <button
                 type="button"
                 disabled={!!errors.actualTag}
                 onClick={addTag}
                 className={`text-white font-semibold py-1 px-2 rounded
-                  ${
-                    form.tags.length > 0 && errors.actualTag
-                      ? "bg-red-500 hover:bg-red-500"
-                      : ""
+                  ${form.tags.length > 0 && errors.actualTag
+                    ? "bg-red-500 hover:bg-red-500"
+                    : ""
                   }
-                  ${
-                    form.tags.length === 0 && errors.actualTag
-                      ? "bg-red-500 hover:bg-red-500"
-                      : ""
+                  ${form.tags.length === 0 && errors.actualTag
+                    ? "bg-red-500 hover:bg-red-500"
+                    : ""
                   }
-                  ${
-                    form.tags.length > 0 && !errors.actualTag
-                      ? "bg-green-500 hover:bg-green-600"
-                      : ""
+                  ${form.tags.length > 0 && !errors.actualTag
+                    ? "bg-green-500 hover:bg-green-600"
+                    : ""
                   }
-                  ${
-                    form.tags.length === 0 && !errors.actualTag
-                      ? "bg-green-500 hover:bg-green-600"
-                      : ""
+                  ${form.tags.length === 0 && !errors.actualTag
+                    ? "bg-green-500 hover:bg-green-600"
+                    : ""
                   }`}
               >
                 Agregar
@@ -287,11 +281,10 @@ const CreatePost = () => {
               rows="10"
               placeholder="Agrega una descripción a tu posteo..."
               value={form.description}
-              className={`border-gray-300 block w-full rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${
-                errors.description
+              className={`border-gray-300 block w-full rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${errors.description
                   ? "focus:border-red-500 focus:ring-red-500"
                   : "focus:ring-green-500 focus:border-green-500"
-              }
+                }
               `}
             ></textarea>
             {errors.description && (
@@ -364,11 +357,10 @@ const CreatePost = () => {
             <button
               type="submit"
               disabled={!formComplete}
-              className={`${
-                !formComplete
+              className={`${!formComplete
                   ? "bg-red-500 hover:bg-red-500 cursor-not-allowed opacity-50"
                   : "bg-green-500 hover:bg-green-600"
-              } text-white font-bold py-2 px-4 rounded`}
+                } text-white font-bold py-2 px-4 rounded`}
             >
               Subir
             </button>
