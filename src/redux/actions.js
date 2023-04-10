@@ -116,7 +116,6 @@ export const getPostByQuery = (query) => {
   return async function (dispatch) {
     const backData = await axios.get(query);
     const posts = backData.data;
-    console.log(posts)
     dispatch({
       type: GET_POST_BY_QUERY,
       payload: posts,

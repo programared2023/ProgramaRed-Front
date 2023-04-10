@@ -26,7 +26,6 @@ const SearchBar = () => {
     if(category === "") dispatch(getPostBySearch(search))
     if(category !== ""){
       let query = queryCreator(search, category)
-      console.log(query)
       dispatch(getPostByQuery(query))
     }
 
