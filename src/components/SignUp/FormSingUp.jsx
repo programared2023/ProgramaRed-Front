@@ -55,11 +55,17 @@ const FormSignUp = () => {
 
   return (
     <div className=" block mt-14 w-full ">
-      <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
-        <h3>Registrarse</h3>
-        <p>Ya tienes una cuenta logeate <NavLink to="/">aquí</NavLink></p>
-        <form onSubmit={handleSubmit}>
-          <div>
+      <div className="flex flex-col max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
+        <h3 className=" self-center text-xl font-bold text-green-700 mb-6">Registrarse</h3>
+        <p className=" self-center">
+          Ya tienes una cuenta logeate <NavLink className=" font-bold text-green-800" to="/">aquí</NavLink>
+        </p>
+        <form
+          className=" gap-4
+         flex flex-col justify-center"
+          onSubmit={handleSubmit}
+        >
+          <div className="flex flex-col ">
             <label>Nombre de usuario: </label>
             <input
               onChange={changeHandler}
@@ -67,11 +73,17 @@ const FormSignUp = () => {
               type="text"
               name="username"
               value={form?.username}
+              className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${
+                errors.username
+                  ? "focus:border-red-500 focus:ring-red-500"
+                  : "focus:ring-green-500 focus:border-green-500"
+              }
+              `}
             />
-            <span>{errors?.username}</span>
+            <span className="text-red-500 text-sm">{errors?.username}</span>
           </div>
 
-          <div>
+          <div className="flex flex-col ">
             <label>Email: </label>
             <input
               onChange={changeHandler}
@@ -79,24 +91,39 @@ const FormSignUp = () => {
               type="text"
               name="email"
               value={form?.email}
+              className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${
+                errors.email
+                  ? "focus:border-red-500 focus:ring-red-500"
+                  : "focus:ring-green-500 focus:border-green-500"
+              }
+              `}
             />
-            <span>{errors?.email}</span>
+            <span className="text-red-500 text-sm">{errors?.email}</span>
           </div>
 
-          <div>
+          <div className="flex flex-col ">
             <label>Contraseña: </label>
             <input
               onChange={changeHandler}
               type="password"
               name="password"
               value={form?.password}
+              className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${
+                errors.password
+                  ? "focus:border-red-500 focus:ring-red-500"
+                  : "focus:ring-green-500 focus:border-green-500"
+              }
+              `}
             />
-            <span>{errors?.password}</span>
+            <span className="text-red-500 text-sm">{errors?.password}</span>
           </div>
 
-          <div>
-            <button type="submit">Enviar</button>
-          </div>
+          <button
+            className="flex self-center bg-mediumGreen text-white font-bold py-2 px-4 rounded"
+            type="submit"
+          >
+            Enviar
+          </button>
         </form>
       </div>
     </div>
