@@ -15,7 +15,7 @@ const Post = ({ post, username, toggleDetails }) => {
 
   useEffect(() => {
     setLocalPost(post);
-  }, [post, localPost]);
+  }, [post]);
 
   const getFavorites = async () => {
     let favorites = await axios.get(`/favorites/${userId}`);

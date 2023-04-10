@@ -46,8 +46,6 @@ const Profile = ({ toggleDetails }) => {
     setProfileImg(file);
   };
 
-  console.log("Soy el estado IMG: ", profileImg);
-
   const fileDelete = () => {
     setProfileImg();
   };
@@ -75,8 +73,6 @@ const Profile = ({ toggleDetails }) => {
       }
     }
   };
-
-  console.log("USER: ", user);
 
   return (
     <div className="flex flex-col w-full relative">

@@ -20,7 +20,7 @@ const NavBar = () => {
       try {
         if (user) {
           const token = await getAccessTokenSilently();
-          let response = await axios.get("/usercreate", {
+          await axios.get("/usercreate", {
             headers: {
               authorization: `Bearer ${token}`,
             },

@@ -58,7 +58,7 @@ const PostDetail = ({ toggleDetails }) => {
             : post.files.map((file, i) => {
               return (
                 <div className=" flex w-52  m-2" key={i} >
-                  <a href={file} target="_blank" >
+                  <a rel="noreferrer noopener" href={file} target="_blank" >
                     <img className=" w-full rounded-md" src={file} alt="a" />
                   </a>
                 </div>

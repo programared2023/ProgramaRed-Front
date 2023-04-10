@@ -56,6 +56,7 @@ const About = () => {
                 <img className=" rounded-full w-20 " src={ailing} alt="" />
                 <p className=" text-center">Ailin Galante Rosso</p>
                 <a
+                  rel="noreferrer noopener"
                   className="hover:text-white hover:bg-slate-900 rounded-md p-1"
                   target="_blank"
                   href="http://github.com/ailuwu12"
@@ -67,6 +68,7 @@ const About = () => {
                 <img className=" rounded-full w-20 " src={pumba} alt="" />
                 <p className=" text-center">Franco David Segovia</p>
                 <a
+                  rel="noreferrer noopener"
                   className="hover:text-white hover:bg-slate-900 rounded-md p-1"
                   target="_blank"
                   href="https://github.com/davidfranncoo"
@@ -78,6 +80,7 @@ const About = () => {
                 <img className=" rounded-full w-20 " src={camilo} alt="" />
                 <p className=" text-center">Jeffer Camilo Romero Perez</p>
                 <a
+                  rel="noreferrer noopener"
                   className="hover:text-white hover:bg-slate-900 rounded-md p-1"
                   target="_blank"
                   href="http://github.com/Camilop4"
@@ -91,6 +94,7 @@ const About = () => {
                 <img className=" rounded-full w-20 " src={lucas} alt="" />
                 <p className=" text-center">Lucas Palma</p>
                 <a
+                  rel="noreferrer noopener"
                   className="hover:text-white hover:bg-slate-900 rounded-md p-1"
                   target="_blank"
                   href="http://github.com/Lukkas98"
@@ -102,6 +106,7 @@ const About = () => {
                 <img className=" rounded-full w-20 " src={niko} alt="" />
                 <p className=" text-center">Nicolas Eduardo Juncos</p>
                 <a
+                  rel="noreferrer noopener"
                   className="hover:text-white hover:bg-slate-900 rounded-md p-1"
                   target="_blank"
                   href="https://github.com/juncos22"
@@ -113,6 +118,7 @@ const About = () => {
                 <img className=" rounded-full w-20 " src={sergio} alt="" />
                 <p className=" text-center">Sergio Rodrigo Suárez</p>
                 <a
+                  rel="noreferrer noopener"
                   className="hover:text-white hover:bg-slate-900 rounded-md p-1"
                   target="_blank"
                   href="http://github.com/serrsua"
@@ -124,6 +130,7 @@ const About = () => {
                 <img className=" rounded-full w-20 " src={thomas} alt="" />
                 <p className=" text-center">Thomas Enrique Naquiche Leon</p>
                 <a
+                  rel="noreferrer noopener"
                   className="hover:text-white hover:bg-slate-900 rounded-md p-1"
                   target="_blank"
                   href="https://github.com/nakiche"
@@ -160,8 +167,17 @@ const About = () => {
               ¡Esperamos que nuestra web sea de tu agrado!
             </p>
             <p className=" m-7 text-center">
-              Para contactarnos puedes enviarnos un e-mail a: programared2023@gmail.com o visitar
-              nuestro <a target="_blank" className="bg-slate-900 p-0.5 rounded-md" href="http://github.com/programared2023">GitHub</a> para ver el proyecto completo
+              Para contactarnos puedes enviarnos un e-mail a:
+              programared2023@gmail.com o visitar nuestro{" "}
+              <a
+                rel="noreferrer noopener"
+                target="_blank"
+                className="bg-slate-900 p-0.5 rounded-md"
+                href="http://github.com/programared2023"
+              >
+                GitHub
+              </a>{" "}
+              para ver el proyecto completo
             </p>
           </div>
         </div>
