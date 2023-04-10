@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { clearDetail, getUserById } from "../redux/actions";
 import Post from "../components/Post";
 import axios from "axios";
@@ -18,9 +18,8 @@ const Profile = ({ toggleDetails }) => {
   const [description, setDescription] = useState("");
   const [profileImg, setProfileImg] = useState();
 
-  let userId;
+  let userId = localStorage.getItem("id");
   useEffect(() => {
-    userId = localStorage.getItem("id");
 
     if (id === localStorage.getItem("id")) dispatch(getUserById(userId));
     else dispatch(getUserById(id));
@@ -28,7 +27,7 @@ const Profile = ({ toggleDetails }) => {
     return () => {
       dispatch(clearDetail());
     };
-  }, [dispatch, description, profileImg, id]);
+  }, [dispatch, description, profileImg, id, userId]);
 
   const updateDescription = async (e) => {
     e.preventDefault();
