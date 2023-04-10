@@ -11,6 +11,13 @@ import { NavLink } from "react-router-dom";
 const About = () => {
   return (
     <div className="flex flex-col items-center bg-slate-500 h-full w-full ">
+      <div className="flex mb-4">
+        <NavLink to="/">
+          <h2 className="text-lg font-bold py-2 px-3 bg-mediumGreen text-gray-800 mt-4 hover:text-white hover:bg-slate-900 rounded-md">
+            Volver
+          </h2>
+        </NavLink>
+      </div>
       <div className=" flex-col flex justify-between items-center bg-slate-500 h-full w-full lg:flex-row ">
         <div className=" gap-16 ml-14 flex flex-col items-center font-semibold text-white shrink-0">
           <div className=" flex flex-col items-center mb-4 md:mb-0">
@@ -158,13 +165,6 @@ const About = () => {
             </p>
           </div>
         </div>
-      </div>
-      <div className="flex mb-4">
-        <NavLink to="/">
-          <h2 className="text-lg font-bold text-gray-800 mt-4 hover:text-white hover:bg-slate-900 rounded-md px-2 ">
-            Volver
-          </h2>
-        </NavLink>
       </div>
     </div>
   );

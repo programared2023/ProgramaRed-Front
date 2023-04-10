@@ -177,7 +177,7 @@ const NavBar = () => {
                   }}
                   to={`/favorites`}
                   className={`flex py-2 px-4 hover:bg-darkGreen hover:scale-110  text-xl gap-3 w-full items-center transition-all rounded-3xl ${
-                    isUserLogged
+                    pathname === "/favorites"
                       ? "text-white bg-darkGreen scale-110"
                       : "text-blue-50"
                   }`}
@@ -201,7 +201,7 @@ const NavBar = () => {
                   }}
                   to={`/premium`}
                   className={`flex py-2 px-4 hover:bg-darkGreen hover:scale-110  text-xl gap-3 w-full items-center transition-all rounded-3xl ${
-                    isUserLogged
+                    pathname === "/premium"
                       ? "text-white bg-darkGreen scale-110"
                       : "text-blue-50"
                   }`}
@@ -386,7 +386,7 @@ const NavBar = () => {
                         }}
                         to={`/favorites`}
                         className={`my-3 flex py-2 px-4 hover:bg-darkGreen hover:scale-110  text-xl gap-3 w-full items-center transition-all rounded-3xl ${
-                          isUserLogged
+                          pathname === "/favorites"
                             ? "text-white bg-darkGreen scale-110"
                             : "text-blue-50"
                         }`}
@@ -409,7 +409,7 @@ const NavBar = () => {
                         }}
                         to={`/premium`}
                         className={`my-3 flex py-2 px-4 hover:bg-darkGreen hover:scale-110  text-xl gap-3 w-full items-center transition-all rounded-3xl ${
-                          isUserLogged
+                          pathname === "/premium"
                             ? "text-white bg-darkGreen scale-110"
                             : "text-blue-50"
                         }`}
