@@ -40,11 +40,10 @@ const Post = ({ post, username, toggleDetails }) => {
     }
   };
 
-  const deleteFavorite = async(e) =>{
+  const deleteFavorite = async (e) => {
     //agregar alerta de borrado Lucas xD
-    await axios.delete(`/favorite`, favorite)
-  }
-
+    await axios.delete(`/favorite`, favorite);
+  };
 
   return (
     <div className="px-4 py-1">
@@ -73,44 +72,44 @@ const Post = ({ post, username, toggleDetails }) => {
             </NavLink>
             <p className="text-black text-xs font-medium">{`Creado el ${post.publishDate}`}</p>
           </div>
-          {
-            pathname === "/home" && localPost.User?.id.toString() !== localStorage.getItem("id") && 
-            <div onClick={favoriteHandler}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill={!clicked ? "none" : "currentColor"}
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                />
-              </svg>
-            </div>  
-          }
-          {
-            pathname === "/favorites" && localPost.User?.id.toString() !== localStorage.getItem("id") &&
-            <div onClick={deleteFavorite}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                />
-              </svg>
-            </div>  
-          }
+          {pathname === "/home" &&
+            localPost.User?.id.toString() !== localStorage.getItem("id") && (
+              <div onClick={favoriteHandler}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill={!clicked ? "none" : "currentColor"}
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                  />
+                </svg>
+              </div>
+            )}
+          {pathname === "/favorites" &&
+            localPost.User?.id.toString() !== localStorage.getItem("id") && (
+              <div onClick={deleteFavorite}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                  />
+                </svg>
+              </div>
+            )}
         </div>
 
         <button
@@ -128,29 +127,27 @@ const Post = ({ post, username, toggleDetails }) => {
 
         <div className="flex gap-2 mt-3">
           {localPost.Tags?.map((tag, i) => {
-            {
-              if (pathname !== "/home") {
-                return (
-                  <NavLink key={i} to="/home">
-                    <button
-                      onClick={() => dispatch(getPostByTag(tag.name))}
-                      className=" text-sm text-amber-700 font-medium"
-                    >
-                      #{tag.name}
-                    </button>
-                  </NavLink>
-                );
-              } else {
-                return (
+            if (pathname !== "/home") {
+              return (
+                <NavLink key={i} to="/home">
                   <button
                     onClick={() => dispatch(getPostByTag(tag.name))}
-                    key={i}
                     className=" text-sm text-amber-700 font-medium"
                   >
                     #{tag.name}
                   </button>
-                );
-              }
+                </NavLink>
+              );
+            } else {
+              return (
+                <button
+                  onClick={() => dispatch(getPostByTag(tag.name))}
+                  key={i}
+                  className=" text-sm text-amber-700 font-medium"
+                >
+                  #{tag.name}
+                </button>
+              );
             }
           })}
         </div>
