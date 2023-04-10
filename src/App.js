@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import FalseScreen from "./components/FalseScreen";
 import Detail from "./views/Detail";
 import About from "./views/About";
+import NotFound from "./components/NotFound";
 
 function App() {
   const { pathname } = useLocation();
@@ -54,6 +55,7 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/premium" element={<Payment />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {/* {pathname !== "/" && <SideBar />} */}
     </div>
