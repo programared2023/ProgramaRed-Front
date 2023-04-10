@@ -20,29 +20,29 @@ function App() {
   const [showDetails, setShowDetails] = useState(false);
   const toggleDetails = () => setShowDetails(!showDetails);
 
-  const appRef = useRef(null); // Ref para el div contenedor de App
+  // const appRef = useRef(null); // Ref para el div contenedor de App
 
-  useEffect(() => {
-    function handleResize() {
-      const windowHeight = window.innerHeight;
-      const contentHeight = appRef.current.scrollHeight;
+  // useEffect(() => {
+  //   function handleResize() {
+  //     const windowHeight = window.innerHeight;
+  //     const contentHeight = appRef.current.scrollHeight;
 
-      if (contentHeight > windowHeight) {
-        appRef.current.style.height = "100%";
-      } else {
-        appRef.current.style.height = "100vh";
-      }
-    }
-    handleResize(); // Llamamos a la función al inicio para ajustar la altura inicialmente
+  //     if (contentHeight > windowHeight) {
+  //       appRef.current.style.height = "100%";
+  //     } else {
+  //       appRef.current.style.height = "100vh";
+  //     }
+  //   }
+  //   handleResize(); // Llamamos a la función al inicio para ajustar la altura inicialmente
 
-    window.addEventListener("resize", handleResize); // Añadimos el event listener para detectar cambios de tamaño
-    return () => {
-      window.removeEventListener("resize", handleResize); // Removemos el event listener al desmontar el componente
-    };
-  }, []);
+  //   window.addEventListener("resize", handleResize); // Añadimos el event listener para detectar cambios de tamaño
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize); // Removemos el event listener al desmontar el componente
+  //   };
+  // }, []);
 
   return (
-    <div ref={appRef} className={`flex flex-col justify-center w-screen bg-veryLigthGreen lg:flex-row`}>
+    <div className={`DIV_APP grid justify-center bg-ligthGreen`}>
       {pathname !== "/" && pathname !== "/signUp" && pathname !== "/about" && <NavBar />}
       {showDetails && <FalseScreen isView={showDetails} />}
       {showDetails && <Detail toggleDetails={toggleDetails} />}
