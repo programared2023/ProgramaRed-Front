@@ -50,7 +50,7 @@ const Home = ({ toggleDetails }) => {
 
   return (
     <>
-      <div className="flex justify-start flex-col items-center h-full overflow-hidden w-full relative">
+      <div className="DIV_HOME flex justify-start flex-col items-center h-full overflow-hidden w-full relative">
         <SideBar />
         <NavLink
           to="/createPost"

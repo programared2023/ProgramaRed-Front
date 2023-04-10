@@ -8,7 +8,7 @@ import SignUp from "./views/SignUp";
 import NavBar from "./components/NavBar";
 import Payment from "./views/Payment";
 import Favorites from "./views/Favorites"
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import FalseScreen from "./components/FalseScreen";
 import Detail from "./views/Detail";
 import About from "./views/About";
@@ -19,27 +19,6 @@ function App() {
 
   const [showDetails, setShowDetails] = useState(false);
   const toggleDetails = () => setShowDetails(!showDetails);
-
-  // const appRef = useRef(null); // Ref para el div contenedor de App
-
-  // useEffect(() => {
-  //   function handleResize() {
-  //     const windowHeight = window.innerHeight;
-  //     const contentHeight = appRef.current.scrollHeight;
-
-  //     if (contentHeight > windowHeight) {
-  //       appRef.current.style.height = "100%";
-  //     } else {
-  //       appRef.current.style.height = "100vh";
-  //     }
-  //   }
-  //   handleResize(); // Llamamos a la función al inicio para ajustar la altura inicialmente
-
-  //   window.addEventListener("resize", handleResize); // Añadimos el event listener para detectar cambios de tamaño
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize); // Removemos el event listener al desmontar el componente
-  //   };
-  // }, []);
 
   return (
     <div className={`DIV_APP grid justify-center bg-ligthGreen`}>
@@ -57,7 +36,6 @@ function App() {
         <Route path="/premium" element={<Payment />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {/* {pathname !== "/" && <SideBar />} */}
     </div>
   );
 }
