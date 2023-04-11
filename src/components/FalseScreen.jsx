@@ -4,7 +4,7 @@ const FalseScreen = ({ isView })=>{
         <>
             {
                 isView ? (
-                    <div className="absolute top-0 left-0 w-full h-full z-40 bg-slate-400 bg-opacity-90"></div>
+                    <div className="DIV_FALSE_SCREEN absolute top-0 left-0 w-full h-full z-40 bg-slate-400 bg-opacity-90"></div>
                 ) : ""
             }
         </>

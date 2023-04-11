@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const Landing = () => {
   return (
-    <div className="DIV_LANDING grid p-3 bg-slate-400">
+    <div className="DIV_LANDING grid p-3 bg-slate-400 lg:col-span-2 md:my-6">
       {/* Hero Section */}
       <div className="w-full bg-center bg-cover">
         <div className="flex items-center justify-center h-full text-center">
