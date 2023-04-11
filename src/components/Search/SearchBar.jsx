@@ -46,7 +46,7 @@ const SearchBar = () => {
 
   return (
     <>
-    <div className="flex relative w-full border-b-2 border-teal-500 py-2 text-white my-4">
+    <div className="DIV_SEARCHBAR flex relative w-full border-b-2 border-teal-500 py-2 text-white my-4">
       <input
         className="bg-transparent w-full border-none mr-3 px-2 leading-tight font-medium focus:outline-none placeholder:text-white placeholder:opacity-60"
         type="text"

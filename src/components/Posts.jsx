@@ -23,13 +23,11 @@ const Posts = ({toggleDetails})=>{
   },[filteredPosts])
 
     return(
-      <div className="flex flex-wrap justify-center p-4 w-full h-screen">
-        <div className="overflow-hidden min-h-0 h-5/6 w-full">
-          <div className="flex flex-col gap-2 overflow-y-auto h-full scrollbar-thin scrollbar-track-transparent">
-            {posts?.map((post, i) => (
-              <Post post={post} key={i} toggleDetails={toggleDetails} />
-            ))}
-          </div>
+      <div className="DIV_POSTS flex p-4 h-full">
+        <div className="flex flex-col gap-3 overflow-y-auto scrollbar-thin scrollbar-track-transparent">
+          {posts?.map((post, i) => (
+            <Post post={post} key={i} toggleDetails={toggleDetails} />
+          ))}
         </div>
       </div>
     )

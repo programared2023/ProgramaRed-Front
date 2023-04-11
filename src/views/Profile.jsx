@@ -75,9 +75,9 @@ const Profile = ({ toggleDetails }) => {
   };
 
   return (
-    <div className="flex flex-col w-full relative">
-      <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 w-full max-w-5xl mx-auto px-4 py-8 items-center justify-evenly">
-        <div className=" flex-col w-1/5 flex justify-center">
+    <div className="DIV_PROFILE flex flex-col w-full relative">
+      <div className="grid gap-3 justify-items-center justify-center w-full max-w-5xl mx-auto px-4 py-8 items-center md:grid-rows-1 md:grid-cols-2">
+        <div className="grid w-[90%] justify-center justify-items-center">
           {id !== localStorage.getItem("id") ? (
             !user.profileImage ? (
               <>
@@ -92,7 +92,7 @@ const Profile = ({ toggleDetails }) => {
                 <img
                   src={user.profileImage}
                   alt="ProfilePhoto"
-                  className="rounded-full w-full object-cover object-center border-2 border-green-500"
+                  className="rounded-full h-full object-cover object-center border-2 border-green-500"
                 />
               </>
             )
@@ -163,11 +163,11 @@ const Profile = ({ toggleDetails }) => {
 
         <div className="md:w-2/5">
           <div className="flex flex-col space-y-4">
-            <h1 className="text-3xl font-bold ">{user.username}</h1>
-            <p className="text-lg text-green-700 font-medium">{`e-mail: ${user.email}`}</p>
+            <h1 className="text-center text-3xl font-bold ">{user.username}</h1>
+            <p className="text-center text-lg text-green-700 font-medium">{`e-mail: ${user.email}`}</p>
             {!user.description && id === localStorage.getItem("id") ? (
               <button
-                className="p-2 m-4 self-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-130 "
+                className="p-2 m-4 self-center font-medium rounded-md bg-mediumGreen transition-all duration-500 hover:bg-darkGreen hover:scale-130 "
                 onClick={() => {
                   setFormDescription(true);
                 }}
@@ -230,20 +230,20 @@ const Profile = ({ toggleDetails }) => {
       {id === localStorage.getItem("id") ? (
         <NavLink
           to="/createPost"
-          className="p-2 m-4 self-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-130"
+          className="p-2 mx-auto sticky top-3 text-center font-medium rounded-md bg-mediumGreen transition-all duration-500 hover:bg-darkGreen hover:scale-130"
         >
           Sube un posteo
         </NavLink>
       ) : (
         ""
       )}
-      <div className="mt-8 p-9 overflow-hidden h-full">
+      <div className="DIV_POST_PROFILE p-9 overflow-hidden h-full">
         {user ? (
           <>
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-2xl font-bold">
               {user.Posts?.length ? "Publicaciones" : "No hay publicaciones"}
             </h2>
-            <div className="space-y-4 h-full py-5 overflow-y-auto scrollbar-thin scrollbar-track-transparent">
+            <div className="flex flex-col gap-2 py-5 overflow-y-auto scrollbar-thin scrollbar-track-transparent">
               {user.Posts?.map((post, i) => {
                 //al post le paso username porque en este caso "post" no posee datos de username
                 return (

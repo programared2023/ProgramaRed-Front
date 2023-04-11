@@ -67,7 +67,7 @@ const Login = () => {
   }
 
   return (
-    <div className=" block mt-14 w-full">
+    <div className="DIV_LOGIN block w-full my-4">
       <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
         <div className="pb-4" >
           <h2 className="text-xl font-bold text-green-700 text-center pb-2">

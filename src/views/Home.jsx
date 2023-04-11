@@ -50,24 +50,20 @@ const Home = ({ toggleDetails }) => {
 
   return (
     <>
-      <div className="flex justify-start flex-col items-center h-full overflow-hidden w-full relative">
+      <div className="DIV_HOME flex justify-start flex-col items-center h-full overflow-hidden w-full relative">
         <SideBar />
         <NavLink
           to="/createPost"
-          className="p-2 m-4 font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-130"
+          className="p-2 my-2 font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-130"
         >
           Sube un posteo
         </NavLink>
 
         {message && (
           <h3 className='text-xl text-green-700'>{message}</h3>
-        )}
+        )} 
 
-        <div className="h-full w-full overflow-hidden py-3">
-          <div className=" h-screen overflow-y-auto scrollbar-none">
-            <Posts toggleDetails={toggleDetails} />
-          </div>
-        </div>
+        <Posts toggleDetails={toggleDetails} /> 
       </div>
     </>
   );
