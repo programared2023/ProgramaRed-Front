@@ -23,8 +23,8 @@ const Posts = ({toggleDetails})=>{
   },[filteredPosts])
 
     return(
-      <div className="DIV_POSTS flex p-4 h-full">
-        <div className="flex flex-col gap-3 overflow-y-auto scrollbar-thin scrollbar-track-transparent">
+      <div className="DIV_POSTS flex p-4 h-[80%] w-full justify-center">
+        <div className="flex flex-col w-[90%] gap-3 overflow-y-auto scrollbar-thin scrollbar-track-transparent">
           {posts?.map((post, i) => (
             <Post post={post} key={i} toggleDetails={toggleDetails} />
           ))}
