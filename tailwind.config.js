@@ -16,7 +16,8 @@ module.exports = {
         "appear-top": "appear 1s" 
       },
       gridTemplateColumns:{
-        desktop: "250px 1fr"
+        desktop_lg: "250px 1fr",
+        desktop_xl: "350px 1fr",
       },
       boxShadow: {
         shadowBlack: '1px 1px 7px 0 black',

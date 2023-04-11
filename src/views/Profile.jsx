@@ -94,7 +94,7 @@ const Profile = ({ toggleDetails }) => {
       {user.username ? (
         <div className="DIV_PROFILE flex flex-col w-full relative">
           <div className="grid gap-3 justify-items-center justify-center w-full max-w-5xl mx-auto px-4 py-8 items-center md:grid-rows-1 md:grid-cols-2">
-            <div className="grid w-[90%] justify-center justify-items-center">
+            <div className="grid w-[90%] lg:w-[60%] justify-center justify-items-center relative mb-5 md:m-0">
               {id !== localStorage.getItem("id") ? (
                 !user.profileImage ? (
                   <>
@@ -121,8 +121,7 @@ const Profile = ({ toggleDetails }) => {
                     alt="ProfilePhoto"
                     className="rounded-full w-full object-cover object-center border-2 border-green-500"
                   />
-                  <div className="p-2 m-4 self-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-110">
-                    <label>
+                  <div className="p-2 m-4 absolute bottom-[-40px] self-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-110">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -150,7 +149,6 @@ const Profile = ({ toggleDetails }) => {
                         name="profile"
                         id="profile"
                       />
-                    </label>
                   </div>
                   {profileImg ? (
                     <div className="flex flex-col">
@@ -179,9 +177,9 @@ const Profile = ({ toggleDetails }) => {
               )}
             </div>
 
-            <div className="md:w-2/5">
-              <div className="flex flex-col space-y-4">
-                <h1 className="text-center text-3xl font-bold ">
+            <div className="w-full">
+              <div className="grid space-y-4 justify-items-center">
+                <h1 className="text-center text-3xl font-bold">
                   {user.username}
                 </h1>
                 <p className="text-center text-lg text-green-700 font-medium">
@@ -197,15 +195,15 @@ const Profile = ({ toggleDetails }) => {
                     Agrega una descripción
                   </button>
                 ) : id !== localStorage.getItem("id") ? (
-                  <div className="flex items-center">
-                    <p>{user.description}</p>
+                  <div className="flex items-center w-full h-full p-3 text-lg border font-medium border-blue-700">
+                    <span>{user.description}</span>
                   </div>
                 ) : (
-                  <div className="flex items-center">
-                    <p>{user.description}</p>
+                  <div className="flex items-center relative w-full h-full p-3 text-lg border font-medium border-blue-700">
+                    <span>{user.description}</span>
 
                     <button
-                      className="p-2 m-4 self-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-110 "
+                      className="absolute top-[-40px] right-0 p-2 font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-110 "
                       onClick={() => {
                         setFormDescription(true);
                       }}

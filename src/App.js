@@ -21,7 +21,7 @@ function App() {
   const toggleDetails = () => setShowDetails(!showDetails);
 
   return (
-    <div className={`DIV_APP grid justify-center bg-veryLigthGreen lg:grid-cols-desktop ${pathname === "/" ? "lg:grid-cols-1 justify-items-center" : "" } ${pathname === "/home" ? "h-screen" : ""}${pathname === "/premium" ? "grid-rows-4 lg:grid-rows-1" : ""}${pathname === "/about" ? "grid-rows-1 lg:grid-cols-1" : ""}`}>
+    <div className={`DIV_APP grid justify-center bg-veryLigthGreen lg:grid-cols-desktop_lg xl:grid-cols-desktop_xl ${pathname === "/" ? "lg:grid-cols-1 justify-items-center" : "" } ${pathname === "/home" ? "h-screen" : ""}${pathname === "/premium" ? "grid-rows-4 lg:grid-rows-1" : ""}${pathname === "/about" ? "grid-rows-1 lg:grid-cols-1" : ""}`}>
      {/*  {pathname !== "/" && pathname !== "/signUp" && pathname !== "/about" && <NavBar />} */}
       {(pathname.startsWith("/profile") || pathname === "/home" || pathname === "/createPost" || pathname === "/favorites" || pathname === "/singUp" || pathname === "/premium") && <NavBar />}
       {showDetails && <FalseScreen isView={showDetails} />}
