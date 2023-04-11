@@ -90,6 +90,7 @@ const Profile = ({ toggleDetails }) => {
             ) : (
               <>
                 <img
+                  referrerPolicy="no-referrer"
                   src={user.profileImage}
                   alt="ProfilePhoto"
                   className="rounded-full w-full object-cover object-center border-2 border-green-500"
@@ -164,7 +165,7 @@ const Profile = ({ toggleDetails }) => {
         <div className="md:w-2/5">
           <div className="flex flex-col space-y-4">
             <h1 className="text-3xl font-bold ">{user.username}</h1>
-            <p className="text-lg text-green-700 font-medium">{`e-mail: ${user.email}`}</p>
+            <p className="text-lg text-green-700 font-medium">{user.email ? `e-mail: ${user.email}` : `Ingresa tu correo`}</p>
             {!user.description && id === localStorage.getItem("id") ? (
               <button
                 className="p-2 m-4 self-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-130 "

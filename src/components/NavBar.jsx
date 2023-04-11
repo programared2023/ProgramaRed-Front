@@ -25,7 +25,7 @@ const NavBar = () => {
               authorization: `Bearer ${token}`,
             },
           });
-          let { data } = await axios(`/user/email/${user.email}`);
+          let { data } = await axios(`/user/username/${user.nickname}`);
           setId(data[0].id);
 
           localStorage.setItem("username", JSON.stringify(data[0].username));
