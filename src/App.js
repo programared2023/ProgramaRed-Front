@@ -22,10 +22,12 @@ function App() {
 
   return (
     <div className={`DIV_APP grid justify-center bg-veryLigthGreen lg:grid-cols-desktop ${pathname === "/" ? "lg:grid-cols-1 justify-items-center" : "" } ${pathname === "/home" ? "h-screen" : ""}${pathname === "/premium" ? "grid-rows-4 lg:grid-rows-1" : ""}${pathname === "/about" ? "grid-rows-1 lg:grid-cols-1" : ""}`}>
-      {pathname !== "/" && pathname !== "/signUp" && pathname !== "/about" && <NavBar />}
+     {/*  {pathname !== "/" && pathname !== "/signUp" && pathname !== "/about" && <NavBar />} */}
+      {(pathname.startsWith("/profile") || pathname === "/home" || pathname === "/createPost" || pathname === "/favorites" || pathname === "/singUp" || pathname === "/premium") && <NavBar />}
       {showDetails && <FalseScreen isView={showDetails} />}
       {showDetails && <Detail toggleDetails={toggleDetails} />}
       <Routes>
+        <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Landing />} />
         <Route path="/about" element={<About />} />
         <Route path="/home" element={<Home toggleDetails={toggleDetails} />}/>
@@ -34,7 +36,6 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/premium" element={<Payment />} />
-        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
