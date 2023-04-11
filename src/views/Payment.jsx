@@ -51,7 +51,7 @@ const Payment = () => {
     console.error("Error:", error);
   }
   return (
-    <div className="h-full w-full self-center pt-10">
+    <div className="DIV_PREMIUM h-full w-full pt-10 row-span-3">
       <div id="wallet_container" className="w-3/4 bg-ligthGreen flex flex-col items-center gap-2 my-2 mx-auto p-5 rounded-40px" >
         <h2>Obtiene tu membresía Premium</h2>
         <p>Hazte Premium para obtener beneficios adicionales en tu cuenta</p>
@@ -60,7 +60,7 @@ const Payment = () => {
         <span>Compartir videos y tutoriales</span>
 
         <Wallet
-          customization={{ visual: { buttonBackground: 'black', borderRadius: '8rem' } }}
+          customization={{ visual: { buttonBackground: "default", borderRadius: '8rem' } }}
           onReady={onReady}
           onSubmit={onSubmit}
           onError={onError}

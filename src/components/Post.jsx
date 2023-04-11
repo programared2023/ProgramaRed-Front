@@ -46,7 +46,7 @@ const Post = ({ post, username, toggleDetails }) => {
   };
 
   return (
-    <div className="DIV_POST px-4 py-1 mt-2">
+    <div className="DIV_POST px-4 py-1">
       <div className=" bg-greenGray rounded-lg p-4 shadow-shadowBlack">
         <div className="flex items-center mb-3">
           <div className="bg-green-300 w-12 h-12 rounded-full mr-3">

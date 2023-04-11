@@ -15,6 +15,9 @@ module.exports = {
         'spin-slow': 'spin 25s linear infinite',
         "appear-top": "appear 1s" 
       },
+      gridTemplateColumns:{
+        desktop: "250px 1fr"
+      },
       boxShadow: {
         shadowBlack: '1px 1px 7px 0 black',
         shadowBoxOutline: "0 0 6px 1px black",

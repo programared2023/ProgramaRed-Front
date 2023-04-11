@@ -76,8 +76,8 @@ const Profile = ({ toggleDetails }) => {
 
   return (
     <div className="DIV_PROFILE flex flex-col w-full relative">
-      <div className="flex gap-4 md:space-x-4 space-y-4 md:space-y-0 w-full max-w-5xl mx-auto px-4 py-8 items-center justify-evenly">
-        <div className=" flex-col w-1/2 flex justify-center">
+      <div className="grid gap-3 justify-items-center justify-center w-full max-w-5xl mx-auto px-4 py-8 items-center md:grid-rows-1 md:grid-cols-2">
+        <div className="grid w-[90%] justify-center justify-items-center">
           {id !== localStorage.getItem("id") ? (
             !user.profileImage ? (
               <>
@@ -92,7 +92,7 @@ const Profile = ({ toggleDetails }) => {
                 <img
                   src={user.profileImage}
                   alt="ProfilePhoto"
-                  className="rounded-full w-full object-cover object-center border-2 border-green-500"
+                  className="rounded-full h-full object-cover object-center border-2 border-green-500"
                 />
               </>
             )
@@ -230,7 +230,7 @@ const Profile = ({ toggleDetails }) => {
       {id === localStorage.getItem("id") ? (
         <NavLink
           to="/createPost"
-          className="p-2 m-4 sticky top-3 text-center font-medium rounded-md bg-mediumGreen transition-all duration-500 hover:bg-darkGreen hover:scale-130"
+          className="p-2 mx-auto sticky top-3 text-center font-medium rounded-md bg-mediumGreen transition-all duration-500 hover:bg-darkGreen hover:scale-130"
         >
           Sube un posteo
         </NavLink>
@@ -243,7 +243,7 @@ const Profile = ({ toggleDetails }) => {
             <h2 className="text-2xl font-bold">
               {user.Posts?.length ? "Publicaciones" : "No hay publicaciones"}
             </h2>
-            <div className="py-5 overflow-y-auto scrollbar-thin scrollbar-track-transparent">
+            <div className="flex flex-col gap-2 py-5 overflow-y-auto scrollbar-thin scrollbar-track-transparent">
               {user.Posts?.map((post, i) => {
                 //al post le paso username porque en este caso "post" no posee datos de username
                 return (

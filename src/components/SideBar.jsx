@@ -4,13 +4,10 @@ import SearchBar from "./Search/SearchBar";
 const SideBar = ()=>{
 
     return(
-        <div className="relative top-0 bg-mediumGreen flex flex-col gap-5 px-3 shadow-shadowBlack w-5/6 mt-3 items-center">
-            <div className="relative text-lg bg-transparent text-gray-800 pt-5 w-2/5">
+        <div className="DIV_SIDEBAR mt-2 flex justify-center bg-mediumGreen px-3 shadow-shadowBlack w-5/6">
+            <div className="text-lg">
                 <SearchBar/>
             </div>
-            {/* <div className="px-4 py-2 border text-center border-cyan-500 bg-mediumGreen text-sm text-white rounded-lg hover:bg-darkGreen cursor-pointer">
-                <p>Tus Favoritos</p>    
-            </div>  */}
         </div>
     )
 }
