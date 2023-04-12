@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { getPostById, getPostByTag } from "../redux/actions";
 import person from "../images/person.png";
 import Fav from "./Fav";
+import Trash from "./Trash";
 
 const Post = ({ post, username, toggleDetails }) => {
   //post recibe username porque en algunos casos el "post" no posee username
@@ -16,11 +17,6 @@ const Post = ({ post, username, toggleDetails }) => {
   useEffect(() => {
     setLocalPost(post);
   }, [post]);
-
- 
-
-
-  
 
   return (
     <div className="DIV_POST px-4 py-1">
@@ -50,6 +46,7 @@ const Post = ({ post, username, toggleDetails }) => {
             <p className="text-black text-xs font-medium">{`Creado el ${post.publishDate}`}</p>
           </div>
           <Fav userId={localPost.User?.id} postId={localPost.id} localUser={userId}/>
+          {Number(localPost.User?.id) === Number(userId) && <Trash postId={localPost.id}/>}
         </div>
 
         <button
