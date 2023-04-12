@@ -3,7 +3,6 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getPostById, getPostByTag } from "../redux/actions";
 import person from "../images/person.png";
-import axios from "axios";
 import Fav from "./Fav";
 
 const Post = ({ post, username, toggleDetails }) => {
@@ -18,33 +17,10 @@ const Post = ({ post, username, toggleDetails }) => {
     setLocalPost(post);
   }, [post]);
 
-  const getFavorites = async () => {
-    let favorites = await axios.get(`/favorites/${userId}`);
-    return favorites;
-  };
+ 
 
-  // const [favorite, setFavorite] = useState([]); //guardar post seleccionado - quiza hacer dispacht a redux
-  const [clicked, setClicked] = useState(false);
 
-  const favorite = {
-    idPost: localPost.id,
-    idUser: userId,
-  };
-
-  const favoriteHandler = async () => {
-    if (!clicked) {
-      setClicked(true);
-      await axios.post(`/favorites`, favorite);
-      getFavorites().then((res) => console.log("favorites: ", res.data));
-    } else {
-      setClicked(false);
-    }
-  };
-
-  const deleteFavorite = async (e) => {
-    //agregar alerta de borrado Lucas xD
-    await axios.delete(`/favorite`, favorite);
-  };
+  
 
   return (
     <div className="px-4 py-1">
@@ -73,7 +49,7 @@ const Post = ({ post, username, toggleDetails }) => {
             </NavLink>
             <p className="text-black text-xs font-medium">{`Creado el ${post.publishDate}`}</p>
           </div>
-          <Fav userId={userId} postId={localPost.id} pathname={pathname}/>
+          <Fav userId={localPost.User?.id} postId={localPost.id} localUser={userId}/>
         </div>
 
         <button
