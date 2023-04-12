@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const Landing = () => {
   return (
-    <div className="DIV_LANDING grid p-3 bg-slate-400 lg:col-span-2 md:my-6">
+    <div className="DIV_LANDING grid p-3 bg-slate-400 lg:col-span-2 md:my-6 transition-all">
       {/* Hero Section */}
       <div className="w-full bg-center bg-cover">
         <div className="flex items-center justify-center h-full text-center">
@@ -33,7 +33,7 @@ const Landing = () => {
               className="bg-ligthGreen rounded-full w-24 h-24 p-2 animate-spin-slow"
             />
             <NavLink to="/about" >
-              <h2 className="text-lg font-bold px-5 py-3 text-gray-800 mt-4 hover:text-white hover:bg-slate-900 rounded-md p-1 ">¿Qué es ProgramaRed?</h2>
+              <h2 className="text-lg font-bold px-5 py-3 text-gray-800 mt-4 hover:text-white hover:bg-slate-900 rounded-md p-1 transition-all">¿Qué es ProgramaRed?</h2>
             </NavLink>
           </div>
         </div>
