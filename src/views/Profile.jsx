@@ -18,6 +18,7 @@ const Profile = ({ toggleDetails }) => {
   const [formDescription, setFormDescription] = useState(false);
   const [description, setDescription] = useState("");
   const [profileImg, setProfileImg] = useState();
+  const [formLinks, setFormLinks] = useState(false);
   const [links, setLinks] = useState([]);
 
   let userId = localStorage.getItem("id");
@@ -25,23 +26,48 @@ const Profile = ({ toggleDetails }) => {
     if (id === localStorage.getItem("id")) dispatch(getUserById(userId));
     else dispatch(getUserById(id));
 
-    if (user.description !== "") updateLinks();
-
     return () => {
       dispatch(clearDetail());
     };
-  }, [dispatch, user.description, description, profileImg, id, userId]);
+  }, [dispatch, user.description, description, profileImg, id, userId, links]);
 
-  const updateLinks = () => {
-    const regex = /((https?|ftp):\/\/[^\s/$.?#].[^\s]*)/gi;
-    const encontrados = user.description?.match(regex) || [];
-    console.log("ENCONTRADO: ", encontrados);
-    setLinks(encontrados);
+  const updateLinks = async () => {
+    if (links.length === 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Escribe un link",
+        showConfirmButton: true,
+      });
+    } else {
+      const { data } = await axios.put(`/user/${userId}`, {
+        socialLinks: links,
+      });
+
+      Swal.fire({
+        icon: "success",
+        title: "Link actualizado",
+        text: data,
+        showConfirmButton: true,
+      }).then((result) => {
+        if (result.isConfirmed) window.location.reload();
+      });
+    }
+  };
+  const deleteLink = async () => {
+    const { data } = await axios.put(`/user/${userId}`, {
+      socialLinks: [],
+    });
+    Swal.fire({
+      icon: "success",
+      title: "Link eliminado",
+      text: data,
+      showConfirmButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) window.location.reload();
+    });
   };
 
-  console.log("user: ", user);
-
-  console.log("desc: ", description);
+  // console.log("user: ", user);
 
   console.log("LINKS: ", links);
 
@@ -187,7 +213,9 @@ const Profile = ({ toggleDetails }) => {
                 <p className="text-center text-lg text-green-700 font-medium">
                   {user.email ? `e-mail: ${user.email}` : `Ingresa tu correo`}
                 </p>
-                {!user.description && !formDescription && id === localStorage.getItem("id") ? (
+                {!user.description &&
+                !formDescription &&
+                id === localStorage.getItem("id") ? (
                   <button
                     className="p-2 m-4 self-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-130 "
                     onClick={() => {
@@ -227,6 +255,7 @@ const Profile = ({ toggleDetails }) => {
                     </button>
                   </div>
                 )}
+
                 {formDescription && (
                   <form onSubmit={updateDescription}>
                     <div className=" flex flex-col">
@@ -247,8 +276,134 @@ const Profile = ({ toggleDetails }) => {
                   </form>
                 )}
               </div>
+
+              {/* LINKS */}
+
+              <div className=" mt-7">
+                {id !== localStorage.getItem("id") ? ( // es otro perfil
+                  user.socialLinks?.length ? ( // y tiene links
+                    <>
+                      {user.socialLinks?.map((link, i) => {
+                        return (
+                          <div>
+                            <a key={i} target="_blank" href={link}>
+                              {link}
+                            </a>
+                          </div>
+                        );
+                      })}
+                    </>
+                  ) : (
+                    ""
+                  )
+                ) : user.socialLinks?.length ? ( // tiene el mismo id y tiene links
+                  <>
+                    <button onClick={() => setFormLinks(true)}>Cambiar</button>
+                    {formLinks && (
+                      <form>
+                        <div>
+                          <label>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="w-6 h-6"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                              />
+                            </svg>
+                          </label>
+                          <input
+                            onChange={(e) => {
+                              const url = [];
+                              url.push(e.target.value);
+                              setLinks([url]);
+                            }}
+                            value={links}
+                            type="url"
+                            name="url"
+                            id="url"
+                          />
+                        </div>
+                        <span
+                          className=" cursor-pointer"
+                          onClick={() => updateLinks()}
+                        >
+                          Subir link
+                        </span>
+                      </form>
+                    )}
+                    {user.socialLinks?.map((link, i) => {
+                      return (
+                        <div key={i}>
+                          <span
+                            className=" cursor-pointer"
+                            onClick={() => deleteLink()}
+                          >
+                            X
+                          </span>
+                          <a
+                            href={link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {link}
+                          </a>
+                        </div>
+                      );
+                    })}
+                  </>
+                ) : (
+                  // mismo id pero no tiene links
+                  <>
+                    <button type="button" onClick={() => setFormLinks(true)}>
+                      Agrega una url
+                    </button>
+                    {formLinks && (
+                      <form onSubmit={updateLinks}>
+                        <div>
+                          <label>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="w-6 h-6"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                              />
+                            </svg>
+                          </label>
+                          <input
+                            onChange={(e) => {
+                              const urls = [];
+                              urls.push(e.target.value);
+                              setLinks([urls]);
+                            }}
+                            value={links}
+                            type="url"
+                            name="url"
+                            id="url"
+                          />
+                        </div>
+                        <button type="submit">Subir url</button>
+                      </form>
+                    )}
+                  </>
+                )}
+              </div>
             </div>
           </div>
+
           {id === localStorage.getItem("id") ? (
             <NavLink
               to="/createPost"
