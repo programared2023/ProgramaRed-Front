@@ -1,6 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 
 const MP_PUBLIC_KEY = "APP_USR-2e62776c-c02a-41fc-8124-39dda16ba58b";
@@ -12,39 +11,6 @@ const Payment = () => {
   // const [preferenceId, setPreferenceId] = useState("");
   const [cargando, setCargando] = useState(true)
   const [procesando, setProcesando] = useState(false)
-  const [searchParams, _] = useSearchParams()
-  // const [initialization, setInitialization] = useState({ preferenceId: '' })
-  const [message, setMessage] = useState("")
-
-  useEffect(() => {
-    if (searchParams.get('status')
-      && searchParams.get('payment_id')
-      && localStorage.getItem('id')) {
-      completePayment()
-    }
-  }, [])
-
-  const completePayment = async () => {
-    console.log(
-      {
-        paymentId: searchParams.get('payment_id'),
-        productTitle: "Subscripcion Premium",
-        price: 500 * 1.30,
-        userId: Number(localStorage.getItem('id')),
-        status: searchParams.get('status')
-      }
-    );
-    const res = await axios.post('/payments', {
-      paymentId: searchParams.get('payment_id'),
-      productTitle: "Subscripcion Premium",
-      price: 500 * 1.30,
-      userId: Number(localStorage.getItem('id')),
-      status: searchParams.get('status')
-    })
-    if (res.data) {
-      setMessage(res.data)
-    }
-  }
 
   const onSubmit = async () => {
     // callback llamado al hacer clic en Wallet Brick
@@ -85,7 +51,7 @@ const Payment = () => {
     console.error("Error:", error);
   }
   return (
-    <div className="h-full w-full self-center pt-10">
+    <div className="DIV_PREMIUM h-full w-full pt-10 row-span-3">
       <div id="wallet_container" className="w-3/4 bg-ligthGreen flex flex-col items-center gap-2 my-2 mx-auto p-5 rounded-40px" >
         <h2>Obtiene tu membresía Premium</h2>
         <p>Hazte Premium para obtener beneficios adicionales en tu cuenta</p>
@@ -94,15 +60,11 @@ const Payment = () => {
         <span>Compartir videos y tutoriales</span>
 
         <Wallet
-          customization={{ visual: { buttonBackground: 'black', borderRadius: '8rem' } }}
+          customization={{ visual: { buttonBackground: "default", borderRadius: '8rem' } }}
           onReady={onReady}
           onSubmit={onSubmit}
           onError={onError}
         />
-
-        {message && (
-          <h3 className='text-xl text-green-700'>{message}</h3>
-        )}
 
         {
           cargando && <span className="text-sm text-orange-700 font-bold">Cargando...</span>

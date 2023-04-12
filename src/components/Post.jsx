@@ -23,9 +23,9 @@ const Post = ({ post, username, toggleDetails }) => {
   
 
   return (
-    <div className="px-4 py-1">
-      <div className=" bg-greenGray rounded-lg p-5 mt-4 shadow-shadowBlack">
-        <div className="flex items-center mb-2">
+    <div className="DIV_POST px-4 py-1">
+      <div className=" bg-greenGray rounded-lg p-4 shadow-shadowBlack">
+        <div className="flex items-center mb-3">
           <div className="bg-green-300 w-12 h-12 rounded-full mr-3">
             <img
               src={
@@ -53,7 +53,7 @@ const Post = ({ post, username, toggleDetails }) => {
         </div>
 
         <button
-          className="text-green-700 text-base line-clamp-4 text-left"
+          className="text-green-700 text-base mb-3 line-clamp-4 text-left"
           onClick={() => {
             toggleDetails();
             dispatch(getPostById(localPost.id));
@@ -65,7 +65,7 @@ const Post = ({ post, username, toggleDetails }) => {
           <p>{localPost.description}</p>
         </button>
 
-        <div className="flex gap-2 mt-3">
+        <div className="flex flex-wrap gap-x-2">
           {localPost.Tags?.map((tag, i) => {
             if (pathname !== "/home") {
               return (

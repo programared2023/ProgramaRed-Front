@@ -25,7 +25,7 @@ const NavBar = () => {
               authorization: `Bearer ${token}`,
             },
           });
-          let { data } = await axios(`/user/email/${user.email}`);
+          let { data } = await axios(`/user/username/${user.nickname}`);
           setId(data[0].id);
 
           localStorage.setItem("username", JSON.stringify(data[0].username));
@@ -69,7 +69,7 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="flex items-center justify-between border-b border-gray-400 lg:flex-col lg:border-0">
+      <div className={`DIV_NAVBAR sticky top-0 z-40 bg-veryLigthGreen flex items-center justify-between border-b border-gray-400 lg:border-0 lg:hidden ${pathname === "/premium" ? "row-span-1 h-[80px]" : "" }`}>
         <div className="inline-flex h-24 px-5 shrink-0 lg:hidden">
           <img src={logo} alt="logo" />
         </div>
@@ -255,7 +255,7 @@ const NavBar = () => {
             display: none;
           }
           .showMenuNav {
-            display: block;
+            display: block;  
             position: absolute;
             width: 100%;
             height: 100vh;
@@ -270,7 +270,7 @@ const NavBar = () => {
           }
         `}</style>
       </div>
-      <section className="DESKTOP-MENU hidden space-x-8 lg:inline-flex">
+      <section className="DESKTOP-MENU hidden space-x-8 lg:grid sticky top-0 h-screen">
         <div className="z-40 bg-mediumGreen shadow-shadowRigth">
           <div className="flex flex-col z-40">
             <div className="absolute min-w-full lg:relative lg:min-w-20%">

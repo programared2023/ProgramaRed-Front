@@ -153,8 +153,8 @@ const CreatePost = () => {
   };
 
   return (
-    <div className=" block my-8 w-full">
-      <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md w-full">
+    <div className="DIV_CREATEPOST block my-8 px-4 w-full">
+      <div className="max-w-[600px] mx-auto p-6 bg-white rounded-md shadow-md w-full">
         <h2 className="text-xl font-bold text-green-700 mb-6">
           Estás creando un post
         </h2>
@@ -342,13 +342,13 @@ const CreatePost = () => {
             </div>
           </div>
 
-          <div className="flex flex-wrap py-3">
+          <div className="flex flex-wrap justify-center y-3 gap-2">
             {!form.files.length
               ? ""
               : form.files.map((file, i) => {
                   return (
                     <div
-                      className="flex flex-col justify-center items-center h-20 mx-3 gap-1"
+                      className="flex flex-col justify-center items-center h-[50px]"
                       key={i}
                     >
                       <span

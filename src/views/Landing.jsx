@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const Landing = () => {
   return (
-    <div className="flex flex-col items-center bg-slate-500 h-full w-full">
+    <div className="DIV_LANDING grid p-3 bg-slate-400 lg:col-span-2 md:my-6">
       {/* Hero Section */}
       <div className="w-full bg-center bg-cover">
         <div className="flex items-center justify-center h-full text-center">
@@ -24,8 +24,8 @@ const Landing = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-3xl w-full my-12 px-4">
-        <div className="flex flex-col md:flex-row items-center justify-center mb-12">
+      <div className="max-w-3xl w-full px-4">
+        <div className="flex flex-col md:flex-row items-center justify-center pt-4">
           <div className="flex flex-col items-center mb-4 md:mb-0">
             <img
               src={logo}
@@ -39,7 +39,7 @@ const Landing = () => {
         </div>
 
         {/* Login Section */}
-        <div className="max-w-sm w-full mx-auto">
+        <div className="DIV_LOADING-LOGIN max-w-sm w-full mx-auto">
           <Login />
         </div>
       </div>

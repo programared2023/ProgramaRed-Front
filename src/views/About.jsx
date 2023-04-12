@@ -9,8 +9,39 @@ import thomas from "../images/Thomas.jpg";
 import { NavLink } from "react-router-dom";
 
 const About = () => {
+  const theDevelopers = [
+    {
+      name: "Ailin Galante Rosso",
+      image: ailing,
+    },
+    {
+      name: "Franco David Segovia",
+      image: pumba,
+    },
+    {
+      name: "Jeffer Camilo Romero Perez",
+      image: camilo,
+    },
+    {
+      name: "Lucas Palma",
+      image: lucas,
+    },
+    {
+      name: "Nicolas Eduardo Juncos",
+      image: niko,
+    },
+    {
+      name: "Sergio Rodrigo Suárez",
+      image: sergio,
+    },
+    {
+      name: "Thomas Enrique Naquiche Leon",
+      image: thomas,
+    },
+  ];
+
   return (
-    <div className="flex flex-col items-center bg-slate-500 h-full w-full ">
+    <div className="flex flex-col items-center bg-slate-500 h-full w-full">
       <div className="flex mb-4">
         <NavLink to="/">
           <h2 className="text-lg font-bold py-2 px-3 bg-mediumGreen text-gray-800 mt-4 hover:text-white hover:bg-slate-900 rounded-md">
@@ -49,12 +80,15 @@ const About = () => {
             </p>
           </div>
         </div>
-        <div>
-          <div className=" gap-16 flex flex-col items-center font-semibold text-white shrink-0 ">
-            <div className="flex gap-2 ">
-              <div className=" w-44 flex flex-col items-center justify-center">
-                <img className=" rounded-full w-20 " src={ailing} alt="" />
-                <p className=" text-center">Ailin Galante Rosso</p>
+        <div className="flex flex-wrap justify-center font-semibold text-white border-t border-green-500">
+          {theDevelopers.map((dev, i) => {
+            return (
+              <div
+                key={i}
+                className=" py-5 w-44 flex flex-col items-center justify-center"
+              >
+                <img className=" rounded-full w-20 " src={dev.image} alt="" />
+                <p className=" text-center">{dev.name}</p>
                 <a
                   rel="noreferrer noopener"
                   className="hover:text-white hover:bg-slate-900 rounded-md p-1"
@@ -64,86 +98,12 @@ const About = () => {
                   GitHub
                 </a>
               </div>
-              <div className=" w-44 flex flex-col items-center justify-center">
-                <img className=" rounded-full w-20 " src={pumba} alt="" />
-                <p className=" text-center">Franco David Segovia</p>
-                <a
-                  rel="noreferrer noopener"
-                  className="hover:text-white hover:bg-slate-900 rounded-md p-1"
-                  target="_blank"
-                  href="https://github.com/davidfranncoo"
-                >
-                  GitHub
-                </a>
-              </div>
-              <div className=" w-44 flex flex-col items-center justify-center">
-                <img className=" rounded-full w-20 " src={camilo} alt="" />
-                <p className=" text-center">Jeffer Camilo Romero Perez</p>
-                <a
-                  rel="noreferrer noopener"
-                  className="hover:text-white hover:bg-slate-900 rounded-md p-1"
-                  target="_blank"
-                  href="http://github.com/Camilop4"
-                >
-                  GitHub
-                </a>
-              </div>
-            </div>
-            <div className="flex gap-2">
-              <div className=" w-44 flex flex-col items-center justify-center">
-                <img className=" rounded-full w-20 " src={lucas} alt="" />
-                <p className=" text-center">Lucas Palma</p>
-                <a
-                  rel="noreferrer noopener"
-                  className="hover:text-white hover:bg-slate-900 rounded-md p-1"
-                  target="_blank"
-                  href="http://github.com/Lukkas98"
-                >
-                  GitHub
-                </a>
-              </div>
-              <div className=" w-44 flex flex-col items-center justify-center">
-                <img className=" rounded-full w-20 " src={niko} alt="" />
-                <p className=" text-center">Nicolas Eduardo Juncos</p>
-                <a
-                  rel="noreferrer noopener"
-                  className="hover:text-white hover:bg-slate-900 rounded-md p-1"
-                  target="_blank"
-                  href="https://github.com/juncos22"
-                >
-                  GitHub
-                </a>
-              </div>
-              <div className=" w-44 flex flex-col items-center justify-center">
-                <img className=" rounded-full w-20 " src={sergio} alt="" />
-                <p className=" text-center">Sergio Rodrigo Suárez</p>
-                <a
-                  rel="noreferrer noopener"
-                  className="hover:text-white hover:bg-slate-900 rounded-md p-1"
-                  target="_blank"
-                  href="http://github.com/serrsua"
-                >
-                  GitHub
-                </a>
-              </div>
-              <div className=" w-44 flex flex-col items-center justify-center">
-                <img className=" rounded-full w-20 " src={thomas} alt="" />
-                <p className=" text-center">Thomas Enrique Naquiche Leon</p>
-                <a
-                  rel="noreferrer noopener"
-                  className="hover:text-white hover:bg-slate-900 rounded-md p-1"
-                  target="_blank"
-                  href="https://github.com/nakiche"
-                >
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
-        <div className="gap-16 ml-14 flex items-center font-semibold text-white shrink-0">
-          <div className=" flex-col max-w-sm items-center text-center">
-            <h2 className="text-lg font-bold mt-4">Desarrolladores</h2>
+        <div className="flex items-center font-semibold text-white shrink-0 border-t border-green-500">
+          <div className="flex-col max-w-sm items-center text-center">
+            <h2 className="text-3xl font-bold mt-4">Desarrolladores</h2>
             <p className=" m-7 text-center">
               Somos un grupo de programadores juniors, jóvenes, de distintos
               países de Latinoamérica y estudiantes del bootcamp "Full Stack Web
