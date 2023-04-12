@@ -1,17 +1,19 @@
 import { useDispatch,useSelector } from "react-redux";
 import Post from "../components/Post";
 import { useEffect } from "react";
-import { getFavorites } from "../redux/actions";
+import { getAllPosts, getFavorites } from "../redux/actions";
+import { useState } from "react";
 
 const Favorites = ()=>{
   const dispatch = useDispatch();
-  const favorites = useSelector((state) => state.favorites)
   
-  let userId = localStorage.getItem("id");
-
+  const userId = localStorage.getItem("id");
+  
   useEffect(() => {
     dispatch(getFavorites(userId));
   }, []);
+  
+  const favorites = useSelector((state) => state.favorites)
 
     return(
       <div className="DIV_FAVORITES py-2">
