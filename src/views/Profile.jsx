@@ -121,7 +121,16 @@ const Profile = ({ toggleDetails }) => {
                     alt="ProfilePhoto"
                     className="rounded-full w-full object-cover object-center border-2 border-green-500"
                   />
-                  <div className="p-2 m-4 absolute bottom-[-40px] self-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-110">
+                  <div className="p-2 absolute bottom-[-20px] self-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-110">
+                    <label htmlFor="profile">
+                      <input
+                        onChange={inputFile}
+                        className="hidden"
+                        type="file"
+                        accept="image/*"
+                        name="profile"
+                        id="profile"
+                      />
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -141,14 +150,7 @@ const Profile = ({ toggleDetails }) => {
                           d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"
                         />
                       </svg>
-                      <input
-                        onChange={inputFile}
-                        className="hidden"
-                        type="file"
-                        accept="image/*"
-                        name="profile"
-                        id="profile"
-                      />
+                    </label>
                   </div>
                   {profileImg ? (
                     <div className="flex flex-col">
@@ -185,9 +187,9 @@ const Profile = ({ toggleDetails }) => {
                 <p className="text-center text-lg text-green-700 font-medium">
                   {user.email ? `e-mail: ${user.email}` : `Ingresa tu correo`}
                 </p>
-                {!user.description && id === localStorage.getItem("id") ? (
+                {!user.description && !formDescription && id === localStorage.getItem("id") ? (
                   <button
-                    className="p-2 m-4 self-center font-medium rounded-md bg-mediumGreen transition-all duration-500 hover:bg-darkGreen hover:scale-130 "
+                    className="p-2 m-4 self-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-130 "
                     onClick={() => {
                       setFormDescription(true);
                     }}
@@ -250,7 +252,7 @@ const Profile = ({ toggleDetails }) => {
           {id === localStorage.getItem("id") ? (
             <NavLink
               to="/createPost"
-              className="p-2 mx-auto sticky top-3 text-center font-medium rounded-md bg-mediumGreen transition-all duration-500 hover:bg-darkGreen hover:scale-130"
+              className="p-2 mx-auto sticky top-3 text-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-130"
             >
               Sube un posteo
             </NavLink>
@@ -287,7 +289,7 @@ const Profile = ({ toggleDetails }) => {
       ) : (
         <div className="DIV_PROFILE flex flex-col w-full relative">
           <p>Perfil? no hay Perfil!</p>
-          <NotFound/>
+          <NotFound />
         </div>
       )}
     </>
