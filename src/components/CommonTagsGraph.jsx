@@ -1,34 +1,7 @@
 import React from 'react'
-import { Card, DonutChart, ProgressBar, Text, Title } from "@tremor/react";
-const cities = [
-    {
-        name: "New York",
-        sales: 9800,
-    },
-    {
-        name: "London",
-        sales: 4567,
-    },
-    {
-        name: "Hong Kong",
-        sales: 3908,
-    },
-    {
-        name: "San Francisco",
-        sales: 2400,
-    },
-    {
-        name: "Singapore",
-        sales: 1908,
-    },
-    {
-        name: "Zurich",
-        sales: 1398,
-    },
-];
-export const CommonTagsGraph = ({ data }) => {
-    // console.log(data);
+import { Card, DonutChart, Title } from "@tremor/react";
 
+export const CommonTagsGraph = ({ data }) => {
     return (
         <Card className='mt-3'>
             <Title>Tags mas usados</Title>
