@@ -424,11 +424,10 @@ const Profile = ({ toggleDetails }) => {
                 </h2>
                 <div className="flex flex-col gap-2 py-5 overflow-y-auto scrollbar-thin scrollbar-track-transparent">
                   {user.Posts?.map((post, i) => {
-                    //al post le paso username porque en este caso "post" no posee datos de username
                     return (
                       <Post
                         post={post}
-                        username={user.username}
+                        user={user}
                         key={i}
                         toggleDetails={toggleDetails}
                       />
