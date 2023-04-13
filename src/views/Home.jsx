@@ -1,7 +1,7 @@
 import { NavLink, useSearchParams } from "react-router-dom";
 import Posts from "../components/Posts";
 import { useDispatch } from "react-redux";
-import { getAllPosts } from "../redux/actions";
+import { getAllPosts, getFavorites } from "../redux/actions";
 import { useEffect, useState } from "react";
 import SideBar from "../components/SideBar";
 import axios from "axios";
@@ -13,16 +13,21 @@ const Home = ({ toggleDetails }) => {
   // const [initialization, setInitialization] = useState({ preferenceId: '' })
   const [message, setMessage] = useState("")
 
-  const posts = useSelector(state => state.posts)
+  // const posts = useSelector(state => state.posts)
 
   useEffect(() => {
-    dispatch(getAllPosts());
+    dispatch(getAllPosts()); 
     if (searchParams.get('status')
       && searchParams.get('payment_id')
       && localStorage.getItem('id')) {
       completePayment()
     }
-  }, [dispatch, posts]);
+  }, [dispatch]);
+
+  useEffect(()=>{
+    let id = localStorage.getItem("id");
+    dispatch(getFavorites(id)); 
+  },[])
 
   const completePayment = async () => {
     try {

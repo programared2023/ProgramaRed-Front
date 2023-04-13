@@ -20,7 +20,7 @@ const CreatePost = () => {
     dispatch(getUserById(id));
   }, [dispatch, id, user]);
 
-  console.log("USER desp del useEffect: ", user);
+  // console.log("USER desp del useEffect: ", user);
 
   const [form, setForm] = useState({
     title: "",
