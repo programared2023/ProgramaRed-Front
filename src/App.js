@@ -3,7 +3,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Landing from "./views/Landing";
 import Home from "./views/Home";
 import CreatePost from "./views/CreatePost/CreatePost";
-import Profile from "./views/Profile";
+import Profile from "./views/Profile/Profile";
 import SignUp from "./views/SignUp";
 import NavBar from "./components/NavBar";
 import Payment from "./views/Payment";

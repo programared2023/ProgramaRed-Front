@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
-import { clearDetail, getUserById } from "../redux/actions";
-import Post from "../components/Post";
+import { clearDetail, getUserById } from "../../redux/actions";
+import Post from "../../components/Post";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { uploadFile } from "../firebase/config";
-import person from "../images/person.png";
-import NotFound from "../components/NotFound";
+import { uploadFile } from "../../firebase/config";
+import person from "../../images/person.png";
+import NotFound from "../../components/NotFound";
+import Validate from './Validate.js';
 
 const Profile = ({ toggleDetails }) => {
   const dispatch = useDispatch();
@@ -15,11 +16,16 @@ const Profile = ({ toggleDetails }) => {
 
   const user = useSelector((state) => state.actualUser);
 
+  const [formEmail, setFormEmail] = useState(false);
+  const [email, setEmail] = useState("");
   const [formDescription, setFormDescription] = useState(false);
   const [description, setDescription] = useState("");
   const [profileImg, setProfileImg] = useState();
   const [formLinks, setFormLinks] = useState(false);
   const [links, setLinks] = useState([]);
+  const [errors, setErrors] = useState({
+    email: "",
+  });
 
   let userId = localStorage.getItem("id");
   useEffect(() => {
@@ -76,6 +82,28 @@ const Profile = ({ toggleDetails }) => {
     Swal.fire({
       icon: "success",
       title: "Descripción actualizada",
+      text: data,
+    }).then((result) => {
+      if (result.isConfirmed) window.location.reload();
+    });
+  };
+
+  const handleInputChange = (event) => {
+    const property = event.target.name;
+    const value = event.target.value;
+    setEmail({
+      ...email,
+      [property]: value,
+    });
+    setErrors(Validate({ ...email, [property]: value }));
+  };
+
+  const updateEmail = async () => {
+    let correo = email.email
+    const { data } = await axios.put(`/user/${userId}`, { email:correo });
+    Swal.fire({
+      icon: "success",
+      title: "Email actualizado",
       text: data,
     }).then((result) => {
       if (result.isConfirmed) window.location.reload();
@@ -210,9 +238,57 @@ const Profile = ({ toggleDetails }) => {
                 <h1 className="text-center text-3xl font-bold">
                   {user.username}
                 </h1>
-                <p className="text-center text-lg text-green-700 font-medium">
-                  {user.email ? `e-mail: ${user.email}` : `Ingresa tu correo`}
-                </p>
+                <div className="text-center text-lg text-black-700 font-medium">
+                  {!user.email &&
+                   !formEmail  ?
+                   (
+                    <div className="flex items-center relative w-full h-full p-3 text-lg border font-medium border-none">
+                    <p className="text-rose-600">Agrega tu correo</p>
+                    <button
+                      className="absolute top-[-5px] right-[-38px] p-2 font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-110 "
+                      onClick={() => {
+                        setFormEmail(true);
+                      }}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  ) : <span>{user.email}</span>
+                }
+                
+                {formEmail && (
+                  <form onSubmit={(e)=>{
+                    e.preventDefault();
+                    updateEmail()}}>
+                    <div className=" flex flex-col">
+                      <input
+                        onChange={handleInputChange}
+                        name="email"
+                        size="20"
+                        placeholder="micorreo@correo.com"
+                      ></input>
+                      <p style={{fontSize: '15px',color: 'red'}}>{errors.email}</p>
+                      <button  disabled ={email.length!==0 && !errors.email ? false :true} className=" p-2 m-4 self-center font-medium rounded-md bg-ligthGreen transition-all duration-500 hover:bg-mediumGreen hover:scale-110">
+                        Actualizar correo
+                      </button>
+                    </div>
+                  </form>
+                )}
+                 
+                </div>
                 {!user.description &&
                 !formDescription &&
                 id === localStorage.getItem("id") ? (
