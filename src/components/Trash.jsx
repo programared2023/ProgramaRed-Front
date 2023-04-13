@@ -15,11 +15,12 @@ const Trash = ({ postId }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         await axios.delete(`/post/${postId}`);
-        Swal.fire({
+        await Swal.fire({
           title: "Post borrado",
           icon: "success",
           timer: 1200,
         });
+        window.location.reload()
       }
     });
   };
