@@ -1362,6 +1362,10 @@ video {
   margin-top: 1rem;
 }
 
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
 .mt-6 {
   margin-top: 1.5rem;
 }
@@ -1684,6 +1688,20 @@ video {
   width: 100vw;
 }
 
+.w-fit {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.w-\[100\%\] {
+  width: 100%;
+}
+
+.w-56 {
+  width: 14rem;
+}
+
 .min-w-90\% {
   min-width: 90%;
 }
@@ -1751,6 +1769,10 @@ video {
 
 .shrink-0 {
   flex-shrink: 0;
+}
+
+.flex-grow {
+  flex-grow: 1;
 }
 
 .grow {

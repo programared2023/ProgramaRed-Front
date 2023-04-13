@@ -4,21 +4,25 @@ import axios from 'axios';
 import { CommonTagsGraph } from '../components/CommonTagsGraph';
 import { CounUsersCard } from "../components/CounUsersCard";
 import { CountPostByTagCard } from '../components/CountPostByTagCard';
+import { UsersTable } from '../components/UsersTable';
 
 export default function DashboardAdmin() {
     const [siteUsers, setSiteUsers] = useState(0)
     const [sitePosts, setSitePosts] = useState(0)
     const [siteTags, setSiteTags] = useState([])
     const [selectedView, setSelectedView] = useState(1)
+    const [users, setUsers] = useState([])
+    const [tag, setTag] = useState("")
 
     const countUsers = async (isPremium) => {
         let query = isPremium ? `?isPremium=${isPremium}` : ""
         const res = await axios.get(`/countUsers${query}`)
-        if (res.data) {
-            setSiteUsers(res.data)
+        if (res.status === 200) {
+            setSiteUsers(Number(res.data))
         }
     }
     const countPostByTag = async (tag) => {
+        setTag(tag)
         let query = tag ? `?tag=${tag}` : ""
         const res = await axios.get(`/countPosts${query}`)
         if (res.data) {
@@ -31,15 +35,22 @@ export default function DashboardAdmin() {
             setSiteTags(res.data)
         }
     }
+    const getAllUsers = async (isPremium) => {
+        let query = isPremium ? `?isPremium=${isPremium}` : ""
+        const res = await axios.get(`/allUsers${query}`)
+        if (res.status === 200) {
+            setUsers(res.data)
+        }
+    }
     useEffect(() => {
         countUsers()
         countPostByTag()
         commonTags()
+        getAllUsers()
     }, [])
-    console.log(selectedView);
     return (
         <div className='m-auto text-center'>
-            <Text className='text-center text-2xl'>Dashboard admin</Text>
+            <Text className='text-center text-2xl mt-3'>Dashboard admin</Text>
             <TabList defaultValue={selectedView}
                 className='w-screen mt-6'
                 onValueChange={value => setSelectedView(Number(value))}>
@@ -54,16 +65,19 @@ export default function DashboardAdmin() {
                             numColsMd={2}
                             numColsLg={2}>
                             <Col>
-                                <CounUsersCard countUsers={siteUsers} />
+                                <CounUsersCard countUsers={siteUsers} onSearch={countUsers} />
                             </Col>
                             <Col>
-                                <CountPostByTagCard countPosts={sitePosts} />
+                                <CountPostByTagCard
+                                    countPosts={sitePosts}
+                                    onSearch={countPostByTag}
+                                    tag={tag} />
                             </Col>
                         </Grid>
                         <CommonTagsGraph data={siteTags} />
                     </>
                 ) : (
-                    <></>
+                    <UsersTable users={users} onSearch={getAllUsers} />
                 )
             }
         </div>
