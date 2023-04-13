@@ -29,7 +29,7 @@ const Profile = ({ toggleDetails }) => {
     return () => {
       dispatch(clearDetail());
     };
-  }, [dispatch, user.description, description, profileImg, id, userId, links]);
+  }, [dispatch, user.description, description, profileImg, id, userId, links, user]);
 
   const updateLinks = async () => {
     if (links.length === 0) {
