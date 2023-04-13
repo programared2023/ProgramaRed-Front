@@ -1,7 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{jsx,js}"
+    "./src/**/*.{jsx,js}",
+    // Path to the tremor module
+    "./node_modules/@tremor/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -13,9 +15,9 @@ module.exports = {
       },
       animation: {
         'spin-slow': 'spin 25s linear infinite',
-        "appear-top": "appear 1s" 
+        "appear-top": "appear 1s"
       },
-      gridTemplateColumns:{
+      gridTemplateColumns: {
         desktop_lg: "250px 1fr",
         desktop_xl: "350px 1fr",
       },
@@ -33,26 +35,26 @@ module.exports = {
         '20%': '20%',
         "90%": "90%"
       },
-      width:{
+      width: {
         "25%": "25%"
       },
-      borderRadius:{
+      borderRadius: {
         "40px": "40px"
       },
-      scrollbar:{
+      scrollbar: {
         width: '4px',
         height: '8px',
         track: '#f1f1f1',
         thumb: '#888',
       },
-      backgroundColor:{
-        "greenGray":"#EDF1D6",
+      backgroundColor: {
+        "greenGray": "#EDF1D6",
         "veryLigthGreen": "#E5D9B6",
         "ligthGreen": "#A4BE7B",
         "mediumGreen": "#5F8D4E",
         "darkGreen": "#285430"
       },
-      scale:{
+      scale: {
         "130": "1.3"
       }
     },
