@@ -17,7 +17,7 @@ const Fav = ({ postId, localUser }) => {
     }
   }, [dispatch]);
 
-  console.log("userId:", userId);
+  // console.log("userId:", userId);
 
   const [clicked, setClicked] = useState(false);
   const allFavorites = useSelector((state) => state.favorites);

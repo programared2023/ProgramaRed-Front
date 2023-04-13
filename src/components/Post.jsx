@@ -4,8 +4,9 @@ import { useDispatch } from "react-redux";
 import { getPostById, getPostByTag } from "../redux/actions";
 import person from "../images/person.png";
 import Fav from "./Fav";
+import Trash from "./Trash";
 
-const Post = ({ post, username, toggleDetails }) => {
+const Post = ({ post, user, toggleDetails }) => {
   //post recibe username porque en algunos casos el "post" no posee username
   const [localPost, setLocalPost] = useState({});
   let userId = localStorage.getItem("id");
@@ -17,39 +18,42 @@ const Post = ({ post, username, toggleDetails }) => {
     setLocalPost(post);
   }, [post]);
 
- 
-
-
-  
-
-  return (
+  return localPost.isActive ? (
     <div className="DIV_POST px-4 py-1">
       <div className=" bg-greenGray rounded-lg p-4 shadow-shadowBlack">
         <div className="flex items-center mb-3">
           <div className="bg-green-300 w-12 h-12 rounded-full mr-3">
             <img
               src={
-                localPost.User?.profileImage
-                  ? localPost.User.profileImage
+                user.profileImage
+                  ? user.profileImage
                   : person
               }
-              alt={localPost.User?.username}
+              alt={user.profileImage}
               className="w-full rounded-full"
             />
           </div>
 
           <div className="flex-1">
             <NavLink
-              to={`/profile/${localPost.User?.id}`}
+              to={`/profile/${user.id}`}
               className="text-green-700 font-medium text-sm"
             >
-              {localPost.User?.username}
-              {!localPost.User && localPost.username}
-              {!localPost.User && !localPost.username && username}
+              {user.username}
             </NavLink>
             <p className="text-black text-xs font-medium">{`Creado el ${post.publishDate}`}</p>
           </div>
-          <Fav userId={localPost.User?.id} postId={localPost.id} localUser={userId}/>
+          <Fav
+            userId={user.id}
+            postId={localPost.id}
+            localUser={userId}
+          />
+          {pathname === `/profile/${userId}` && localPost.id && (
+            <Trash postId={localPost.id} />
+          )}
+          {Number(localPost.User?.id) === Number(userId) && (
+            <Trash postId={localPost.id} />
+          )}
         </div>
 
         <button
@@ -93,6 +97,8 @@ const Post = ({ post, username, toggleDetails }) => {
         </div>
       </div>
     </div>
+  ) : (
+    ""
   );
 };
 

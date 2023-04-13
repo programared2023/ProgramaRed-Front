@@ -5,12 +5,15 @@ import { getAllPosts } from "../redux/actions";
 import { useEffect, useState } from "react";
 import SideBar from "../components/SideBar";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Home = ({ toggleDetails }) => {
   const dispatch = useDispatch();
   const [searchParams, _] = useSearchParams()
   // const [initialization, setInitialization] = useState({ preferenceId: '' })
   const [message, setMessage] = useState("")
+
+  const posts = useSelector(state => state.posts)
 
   useEffect(() => {
     dispatch(getAllPosts());
@@ -19,7 +22,7 @@ const Home = ({ toggleDetails }) => {
       && localStorage.getItem('id')) {
       completePayment()
     }
-  }, [dispatch]);
+  }, [dispatch, posts]);
 
   const completePayment = async () => {
     try {
