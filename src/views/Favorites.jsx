@@ -7,12 +7,12 @@ const Favorites = ({toggleDetails}) => {
   const dispatch = useDispatch();
 
   const userId = localStorage.getItem("id");
+  const favorites = useSelector((state) => state.favorites);
 
   useEffect(() => {
     dispatch(getFavorites(userId));
-  }, []);
+  }, [favorites]);
 
-  const favorites = useSelector((state) => state.favorites);
 
   return (
     <div className="DIV_FAVORITES py-2">
