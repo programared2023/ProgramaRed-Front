@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
-import { clearDetail, getUserById } from "../../redux/actions";
+import { clearUser, getUserById } from "../../redux/actions";
 import Post from "../../components/Post";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -26,16 +26,22 @@ const Profile = ({ toggleDetails }) => {
   const [errors, setErrors] = useState({
     email: "",
   });
-
+  
   let userId = localStorage.getItem("id");
+
   useEffect(() => {
-    if (id === localStorage.getItem("id")) dispatch(getUserById(userId));
-    else dispatch(getUserById(id));
+    let userId = localStorage.getItem("id");
+    if (id === userId) {
+      dispatch(getUserById(userId));
+    }
+    else {
+      dispatch(getUserById(id));
+    }
 
     return () => {
-      dispatch(clearDetail());
+      dispatch(clearUser());
     };
-  }, [dispatch, user.description, description, profileImg, id, userId, links, user]);
+  }, [id]);
 
   const handleInputChange = (event) => {
     const property = event.target.name;

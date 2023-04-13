@@ -13,7 +13,7 @@ const Fav = ({ postId, localUser }) => {
     let id = localStorage.getItem("id");
     if (id) {
       setUserId(id);
-      dispatch(getFavorites(id));
+      // dispatch(getFavorites(id));       
     }
   }, [dispatch]);
 
@@ -31,7 +31,7 @@ const Fav = ({ postId, localUser }) => {
     } else {
       setClicked(false);
     }
-  }, [allFavorites]);
+  }, [allFavorites, postId]);
 
   const favorite = {
     idPost: postId,
@@ -40,7 +40,9 @@ const Fav = ({ postId, localUser }) => {
 
   const favoriteHandler = async () => {
     await axios.post(`/favorites`, favorite);
+    let id = localStorage.getItem("id");
     setClicked(true);
+    dispatch(getFavorites(id));       
     Swal.fire({
       icon: "success",
       title: "Favorito Agregado",
@@ -51,7 +53,9 @@ const Fav = ({ postId, localUser }) => {
 
   const deleteFavorite = async () => {
     await axios.delete(`/favorites`, { data: favorite });
+    let id = localStorage.getItem("id");
     setClicked(false);
+    dispatch(getFavorites(id));       
     Swal.fire({
       icon: "success",
       title: "Favorito eliminado",

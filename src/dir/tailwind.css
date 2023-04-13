@@ -797,6 +797,10 @@ video {
   right: 1.5rem;
 }
 
+.right-\[-38px\] {
+  right: -38px;
+}
+
 .right-px {
   right: 1px;
 }
@@ -847,6 +851,10 @@ video {
 
 .top-\[-40px\] {
   top: -40px;
+}
+
+.top-\[-5px\] {
+  top: -5px;
 }
 
 .top-px {

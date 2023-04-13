@@ -12,6 +12,7 @@ import {
   GET_POST_BY_SEARCH,
   SET_CATEGORY,
   GET_FAVORITES,
+  DELETE_USER,
 } from "./types";
 
 const initialState = {
@@ -42,6 +43,11 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         actualUser: payload,
       };
+    case DELETE_USER:
+      return{
+        ...state,
+        actualUser: payload
+      }
     case CLEAR_DETAIL:
       return {
         ...state,

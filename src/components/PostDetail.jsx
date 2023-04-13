@@ -9,13 +9,12 @@ const PostDetail = ({ toggleDetails }) => {
 
   // const date = postDate[0];
   // const hour = postDate[1];
-
   const dispatch = useDispatch()
 
   const clickHandler = (tag) => {
+    dispatch(clearDetail())
     dispatch(getPostByTag(tag))
     toggleDetails()
-    dispatch(clearDetail())
   }
 
   return (
@@ -38,12 +37,11 @@ const PostDetail = ({ toggleDetails }) => {
             />
           </div>
           <div className="flex-1">
-            <NavLink
-              to={`/profile/${post?.User?.id}`}
+            <span
               className="text-green-700 font-medium text-sm"
             >
               {post?.User?.username}
-            </NavLink>
+            </span>
             <p className="text-black text-xs font-medium">{`Creado el ${post.publishDate}`}</p>
           </div>
         </div>
