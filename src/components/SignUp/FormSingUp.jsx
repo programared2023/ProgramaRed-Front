@@ -45,7 +45,7 @@ const FormSignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const info = await axios.post("/user", form);
+      const info = await axios.post("/register", form);
       Swal.fire({
         icon: "success",
         title: info.data,
