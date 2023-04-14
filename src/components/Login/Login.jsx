@@ -52,7 +52,7 @@ const Login = () => {
         didClose: () => {
           navigate(`/profile/${localStorage.getItem("id")}`);
         }
-      })
+      }) 
     
     } catch (error) {
       Swal.fire({
