@@ -3,6 +3,7 @@ import validate from "./validate";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const FormSignUp = () => {
   const [form, setForm] = useState({
@@ -45,16 +46,27 @@ const FormSignUp = () => {
     e.preventDefault();
     try {
       const info = await axios.post("/user", form);
-      alert(info.data);
+      Swal.fire({
+        icon: "success",
+        title: info.data,
+        showConfirmButton: false,
+        timer: 1200,
+      })
       clearForm();
       navigate("/");
     } catch (error) {
-      alert(error.response.data.error);
+      Swal.fire({
+        icon: "error",
+        title: error.response.data.error,
+        showConfirmButton: false,
+        timer: 2000,
+      })
     }
   };
 
   return (
-    <div className=" block mt-14 w-full ">
+    
+    <div className="DIV_FORM_SIGN p-3 lg:col-span-4 md:my-6 transition-all">
       <div className="flex flex-col max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
         <h3 className=" self-center text-xl font-bold text-green-700 mb-6">Registrarse</h3>
         <p className=" self-center">
@@ -127,6 +139,7 @@ const FormSignUp = () => {
         </form>
       </div>
     </div>
+  
   );
 };
 

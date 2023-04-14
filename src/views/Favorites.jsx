@@ -9,9 +9,9 @@ const Favorites = ({toggleDetails}) => {
   const userId = localStorage.getItem("id");
   const favorites = useSelector((state) => state.favorites);
 
-  useEffect(() => {
-    dispatch(getFavorites(userId));
-  }, [favorites]);
+  // useEffect(() => {
+  //   dispatch(getFavorites(userId));
+  // }, [favorites]);
 
 
   return (

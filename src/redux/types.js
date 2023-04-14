@@ -12,3 +12,4 @@ export const GET_POST_BY_SEARCH = "GET_POST_BY_SEARCH";
 export const SET_CATEGORY = "SET_CATEGORY";
 export const GET_FAVORITES = "GET_FAVORITES";
 export const SELECT_EDIT_POST = "SELECT_EDIT_POST"
+export const DELETE_USER = "DELETE_USER";

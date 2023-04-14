@@ -15,6 +15,7 @@ import {
   SET_CATEGORY,
   GET_FAVORITES,
   SELECT_EDIT_POST,
+  DELETE_USER
 } from "./types";
 
 export const getUsers = () => {
@@ -51,6 +52,13 @@ export const clearDetail = () => {
     payload: [],
   };
 };
+
+export const clearUser = () => {
+  return{
+    type: DELETE_USER,
+    payload: []
+  }
+}
 
 export const getPostById = (id) => {
   return async function (dispatch) {
