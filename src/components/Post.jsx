@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getPostById, getPostByTag } from "../redux/actions";
+import { getPostById, getPostByTag, selectEditPost } from "../redux/actions";
 import person from "../images/person.png";
 import Fav from "./Fav";
 import Trash from "./Trash";
+import Edit from "./Edit";
 
 const Post = ({ post, user, toggleDetails }) => {
   //post recibe username porque en algunos casos el "post" no posee username
@@ -49,7 +50,13 @@ const Post = ({ post, user, toggleDetails }) => {
             localUser={userId}
           />
           {pathname === `/profile/${userId}` && localPost.id && (
+            <Edit post={localPost}/>
+          )}
+          {pathname === `/profile/${userId}` && localPost.id && (
             <Trash postId={localPost.id} />
+          )}
+          {Number(localPost.User?.id) === Number(userId) && (
+            <Edit post={localPost}/>
           )}
           {Number(localPost.User?.id) === Number(userId) && (
             <Trash postId={localPost.id} />
