@@ -15,7 +15,7 @@ const PostDetail = ({ toggleDetails }) => {
     dispatch(clearDetail());
     dispatch(getPostByTag(tag));
     toggleDetails();
-  };
+  }; 
 
   return (
     <div className="DIV_POSTDETAIL bg-greenGray rounded-lg p-4 shadow-shadowBlack min-w-90% flex flex-col justify-between h-3/4 m-0 absolute top-10 left-1/2 transform -translate-x-1/2 z-50">
