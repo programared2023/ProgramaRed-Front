@@ -20,16 +20,22 @@ const NavBar = () => {
       try {
         if (user) {
           const token = await getAccessTokenSilently();
-          await axios.get("/usercreate", {
+          const response = await axios.get("/usercreate", {
             headers: {
               authorization: `Bearer ${token}`,
             },
           });
-          let { data } = await axios(`/user/username/${user.nickname}`);
+          console.log(response.data.token)
+          let { data } = await axios(`/user/username/${user.nickname}`,{
+            headers:{
+              authorization: `Bearer ${response.data.token}`
+            }
+          });
           setId(data[0].id);
 
           localStorage.setItem("username", JSON.stringify(data[0].username));
           localStorage.setItem("id", JSON.stringify(data[0].id));
+          localStorage.setItem("token", JSON.stringify(response.data.token));
         }
       } catch (e) {
         console.log(e.message);

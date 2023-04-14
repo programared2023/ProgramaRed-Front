@@ -35,13 +35,15 @@ const Login = () => {
       e.preventDefault();
       if(!form.password && !form.username) throw new Error("Debe completar los campos")
 
-      let {data} = await axios(`/user?username=${form.username}`)
+      let {data} = await axios.post(`/login`,form)
+      console.log(data)
       
-      if (!data.length) throw new Error("El usuario no existe")
-      if (data[0].password !== form.password) throw new Error("La contraseña es incorrecta")
+      if (!data.user.username.length) throw new Error("El usuario no existe")
+      if (data.user.password !== form.password) throw new Error("La contraseña es incorrecta")
 
-      localStorage.setItem("username", JSON.stringify(data[0].username))
-      localStorage.setItem("id", JSON.stringify(data[0].id))
+      localStorage.setItem("username", JSON.stringify(data.user.username))
+      localStorage.setItem("id", JSON.stringify(data.user.id))
+      localStorage.setItem("token", JSON.stringify(data.token));
 
       Swal.fire({
         position: 'center',
