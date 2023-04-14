@@ -14,6 +14,7 @@ import {
   GET_POST_BY_SEARCH,
   SET_CATEGORY,
   GET_FAVORITES,
+  SELECT_EDIT_POST,
   DELETE_USER
 } from "./types";
 
@@ -147,5 +148,12 @@ export const getFavorites = (userId) => {
       payload: favorites,
     });
   };
+}
+
+export const selectEditPost = (post) => {
+  return{
+    type: SELECT_EDIT_POST,
+    payload: post
+  }
 }
 

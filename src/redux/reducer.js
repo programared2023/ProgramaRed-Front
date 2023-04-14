@@ -12,6 +12,7 @@ import {
   GET_POST_BY_SEARCH,
   SET_CATEGORY,
   GET_FAVORITES,
+  SELECT_EDIT_POST,
   DELETE_USER,
 } from "./types";
 
@@ -29,6 +30,7 @@ const initialState = {
   actualPost: [],
   message: "",
   category: "",
+  editedPost: []
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -104,6 +106,12 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         favorites: payload,
       }; 
+      case SELECT_EDIT_POST:
+        console.log("reducer", payload)
+        return{
+          ...state,
+          editedPost: payload
+        }
 
     default:
       return { ...state };

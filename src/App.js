@@ -14,6 +14,7 @@ import Detail from "./views/Detail";
 import About from "./views/About";
 import NotFound from "./components/NotFound";
 import DashboardAdmin from "./views/Admin";
+import EditPost from "./views/EditPost/EditPost";
 
 function App() {
   const { pathname } = useLocation();
@@ -24,7 +25,7 @@ function App() {
   return (
     <div className={`DIV_APP grid justify-center bg-veryLigthGreen lg:grid-cols-desktop_lg xl:grid-cols-desktop_xl ${pathname === "/" ? "lg:grid-cols-1 justify-items-center" : ""} ${pathname === "/home" ? "h-screen" : ""}${pathname === "/premium" ? "grid-rows-4 lg:grid-rows-1" : ""}${pathname === "/about" ? "grid-rows-1 lg:grid-cols-1" : ""}`}>
       {/*  {pathname !== "/" && pathname !== "/signUp" && pathname !== "/about" && <NavBar />} */}
-      {(pathname.startsWith("/profile") || pathname === "/home" || pathname === "/createPost" || pathname === "/favorites" || pathname === "/singUp" || pathname === "/premium") && <NavBar />}
+      {(pathname.startsWith("/profile") || pathname === "/home" || pathname === "/createPost" || pathname === "/editPost" || pathname === "/favorites" || pathname === "/singUp" || pathname === "/premium") && <NavBar />}
       {showDetails && <FalseScreen isView={showDetails} />}
       {showDetails && <Detail toggleDetails={toggleDetails} />}
       <Routes>
@@ -38,6 +39,7 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/premium" element={<Payment />} />
         <Route path="/admin" element={<DashboardAdmin />} />
+        <Route path="/editPost" element={<EditPost/>} />
       </Routes>
     </div>
   );
