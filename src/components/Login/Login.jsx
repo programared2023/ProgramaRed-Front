@@ -35,7 +35,7 @@ const Login = () => {
       e.preventDefault();
       if(!form.password && !form.username) throw new Error("Debe completar los campos")
 
-      let {data} = await axios(`/user?username=${form.username}`)
+      let {data} = await axios.post("/login", form)
       
       if (!data.length) throw new Error("El usuario no existe")
       if (data[0].password !== form.password) throw new Error("La contraseña es incorrecta")
