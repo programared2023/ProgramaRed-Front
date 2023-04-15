@@ -26,7 +26,7 @@ function App() {
     <div className={`DIV_APP grid justify-center bg-veryLigthGreen lg:grid-cols-desktop_lg xl:grid-cols-desktop_xl ${pathname === "/" ? "lg:grid-cols-1 justify-items-center" : ""} ${pathname === "/home" ? "h-screen" : ""}${pathname === "/premium" ? "grid-rows-4 lg:grid-rows-1" : ""}${pathname === "/about" ? "grid-rows-1 lg:grid-cols-1" : ""}`}>
       {/*  {pathname !== "/" && pathname !== "/signUp" && pathname !== "/about" && <NavBar />} */}
       {(pathname.startsWith("/profile") || pathname === "/home" || pathname === "/createPost" || pathname === "/editPost" || pathname === "/favorites" || pathname === "/singUp" || pathname === "/premium") && <NavBar />}
-      {showDetails && <FalseScreen isView={showDetails} />}
+      {showDetails && <FalseScreen isView={showDetails} toggleDetails={toggleDetails} />}
       {showDetails && <Detail toggleDetails={toggleDetails} />}
       <Routes>
         <Route path="*" element={<NotFound />} />
