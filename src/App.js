@@ -35,7 +35,7 @@ function App() {
         <Route path="/home" element={<Home toggleDetails={toggleDetails} />} />
         <Route path="/createPost" element={<CreatePost />} />
         <Route path="/profile/:id" element={<Profile toggleDetails={toggleDetails} />} />
-        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/favorites" element={<Favorites toggleDetails={toggleDetails} />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/premium" element={<Payment />} />
         <Route path="/admin" element={<DashboardAdmin />} />
