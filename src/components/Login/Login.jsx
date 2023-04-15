@@ -33,15 +33,15 @@ const Login = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      if(!form.password && !form.username) throw new Error("Debe completar los campos")
+      if (!form.password && !form.username) throw new Error("Debe completar los campos")
 
-      let {data} = await axios.post("/login", form)
-      
-      if (!data.length) throw new Error("El usuario no existe")
-      if (data[0].password !== form.password) throw new Error("La contraseña es incorrecta")
+      let { data } = await axios.post("/login", form)
 
-      localStorage.setItem("username", JSON.stringify(data[0].username))
-      localStorage.setItem("id", JSON.stringify(data[0].id))
+      if (!data.user) throw new Error("El usuario no existe")
+      if (data.user.password !== form.password) throw new Error("La contraseña es incorrecta")
+
+      localStorage.setItem("username", JSON.stringify(data.user.username))
+      localStorage.setItem("id", JSON.stringify(data.user.id))
 
       Swal.fire({
         position: 'center',
@@ -52,8 +52,8 @@ const Login = () => {
         didClose: () => {
           navigate(`/profile/${localStorage.getItem("id")}`);
         }
-      }) 
-    
+      })
+
     } catch (error) {
       Swal.fire({
         icon: 'error',
@@ -71,15 +71,15 @@ const Login = () => {
       <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
         <div className="pb-4" >
           <h2 className="text-xl font-bold text-green-700 text-center pb-2">
-            Inicia sesión con tu cuenta 
+            Inicia sesión con tu cuenta
           </h2>
           <p className="text-center text-xs" >No tienes una cuenta? Regístrate <NavLink to="/signUp" className="text-blue-600">aquí</NavLink></p>
         </div>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="username" 
-                  className="block text-sm font-medium text-gray-700 mb-1" 
-                  >Nombre de usuario
+            <label htmlFor="username"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >Nombre de usuario
             </label>
             <input
               type="text"
@@ -87,11 +87,10 @@ const Login = () => {
               placeholder="Tu nombre de usuario"
               value={form.username}
               onChange={handleInputs}
-              className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${
-                errors.username
-                  ? "focus:border-red-500 focus:ring-red-500"
-                  : "focus:ring-green-500 focus:border-green-500"
-              }
+              className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${errors.username
+                ? "focus:border-red-500 focus:ring-red-500"
+                : "focus:ring-green-500 focus:border-green-500"
+                }
               `}
             />
             {errors.username && (
@@ -101,9 +100,9 @@ const Login = () => {
 
           <div>
             <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1"
-                >Contraseña
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >Contraseña
             </label>
             <input
               type="password"
@@ -111,24 +110,23 @@ const Login = () => {
               placeholder="Tu contraseña"
               value={form.password}
               onChange={handleInputs}
-              className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${
-                errors.password
-                  ? "focus:border-red-500 focus:ring-red-500"
-                  : "focus:ring-green-500 focus:border-green-500"
-              }
+              className={`border-gray-300 block w-full px-2 py-1 rounded-md shadow-sm focus:outline-none focus:ring-2 transition duration-150 ease-in-out ${errors.password
+                ? "focus:border-red-500 focus:ring-red-500"
+                : "focus:ring-green-500 focus:border-green-500"
+                }
               `}
             />
             {errors.password && (
               <span className="text-red-500 text-sm">{errors.password}</span>
             )}
           </div>
-          <div className="flex justify-center"> 
-              <button type="submit"
-                      className={`text-white font-semibold py-1 px-2 rounded mt-3
+          <div className="flex justify-center">
+            <button type="submit"
+              className={`text-white font-semibold py-1 px-2 rounded mt-3
                       ${errors.password || errors.username ? "bg-red-500 hover:bg-red-500" : "bg-green-500 hover:bg-green-600"}`}
-                    >
-                    Ingresar
-              </button>
+            >
+              Ingresar
+            </button>
           </div>
         </form>
         <div className=" border-t border-t-gray-500 mt-3">
