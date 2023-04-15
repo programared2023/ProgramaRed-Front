@@ -60,10 +60,10 @@ const PostDetail = ({ toggleDetails }) => {
           />
           {
             Number(post?.User?.id) === Number(localUser) && (
-              <>
-                <Edit />
+              <div onClick={toggleDetails} className="flex">
+                <Edit post={post} />
                 <Trash postId={post?.id} />
-              </>
+              </div>
             )
           }
         </div>
