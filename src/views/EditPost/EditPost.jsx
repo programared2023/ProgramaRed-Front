@@ -293,7 +293,7 @@ const EditPost = () => {
               className={`${"bg-green-500 hover:bg-green-600"
               } text-white font-bold py-2 px-4 rounded`}
             >
-              Subir
+              Editar
             </button>
             <button
               className=" text-gray-100 font-bold py-2 px-4 rounded bg-stone-500 hover:bg-stone-400 hover:text-gray-800"
